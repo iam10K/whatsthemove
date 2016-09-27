@@ -97,8 +97,8 @@
 		2F74EC471D91ACEE00CD1EBA /* WhatsTheMove */ = {
 			isa = PBXGroup;
 			children = (
+				2F8D64091D91B6190089FFCB /* Views */,
 				2F74EC481D91ACEE00CD1EBA /* AppDelegate.swift */,
-				2F74EC4A1D91ACEE00CD1EBA /* ViewController.swift */,
 				2F74EC4C1D91ACEE00CD1EBA /* Main.storyboard */,
 				2F74EC4F1D91ACEE00CD1EBA /* Assets.xcassets */,
 				2F74EC511D91ACEE00CD1EBA /* LaunchScreen.storyboard */,
@@ -123,6 +123,14 @@
 				2F74EC6A1D91ACEE00CD1EBA /* Info.plist */,
 			);
 			path = WhatsTheMoveUITests;
+			sourceTree = "<group>";
+		};
+		2F8D64091D91B6190089FFCB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2F74EC4A1D91ACEE00CD1EBA /* ViewController.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -514,6 +522,7 @@
 				2F74EC6F1D91ACEE00CD1EBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2F74EC701D91ACEE00CD1EBA /* Build configuration list for PBXNativeTarget "WhatsTheMoveTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +531,7 @@
 				2F74EC721D91ACEE00CD1EBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2F74EC731D91ACEE00CD1EBA /* Build configuration list for PBXNativeTarget "WhatsTheMoveUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +540,7 @@
 				2F74EC751D91ACEE00CD1EBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

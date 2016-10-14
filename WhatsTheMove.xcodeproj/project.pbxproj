@@ -11,6 +11,7 @@
 		2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */; };
 		2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */; };
 		2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */; };
+		2F40E1DA1DAD9FC70058EB76 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D91DAD9FC70058EB76 /* FeedViewController.swift */; };
 		2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE61D9AD4A0009E6271 /* Event.swift */; };
 		2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE81D9AD4B1009E6271 /* Comment.swift */; };
 		2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AEA1D9AD4C0009E6271 /* User.swift */; };
@@ -52,6 +53,7 @@
 		2F40E1D41DAABD5D0058EB76 /* WhatsTheMove.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatsTheMove.entitlements; sourceTree = "<group>"; };
 		2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = Views/RegistrationViewController.swift; sourceTree = "<group>"; };
 		2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewAccountViewController.swift; path = Views/NewAccountViewController.swift; sourceTree = "<group>"; };
+		2F40E1D91DAD9FC70058EB76 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = Views/FeedViewController.swift; sourceTree = "<group>"; };
 		2F741AE61D9AD4A0009E6271 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Objects/Event.swift; sourceTree = "<group>"; };
 		2F741AE81D9AD4B1009E6271 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Comment.swift; path = Objects/Comment.swift; sourceTree = "<group>"; };
 		2F741AEA1D9AD4C0009E6271 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Objects/User.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */,
 				2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */,
 				2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */,
+				2F40E1D91DAD9FC70058EB76 /* FeedViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 			files = (
 				2F74EC4B1D91ACEE00CD1EBA /* ViewController.swift in Sources */,
 				2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */,
+				2F40E1DA1DAD9FC70058EB76 /* FeedViewController.swift in Sources */,
 				2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */,
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,
 				2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */,

@@ -15,3 +15,5 @@ We will develop an application that will let users:
   - Display a map of events nearby.
   - Comment on events.
   - Likes/Dislikes for comments and events.
+
+Change Made

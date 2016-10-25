@@ -41,7 +41,6 @@ class NewAccountViewController: UIViewController {
     // Create account action. Adds user info to the Firebase Database.
     @IBAction func createAccountAction() {
         // TODO: Create account. Use Firebase to create the user object.
-        //
     }
     
     // TODO Keyboard next button goes to next field.

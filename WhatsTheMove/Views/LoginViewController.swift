@@ -43,10 +43,12 @@ class LoginViewController: UIViewController {
     
     // Login using Firebase Auth to authenticate with Facebook
     @IBAction func facebookLoginAction() {
+        
     }
     
     // Login using Firebase Auth to authenticate with Google
     @IBAction func googleLoginAction() {
+        
     }
     
 }

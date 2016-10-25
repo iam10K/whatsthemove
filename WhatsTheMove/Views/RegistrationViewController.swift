@@ -60,6 +60,7 @@ class RegistrationViewController: UIViewController {
     
     // Use Firebase Auth to authenticate with Google
     @IBAction func googleRegisterAction() {
+        
     }
     
     

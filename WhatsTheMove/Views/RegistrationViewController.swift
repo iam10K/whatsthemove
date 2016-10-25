@@ -53,4 +53,18 @@ class RegistrationViewController: UIViewController {
         }
     }
     
+    // Use Firebase Auth to authenticate with Facebook
+    @IBAction func facebookRegisterAction() {
+        
+    }
+    
+    // Use Firebase Auth to authenticate with Google
+    @IBAction func googleRegisterAction() {
+    }
+    
+    
+    // TODO Keyboard next button goes to next field.
+    // http://stackoverflow.com/questions/9540500/ios-app-next-key-wont-go-to-the-next-text-field
+    // http://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons
+    
 }

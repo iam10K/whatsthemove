@@ -38,7 +38,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -227,6 +227,22 @@
                                     <action selector="createAccountAction" destination="fur-LU-9in" eventType="touchUpInside" id="Lp9-N4-ixQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6d-1W-dSo">
+                                <frame key="frameInset" minX="154" minY="291" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Facebook"/>
+                                <connections>
+                                    <action selector="facebookRegisterAction" destination="fur-LU-9in" eventType="touchUpInside" id="kPa-4V-Gzk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ke7-7M-SWM">
+                                <frame key="frameInset" minX="158" minY="329" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Google+"/>
+                                <connections>
+                                    <action selector="googleRegisterAction" destination="fur-LU-9in" eventType="touchUpInside" id="EZZ-dX-NyH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -282,6 +298,22 @@
                                     <segue destination="fur-LU-9in" kind="show" id="PLM-xn-7sw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2be-Le-x3m">
+                                <frame key="frameInset" minX="154" minY="237" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Facebook"/>
+                                <connections>
+                                    <action selector="facebookLoginAction" destination="WYD-sw-KlX" eventType="touchUpInside" id="2OE-gK-bsq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rws-qB-ta8">
+                                <frame key="frameInset" minX="158" minY="275" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Google+"/>
+                                <connections>
+                                    <action selector="googleLoginAction" destination="WYD-sw-KlX" eventType="touchUpInside" id="66M-lq-AGA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -334,6 +366,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="usernameEditEnded" destination="vcl-Y4-x8h" eventType="editingDidEnd" id="mtQ-3E-qcw"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3mB-3l-2FW">
                                 <frame key="frameInset" minX="16" minY="116" width="343" height="30"/>
@@ -357,15 +392,25 @@
                                     <segment title="Private"/>
                                     <segment title="Friends"/>
                                 </segments>
+                                <connections>
+                                    <action selector="privacyLevelChange:" destination="vcl-Y4-x8h" eventType="valueChanged" id="IKU-4D-vB6"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFx-hh-nR3">
-                                <frame key="frameInset" minX="104" minY="228" width="167" height="30"/>
+                                <frame key="frameInset" minX="104" minY="294" width="167" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
                                     <action selector="createAccountAction" destination="vcl-Y4-x8h" eventType="touchUpInside" id="RX6-iI-c28"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Everyone can view your profile, full name, bio, and attended events." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjx-7q-HOc">
+                                <frame key="frameInset" minX="16" minY="228" width="343" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -374,6 +419,7 @@
                         <outlet property="firstNameField" destination="3mB-3l-2FW" id="LPX-0U-67i"/>
                         <outlet property="lastNameField" destination="TUW-cD-AxY" id="R5c-fA-sc0"/>
                         <outlet property="privacyLevelControl" destination="ure-Da-rZs" id="mrl-H0-Lc6"/>
+                        <outlet property="privacyLevelInfoLabel" destination="qjx-7q-HOc" id="9aV-gg-kh6"/>
                         <outlet property="usernameField" destination="GEy-Xi-KF0" id="wIx-3x-6hu"/>
                     </connections>
                 </viewController>

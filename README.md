@@ -17,3 +17,9 @@ We will develop an application that will let users:
   - Likes/Dislikes for comments and events.
 
 Change Made
+deairab
+wtfgarrett
+alcena15
+alcena15 git add
+alcena15
+laurenhicks108

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */; };
 		2F1D55401DA99FD500B2A46C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */; };
 		2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */; };
 		2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */; };
@@ -15,7 +16,6 @@
 		2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE61D9AD4A0009E6271 /* Event.swift */; };
 		2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE81D9AD4B1009E6271 /* Comment.swift */; };
 		2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AEA1D9AD4C0009E6271 /* User.swift */; };
-		2F741AED1D9AD4D6009E6271 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AEC1D9AD4D6009E6271 /* Report.swift */; };
 		2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F74EC481D91ACEE00CD1EBA /* AppDelegate.swift */; };
 		2F74EC4E1D91ACEE00CD1EBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F74EC4C1D91ACEE00CD1EBA /* Main.storyboard */; };
 		2F74EC501D91ACEE00CD1EBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F74EC4F1D91ACEE00CD1EBA /* Assets.xcassets */; };
@@ -47,6 +47,7 @@
 /* Begin PBXFileReference section */
 		07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WTMSingleton.swift; path = Objects/WTMSingleton.swift; sourceTree = "<group>"; };
 		2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Views/LoginViewController.swift; sourceTree = "<group>"; };
 		2F40E1D41DAABD5D0058EB76 /* WhatsTheMove.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatsTheMove.entitlements; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		2F741AE61D9AD4A0009E6271 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Objects/Event.swift; sourceTree = "<group>"; };
 		2F741AE81D9AD4B1009E6271 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Comment.swift; path = Objects/Comment.swift; sourceTree = "<group>"; };
 		2F741AEA1D9AD4C0009E6271 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Objects/User.swift; sourceTree = "<group>"; };
-		2F741AEC1D9AD4D6009E6271 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		2F74EC451D91ACEE00CD1EBA /* WhatsTheMove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatsTheMove.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F74EC481D91ACEE00CD1EBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F74EC4D1D91ACEE00CD1EBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,7 +135,6 @@
 				2F741AE61D9AD4A0009E6271 /* Event.swift */,
 				2F741AE81D9AD4B1009E6271 /* Comment.swift */,
 				2F741AEA1D9AD4C0009E6271 /* User.swift */,
-				2F741AEC1D9AD4D6009E6271 /* Report.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -201,6 +200,7 @@
 			children = (
 				2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */,
 				2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */,
+				2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */,
 				2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */,
 				2F40E1D91DAD9FC70058EB76 /* FeedViewController.swift */,
 			);
@@ -488,7 +488,7 @@
 				2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */,
 				2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */,
 				2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */,
-				2F741AED1D9AD4D6009E6271 /* Report.swift in Sources */,
+				2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */,
 				2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

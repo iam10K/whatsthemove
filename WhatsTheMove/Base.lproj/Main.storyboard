@@ -243,6 +243,14 @@
                                     <action selector="googleRegisterAction" destination="fur-LU-9in" eventType="touchUpInside" id="EZZ-dX-NyH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRa-Uy-UX0">
+                                <frame key="frameInset" minX="34" minY="629" width="307" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Already have an account? Click here to login."/>
+                                <connections>
+                                    <segue destination="WYD-sw-KlX" kind="show" id="xJJ-sa-z5N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -324,7 +332,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="thb-5I-1MS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="-1606.1469265367318"/>
+            <point key="canvasLocation" x="-799" y="-2372"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zTa-iJ-apJ">
@@ -351,7 +359,7 @@
         <!--New Account View Controller-->
         <scene sceneID="u5M-Ir-aUW">
             <objects>
-                <viewController id="vcl-Y4-x8h" customClass="NewAccountViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newAccountViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vcl-Y4-x8h" customClass="NewAccountViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9pc-pe-pPf"/>
                         <viewControllerLayoutGuide type="bottom" id="WlE-0x-Mwu"/>
@@ -401,7 +409,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
-                                    <action selector="createAccountAction" destination="vcl-Y4-x8h" eventType="touchUpInside" id="RX6-iI-c28"/>
+                                    <action selector="createAccountAction" destination="vcl-Y4-x8h" eventType="touchUpInside" id="taV-gf-GdF"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Everyone can view your profile, full name, bio, and attended events." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjx-7q-HOc">
@@ -415,7 +423,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="createAccountAction" destination="OFx-hh-nR3" id="9vG-EK-3YL"/>
                         <outlet property="firstNameField" destination="3mB-3l-2FW" id="LPX-0U-67i"/>
                         <outlet property="lastNameField" destination="TUW-cD-AxY" id="R5c-fA-sc0"/>
                         <outlet property="privacyLevelControl" destination="ure-Da-rZs" id="mrl-H0-Lc6"/>

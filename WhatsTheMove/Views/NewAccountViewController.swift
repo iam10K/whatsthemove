@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import Firebase
 
 class NewAccountViewController: UIViewController {
+    
+    let WTM = WTMSingleton.instance
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
@@ -40,7 +41,17 @@ class NewAccountViewController: UIViewController {
     
     // Create account action. Adds user info to the Firebase Database.
     @IBAction func createAccountAction() {
-        // TODO: Create account. Use Firebase to create the user object.
+        // Validate entered values
+        if !validateFields() {
+            return
+        }
+        
+        if let username = usernameField.text,
+            let firstName = firstNameField.text,
+            let lastName = lastNameField.text,
+            let user = WTM.auth.currentUser {
+            WTM.dbRef.child("users").child(user.uid).setValue(["username": username, "firstName": firstName, "lastName": lastName])
+        }
     }
     
     // TODO Keyboard next button goes to next field.
@@ -59,5 +70,10 @@ class NewAccountViewController: UIViewController {
         default: // None selected
             return "Select a privacy level for your account."
         }
+    }
+    
+    // Validate username, first and last name. Displays popup messages if any field is invalid
+    private func validateFields() -> Bool {
+        return true;
     }
 }

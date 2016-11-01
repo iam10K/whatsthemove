@@ -29,15 +29,21 @@ class RegistrationViewController: UIViewController {
     
     @IBAction func createAccountAction() {
         if let email = emailField.text {
-            
-            
             if let password = passwordField.text {
-                
-                
                 if let passwordConfirm = passwordConfirmField.text {
                     
                     if password != passwordConfirm {
-                        
+                        // TODO: Message, Passwords do not match
+                        return
+                    } else {
+                        if password.characters.count < 6 {
+                            // TODO: Message, Password is too short
+                            return
+                        }
+                        if password.characters.count > 32 {
+                            // TODO: Message. Password is too long
+                            return
+                        }
                     }
                     
                     WTM.auth.createUser(withEmail: email, password: password) { (user, error) in
@@ -49,12 +55,20 @@ class RegistrationViewController: UIViewController {
                         
                         // Error
                         if let error = error {
+                            // TODO: Handle errors, print messages, etcs
                             print(error.localizedDescription)
                         }
                         
                     }
+                    
+                } else {
+                    // TODO: Message, Password not confirmed
                 }
+            } else {
+                // TODO: Message, No password entered
             }
+        } else {
+            // TODO: Message, No email entered
         }
     }
     

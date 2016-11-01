@@ -13,8 +13,7 @@ class NewAccountViewController: UIViewController {
     let WTM = WTMSingleton.instance
     
     @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var firstNameField: UITextField!
-    @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var privacyLevelControl: UISegmentedControl!
     @IBOutlet weak var privacyLevelInfoLabel: UILabel!
     
@@ -33,8 +32,8 @@ class NewAccountViewController: UIViewController {
     @IBAction func usernameEditEnded() {
     // TODO: Use link above, one of three options. Second or third option would be preferable.
         if let username = usernameField.text {
-            if !validateUsername(username: username) {
-                // TODO: Display message to user that username is taken of not valid.
+            if !validateUsernameAvailable(username: username) {
+                // TODO: Display message to user that username is taken & not valid.
             }
         }
     }
@@ -52,10 +51,9 @@ class NewAccountViewController: UIViewController {
         }
         
         if let username = usernameField.text,
-            let firstName = firstNameField.text,
-            let lastName = lastNameField.text,
+            let name = nameField.text,
             let user = WTM.auth.currentUser {
-            WTM.dbRef.child("users").child(user.uid).updateChildValues(["username": username, "firstName": firstName, "lastName": lastName, "privacyLevel": privacyLevelControl.selectedSegmentIndex])
+            WTM.dbRef.child("users").child(user.uid).updateChildValues(["username": username, "name": name, "privacyLevel": privacyLevelControl.selectedSegmentIndex])
         }
         
         // Push to Feed View Controller
@@ -79,11 +77,24 @@ class NewAccountViewController: UIViewController {
         }
     }
     
-    // Validate that the username is not taken and is valid, true if valid
-    private func validateUsername(username: String) -> Bool {
-        var valid = true
+    // Validate that the username matches the correct pattern
+    private func validateUsernamePattern(username: String) -> Bool {
+        if let result = username.range(of: "^[a-zA-Z0-9_-]{4,20}$", options: .regularExpression) {
+            if result.isEmpty {
+                // TODO: Message, username can only contain alphanumeric and underscore
+                return false
+            } else {
+                return true
+            }
+        }
+        // TODO: Message, username can only contain alphanumeric and underscore
+        return false
         
-        // TODO: Use REGEX to validate usename is a-zA-Z0-9_
+    }
+    
+    // Validate that the username is not taken, true if it is taken
+    private func validateUsernameAvailable(username: String) -> Bool {
+        var valid = true
         
         // Use Firebase database to check if user name is take
         WTM.dbRef.child("users").child(username).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -97,12 +108,24 @@ class NewAccountViewController: UIViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
-        
         return valid
+
     }
     
     // Validate username, first and last name. Displays popup messages if any field is invalid
     private func validateFields() -> Bool {
-        return true;
+        if let username = usernameField.text {
+            if !validateUsernamePattern(username: username) {
+                return false
+            }
+            if !validateUsernameAvailable(username: username) {
+                // TODO: Display message to user that username is taken & not valid.
+                return false
+            }
+        } else {
+            // TODO: Message, no username entered.
+        }
+        
+        return true
     }
 }

@@ -378,15 +378,8 @@
                                     <action selector="usernameEditEnded" destination="vcl-Y4-x8h" eventType="editingDidEnd" id="mtQ-3E-qcw"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3mB-3l-2FW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3mB-3l-2FW">
                                 <frame key="frameInset" minX="16" minY="116" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TUW-cD-AxY">
-                                <frame key="frameInset" minX="16" minY="154" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -406,7 +399,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFx-hh-nR3">
                                 <frame key="frameInset" minX="104" minY="294" width="167" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create Account"/>
+                                <state key="normal" title="Complete Registration"/>
                                 <connections>
                                     <action selector="createAccountAction" destination="vcl-Y4-x8h" eventType="touchUpInside" id="taV-gf-GdF"/>
                                 </connections>
@@ -423,7 +416,6 @@
                     </view>
                     <connections>
                         <outlet property="firstNameField" destination="3mB-3l-2FW" id="LPX-0U-67i"/>
-                        <outlet property="lastNameField" destination="TUW-cD-AxY" id="R5c-fA-sc0"/>
                         <outlet property="privacyLevelControl" destination="ure-Da-rZs" id="mrl-H0-Lc6"/>
                         <outlet property="privacyLevelInfoLabel" destination="qjx-7q-HOc" id="9aV-gg-kh6"/>
                         <outlet property="usernameField" destination="GEy-Xi-KF0" id="wIx-3x-6hu"/>

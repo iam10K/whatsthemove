@@ -77,10 +77,9 @@ class RegistrationViewController: UIViewController {
     private func addNewUserToDatabase(user: FIRUser) {
         if let email = user.email {
             WTM.dbRef.child("users").child(user.uid).setValue(["email": email])
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
-            self.present(vc!, animated: true)
-
         }
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
+        self.present(vc!, animated: true)
     }
     
 }

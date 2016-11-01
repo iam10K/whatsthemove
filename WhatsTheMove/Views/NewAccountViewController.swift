@@ -32,6 +32,11 @@ class NewAccountViewController: UIViewController {
     // http://stackoverflow.com/questions/38134789
     @IBAction func usernameEditEnded() {
     // TODO: Use link above, one of three options. Second or third option would be preferable.
+        if let username = usernameField.text {
+            if !validateUsername(username: username) {
+                // TODO: Display message to user that username is taken of not valid.
+            }
+        }
     }
     
     // When the privacy level changes update the info text.
@@ -50,8 +55,12 @@ class NewAccountViewController: UIViewController {
             let firstName = firstNameField.text,
             let lastName = lastNameField.text,
             let user = WTM.auth.currentUser {
-            WTM.dbRef.child("users").child(user.uid).setValue(["username": username, "firstName": firstName, "lastName": lastName])
+            WTM.dbRef.child("users").child(user.uid).updateChildValues(["username": username, "firstName": firstName, "lastName": lastName, "privacyLevel": privacyLevelControl.selectedSegmentIndex])
         }
+        
+        // Push to Feed View Controller
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+        self.present(vc!, animated: true)
     }
     
     // TODO Keyboard next button goes to next field.
@@ -64,12 +73,32 @@ class NewAccountViewController: UIViewController {
         case 0: // Public
             return "Everyone can view your profile, full name, bio, and events."
         case 1: // Private
-            return "Users can only view your profile, first name, and bio."
-        case 2: // Friends-Only
-            return "Only friends will see your profile, full name, bio, and events."
+            return "Only your friends can view your profile, full name, bio, and events."
         default: // None selected
             return "Select a privacy level for your account."
         }
+    }
+    
+    // Validate that the username is not taken and is valid, true if valid
+    private func validateUsername(username: String) -> Bool {
+        var valid = true
+        
+        // TODO: Use REGEX to validate usename is a-zA-Z0-9_
+        
+        // Use Firebase database to check if user name is take
+        WTM.dbRef.child("users").child(username).observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                // Username is taken already
+                valid = false
+            } else {
+                // Username is not taken
+                valid = true
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        return valid
     }
     
     // Validate username, first and last name. Displays popup messages if any field is invalid

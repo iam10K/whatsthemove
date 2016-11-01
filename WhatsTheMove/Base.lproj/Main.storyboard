@@ -73,10 +73,10 @@
             </objects>
             <point key="canvasLocation" x="2952.8000000000002" y="919.79010494752629"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Feed Table View Controller-->
         <scene sceneID="mEG-W4-aRn">
             <objects>
-                <tableViewController id="ZkC-Ga-Bb4" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="feedTableViewController" id="ZkC-Ga-Bb4" customClass="FeedTableViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0yg-cv-dAJ" customClass="FeedViewController" customModule="WhatsTheMove" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,7 +105,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="hOe-cr-FGc">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="SfN-zm-pSM" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" automaticallyAdjustsScrollViewInsets="NO" id="SfN-zm-pSM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="I8f-MB-64M">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -373,7 +373,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <connections>
                                     <action selector="usernameEditEnded" destination="vcl-Y4-x8h" eventType="editingDidEnd" id="mtQ-3E-qcw"/>
                                 </connections>
@@ -383,14 +383,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TUW-cD-AxY">
                                 <frame key="frameInset" minX="16" minY="154" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ure-Da-rZs">
                                 <frame key="frameInset" minX="16" minY="192" width="343" height="29"/>
@@ -398,7 +398,6 @@
                                 <segments>
                                     <segment title="Public"/>
                                     <segment title="Private"/>
-                                    <segment title="Friends"/>
                                 </segments>
                                 <connections>
                                     <action selector="privacyLevelChange:" destination="vcl-Y4-x8h" eventType="valueChanged" id="IKU-4D-vB6"/>

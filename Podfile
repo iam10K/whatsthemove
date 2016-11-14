@@ -10,6 +10,7 @@ target 'WhatsTheMove' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Messaging'
+  pod 'FSCalendar'
 
   target 'WhatsTheMoveTests' do
     inherit! :search_paths

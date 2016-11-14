@@ -11,6 +11,8 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    let WTM = WTMSingleton.instance
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -27,9 +29,8 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonAction() {
         if let email = emailField.text {
             
-            
             if let password = passwordField.text {
-                FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
+                WTM.auth.signIn(withEmail: email, password: password) { (user, error) in
                     if let user = user {
                         print(user.uid)
                     }

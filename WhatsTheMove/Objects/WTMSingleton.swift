@@ -19,6 +19,7 @@ class WTMSingleton: NSObject {
     
     private override init() {
         super.init()
+        FIRApp.configure()
         
         dbRef = FIRDatabase.database().reference()
         auth = FIRAuth.auth()

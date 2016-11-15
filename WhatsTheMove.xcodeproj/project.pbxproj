@@ -25,6 +25,8 @@
 		2F74EC691D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F74EC681D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift */; };
 		2F900D781DCBC4D200198AEA /* NewEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */; };
 		2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */; };
+		2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */; };
+		2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */; };
 		3039D0BEEA2E0D709AD773D2 /* Pods_WhatsTheMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */; };
 		6E53EAD380CD6BA50D1565AC /* Pods_WhatsTheMoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */; };
 		767C9340F707062CFCCFD011 /* Pods_WhatsTheMoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */; };
@@ -76,6 +78,8 @@
 		2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewEventTableViewController.swift; path = Views/NewEventTableViewController.swift; sourceTree = "<group>"; };
 		2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectDateViewController.swift; path = Views/SelectDateViewController.swift; sourceTree = "<group>"; };
 		2F9329C61DDA3E34004F3C9F /* WhatsTheMove-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhatsTheMove-Bridge-Header.h"; sourceTree = "<group>"; };
+		2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectLocationViewController.swift; path = Views/SelectLocationViewController.swift; sourceTree = "<group>"; };
+		2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchTableViewController.swift; path = Views/LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		3D60E4694E8D2691AEB84605 /* Pods-WhatsTheMoveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveTests/Pods-WhatsTheMoveTests.release.xcconfig"; sourceTree = "<group>"; };
 		559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMove.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		592CC708A9974C0672BF74C9 /* Pods-WhatsTheMove.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.release.xcconfig"; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 			children = (
 				2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */,
 				2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */,
+				2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */,
+				2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */,
 			);
 			name = NewEventViews;
 			sourceTree = "<group>";
@@ -502,7 +508,9 @@
 			files = (
 				2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */,
 				2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */,
+				2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */,
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,
+				2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */,
 				2F65C5501DC916120014AEBE /* MapViewController.swift in Sources */,
 				2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */,
 				2F65C54E1DC8FB1D0014AEBE /* FeedTableViewController.swift in Sources */,

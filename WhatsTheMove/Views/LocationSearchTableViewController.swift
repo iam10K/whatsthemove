@@ -13,6 +13,7 @@ class LocationSearchTableViewController: UITableViewController {
     
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
+    var handleMapSearchDelegate:HandleMapSearch? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,34 @@ class LocationSearchTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func parseAddress(for selectedItem: MKPlacemark) -> String {
+        // Put a space between "4" and "Melrose Place"
+        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
+        // Put a comma between street and city/state
+        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
+        // Put a space between "Washington" and "DC"
+        let secondSpace = (selectedItem.subAdministrativeArea != nil && selectedItem.administrativeArea != nil) ? " " : ""
+        let addressLine = String(
+            format:"%@%@%@%@%@%@%@",
+            // Street number
+            selectedItem.subThoroughfare ?? "",
+            firstSpace,
+            // Street name
+            selectedItem.thoroughfare ?? "",
+            comma,
+            // City
+            selectedItem.locality ?? "",
+            secondSpace,
+            // State
+            selectedItem.administrativeArea ?? ""
+        )
+        return addressLine
+    }
 
 }
 
 extension LocationSearchTableViewController : UISearchResultsUpdating {
-    @objc(updateSearchResultsForSearchController:)
     func updateSearchResults(for searchController: UISearchController) {
         guard let mapView = mapView,
             let searchBarText = searchController.searchBar.text else { return }
@@ -55,11 +79,20 @@ extension LocationSearchTableViewController {
         return matchingItems.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         let selectedItem = matchingItems[indexPath.row].placemark
         cell.textLabel?.text = selectedItem.name
-        cell.detailTextLabel?.text = ""
+        cell.detailTextLabel?.text = parseAddress(for: selectedItem)
         return cell
+    }
+}
+
+extension LocationSearchTableViewController {
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = matchingItems[indexPath.row]
+        handleMapSearchDelegate?.dropPinZoomIn(for: selectedItem.placemark, of: selectedItem)
+        dismiss(animated: true, completion: nil)
     }
 }

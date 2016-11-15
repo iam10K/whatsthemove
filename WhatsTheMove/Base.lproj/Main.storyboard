@@ -266,6 +266,10 @@
                                                 <constraint firstItem="Xs7-1n-Qj6" firstAttribute="centerY" secondItem="YwT-Lw-B9s" secondAttribute="centerY" id="vSV-Mi-IiG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Rk3-Ze-7uj" kind="show" identifier="selectDateControllerSegue" id="Ejm-Tc-bIc"/>
+                                            <segue destination="Rk3-Ze-7uj" kind="show" identifier="selectDateControllerSegue" trigger="accessoryAction" id="WUL-K7-m8A"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="58D-BN-zfl">
                                         <rect key="frame" x="0.0" y="252" width="414" height="44"/>
@@ -807,6 +811,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CmN-sE-3Fe"/>
-        <segue reference="QR5-lc-zLv"/>
+        <segue reference="WUL-K7-m8A"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -11,7 +11,7 @@ import FSCalendar
 
 class SelectDateViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
 
-    var newEvent: Event?
+    var newEvent: Event? = nil
     var selectingStartDate: Bool = true
     
     @IBOutlet weak var calendar: FSCalendar!
@@ -24,6 +24,7 @@ class SelectDateViewController: UIViewController, FSCalendarDataSource, FSCalend
         calendar.placeholderType = FSCalendarPlaceholderType.none
         tabBarController?.tabBar.isHidden = true
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         if selectingStartDate {
             title = "Start Date"

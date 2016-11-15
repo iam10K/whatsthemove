@@ -9,6 +9,11 @@
 import UIKit
 import MapKit
 
+protocol HandleMapSearch {
+    func dropPinZoomIn(placemark: MKPlacemark)
+    func dropPinZoomIn(for placemark: MKPlacemark, of selectedItem: MKMapItem)
+}
+
 class SelectLocationViewController: UIViewController {
     
     let locationManager = CLLocationManager()
@@ -16,6 +21,10 @@ class SelectLocationViewController: UIViewController {
     var resultSearchController:UISearchController? = nil
     
     @IBOutlet weak var mapView: MKMapView!
+    var selectedLocation: MKMapItem? = nil
+    var selectedPin: MKPlacemark? = nil
+    
+    var newEvent: Event? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +39,10 @@ class SelectLocationViewController: UIViewController {
         
         // Setup locationSearchResultsTable
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableViewController
+        locationSearchTable.mapView = mapView
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
+        locationSearchTable.handleMapSearchDelegate = self
         
         // This configures the search bar, and embeds it within the navigation bar.
         let searchBar = resultSearchController!.searchBar
@@ -53,7 +64,7 @@ class SelectLocationViewController: UIViewController {
 }
 
 extension SelectLocationViewController : CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
         }
@@ -70,4 +81,59 @@ extension SelectLocationViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error:: (error)")
     }
+}
+
+extension SelectLocationViewController: HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark){
+        // Cache the pin
+        selectedPin = placemark
+        // Clear existing pins
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    func dropPinZoomIn(for placemark: MKPlacemark, of selectedItem: MKMapItem) {
+        dropPinZoomIn(placemark: placemark)
+        self.selectedLocation = selectedItem
+    }
+}
+
+extension SelectLocationViewController : MKMapViewDelegate {
+    // Map view to add the annotation to the pin
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else { return nil }
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pin") as? MKPinAnnotationView
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            annotationView?.canShowCallout = true
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .contactAdd)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        return annotationView
+    }
+    
+    // Function to open maps app when clicking map annotation
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let newEvent = newEvent, let selectedLocation = selectedLocation {
+            if let location = selectedLocation.placemark.location {
+                newEvent.longitude = location.coordinate.longitude
+                newEvent.latitude = location.coordinate.latitude
+            }
+        }
+        print("Clicked")
+    }
+    
 }

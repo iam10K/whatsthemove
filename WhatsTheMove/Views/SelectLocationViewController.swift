@@ -16,6 +16,8 @@ protocol HandleMapSearch {
 
 class SelectLocationViewController: UIViewController {
     
+    let WTM = WTMSingleton.instance
+    
     let locationManager = CLLocationManager()
 
     var resultSearchController:UISearchController? = nil
@@ -23,8 +25,6 @@ class SelectLocationViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     var selectedLocation: MKMapItem? = nil
     var selectedPin: MKPlacemark? = nil
-    
-    var newEvent: Event? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,7 @@ class SelectLocationViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
 
+        // Hide back button
         self.navigationItem.hidesBackButton = true
         
         // Setup locationSearchResultsTable
@@ -127,13 +128,44 @@ extension SelectLocationViewController : MKMapViewDelegate {
     
     // Function to open maps app when clicking map annotation
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if let newEvent = newEvent, let selectedLocation = selectedLocation {
+        // Update newEvent with the location info
+        if let selectedLocation = selectedLocation {
             if let location = selectedLocation.placemark.location {
-                newEvent.longitude = location.coordinate.longitude
-                newEvent.latitude = location.coordinate.latitude
+                WTM.newEvent.address = parseAddress(for: selectedLocation.placemark)
+                WTM.newEvent.longitude = location.coordinate.longitude
+                WTM.newEvent.latitude = location.coordinate.latitude
+                if let addressName = selectedLocation.name {
+                    WTM.newEvent.addressName = addressName
+                }
+                // Return to new event view
+                _ = self.navigationController?.popViewController(animated: true)
             }
         }
-        print("Clicked")
+    }
+    
+    // Parse address
+    func parseAddress(for selectedItem: MKPlacemark) -> String {
+        // Put a space between "4" and "Melrose Place"
+        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
+        // Put a comma between street and city/state
+        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
+        // Put a space between "Washington" and "DC"
+        let secondSpace = (selectedItem.subAdministrativeArea != nil && selectedItem.administrativeArea != nil) ? " " : ""
+        let addressLine = String(
+            format:"%@%@%@%@%@%@%@",
+            // Street number
+            selectedItem.subThoroughfare ?? "",
+            firstSpace,
+            // Street name
+            selectedItem.thoroughfare ?? "",
+            comma,
+            // City
+            selectedItem.locality ?? "",
+            secondSpace,
+            // State
+            selectedItem.administrativeArea ?? ""
+        )
+        return addressLine
     }
     
 }

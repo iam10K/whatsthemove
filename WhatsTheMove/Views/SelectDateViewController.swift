@@ -10,8 +10,9 @@ import UIKit
 import FSCalendar
 
 class SelectDateViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
-
-    var newEvent: Event? = nil
+    
+    let WTM = WTMSingleton.instance
+    
     var selectingStartDate: Bool = true
     
     @IBOutlet weak var calendar: FSCalendar!
@@ -22,13 +23,24 @@ class SelectDateViewController: UIViewController, FSCalendarDataSource, FSCalend
 
         // Do any additional setup after loading the view.
         calendar.placeholderType = FSCalendarPlaceholderType.none
+        
+        // Hide tabBar
         tabBarController?.tabBar.isHidden = true
+        
+        // Hide back button
+        self.navigationItem.hidesBackButton = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if selectingStartDate {
+            let date = WTM.newEvent.startDate
+            calendar.select(date)
+            timePicker.date = date
             title = "Start Date"
         } else {
+            let date = WTM.newEvent.endDate
+            calendar.select(date)
+            timePicker.date = date
             title = "End Date"
         }
     }
@@ -38,6 +50,7 @@ class SelectDateViewController: UIViewController, FSCalendarDataSource, FSCalend
         // Dispose of any resources that can be recreated.
     }
     
+    // Done action, sets date in newEvent and returns view to newEvent
     @IBAction func doneSelectingDate(_ sender: AnyObject) {
         // Gather all the date components to construct new date
         let curCalendar = Calendar.current
@@ -62,13 +75,16 @@ class SelectDateViewController: UIViewController, FSCalendarDataSource, FSCalend
         let selectedDate = curCalendar.date(from: selectedComponents)
         
         // Assign new date to the start or end date
-        if let newEvent = newEvent, let selectedDate = selectedDate {
+        if let selectedDate = selectedDate {
             if selectingStartDate {
-                newEvent.startDate = selectedDate
+                WTM.newEvent.startDate = selectedDate
             } else {
-                newEvent.endDate = selectedDate
+                WTM.newEvent.endDate = selectedDate
             }
         }
+        
+        _ = self.navigationController?.popViewController(animated: true)
+        
     }
     
 

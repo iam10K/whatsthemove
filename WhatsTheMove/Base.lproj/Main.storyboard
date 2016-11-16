@@ -64,7 +64,7 @@
                                 </connections>
                             </view>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="6hN-l9-nxb">
-                                <frame key="frameInset" minY="412" height="255"/>
+                                <frame key="frameInset" minX="-0.5" minY="412" height="255"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="500846564.38066101">
                                     <!--2016-11-14 20:02:44 +0000-->
@@ -190,14 +190,15 @@
         <scene sceneID="9R2-gh-TLg">
             <objects>
                 <tableViewController id="ufq-Ue-O6h" customClass="NewEventTableViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KnU-vv-bxO">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KnU-vv-bxO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.77046883553548329" green="0.77809723984771573" blue="0.77809723984771573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection headerTitle=" " id="mQe-6U-ced">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CEi-ps-zUV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CEi-ps-zUV">
                                         <rect key="frame" x="0.0" y="92" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CEi-ps-zUV" id="3Ax-iT-yss">
@@ -217,27 +218,33 @@
                                                 <constraint firstItem="S6f-Uc-Y1P" firstAttribute="trailing" secondItem="3Ax-iT-yss" secondAttribute="trailingMargin" id="zqE-ja-PE5"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lNR-H3-84Q">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lNR-H3-84Q">
                                         <rect key="frame" x="0.0" y="136" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNR-H3-84Q" id="say-Td-RNM">
                                             <frame key="frameInset" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X1U-fJ-age">
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2JD-iu-p7m">
+                                                    <frame key="frameInset" minX="13" minY="5" width="381" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znq-ZS-Yhy">
+                                                    <frame key="frameInset" minX="13" minY="25" width="381" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="X1U-fJ-age" firstAttribute="top" secondItem="say-Td-RNM" secondAttribute="topMargin" constant="-2" id="8wy-vj-Cy7"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="X1U-fJ-age" secondAttribute="trailing" constant="9" id="Ja6-Gt-ETZ"/>
-                                                <constraint firstItem="X1U-fJ-age" firstAttribute="centerY" secondItem="say-Td-RNM" secondAttribute="centerY" id="TVw-Jl-08r"/>
-                                                <constraint firstItem="X1U-fJ-age" firstAttribute="leading" secondItem="say-Td-RNM" secondAttribute="leadingMargin" constant="5" id="cdr-9v-OaB"/>
-                                            </constraints>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="h2p-Vg-68w" kind="show" identifier="selectLocationControllerSegue" id="CmN-sE-3Fe"/>
                                             <segue destination="h2p-Vg-68w" kind="show" identifier="selectLocationControllerSegue" trigger="accessoryAction" id="9hr-qN-0f7"/>
@@ -266,6 +273,7 @@
                                                 <constraint firstItem="Xs7-1n-Qj6" firstAttribute="centerY" secondItem="YwT-Lw-B9s" secondAttribute="centerY" id="vSV-Mi-IiG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="Rk3-Ze-7uj" kind="show" identifier="selectDateControllerSegue" id="Ejm-Tc-bIc"/>
                                             <segue destination="Rk3-Ze-7uj" kind="show" identifier="selectDateControllerSegue" trigger="accessoryAction" id="WUL-K7-m8A"/>
@@ -290,12 +298,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="xgo-5S-TBj" secondAttribute="trailing" id="qv2-LO-pjt"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="Rk3-Ze-7uj" kind="show" identifier="selectDateControllerSegue" id="Tw6-rs-RIw"/>
                                             <segue destination="Rk3-Ze-7uj" kind="show" identifier="selectDateControllerSegue" trigger="accessoryAction" id="QR5-lc-zLv"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="58" id="GVM-lQ-MZG">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="58" id="GVM-lQ-MZG">
                                         <rect key="frame" x="0.0" y="296" width="414" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GVM-lQ-MZG" id="J40-f4-QWa">
@@ -310,17 +319,18 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="aoK-3O-x3i" firstAttribute="leading" secondItem="J40-f4-QWa" secondAttribute="leadingMargin" constant="5" id="BdE-A7-TZz"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="aoK-3O-x3i" secondAttribute="trailing" constant="9" id="ihR-d3-Ts5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="aoK-3O-x3i" secondAttribute="trailing" constant="12" id="ihR-d3-Ts5"/>
                                                 <constraint firstItem="aoK-3O-x3i" firstAttribute="bottom" secondItem="J40-f4-QWa" secondAttribute="bottomMargin" id="xSv-yi-Q73"/>
                                                 <constraint firstItem="aoK-3O-x3i" firstAttribute="top" secondItem="J40-f4-QWa" secondAttribute="topMargin" constant="-3" id="zXV-ys-idj"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="94p-by-yaQ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="e6r-8V-MIN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="e6r-8V-MIN">
                                         <rect key="frame" x="0.0" y="382" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e6r-8V-MIN" id="Wwq-4v-A7i">
@@ -333,16 +343,18 @@
                                                         <segment title="Friends Only"/>
                                                         <segment title="Invite Only"/>
                                                     </segments>
+                                                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Ref-D1-hbF" firstAttribute="leading" secondItem="Wwq-4v-A7i" secondAttribute="leadingMargin" constant="5" id="D1A-kB-aCH"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Ref-D1-hbF" secondAttribute="trailing" constant="9" id="wGq-4e-DDa"/>
-                                                <constraint firstItem="Ref-D1-hbF" firstAttribute="top" secondItem="Wwq-4v-A7i" secondAttribute="topMargin" id="xuH-D0-bmB"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Ref-D1-hbF" secondAttribute="trailing" constant="9" id="Yap-C8-v08"/>
+                                                <constraint firstItem="Ref-D1-hbF" firstAttribute="leading" secondItem="Wwq-4v-A7i" secondAttribute="leadingMargin" constant="5" id="bQB-e2-AK9"/>
+                                                <constraint firstItem="Ref-D1-hbF" firstAttribute="top" secondItem="Wwq-4v-A7i" secondAttribute="topMargin" id="fku-dF-EXO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fb4-2d-GeO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fb4-2d-GeO">
                                         <rect key="frame" x="0.0" y="426" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fb4-2d-GeO" id="dJX-DT-1HD">
@@ -363,8 +375,9 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="8u9-XB-gz0" secondAttribute="trailing" constant="11" id="Qp0-GX-P2e"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="6Se-xa-QR5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="6Se-xa-QR5">
                                         <rect key="frame" x="0.0" y="470" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Se-xa-QR5" id="irC-Ge-LmY">
@@ -384,8 +397,9 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="w6X-s2-3b0" secondAttribute="trailing" constant="9" id="yKM-Es-U3b"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mJr-rl-Hqb">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mJr-rl-Hqb">
                                         <rect key="frame" x="0.0" y="514" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mJr-rl-Hqb" id="VFW-Kn-NRB">
@@ -405,6 +419,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="cga-Qw-y5K" secondAttribute="trailing" constant="9" id="ie1-C6-IT9"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -415,7 +430,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Event" id="xqP-Wu-7PS">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vhx-a0-Ubn"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vhx-a0-Ubn">
+                            <connections>
+                                <action selector="cancelAction:" destination="ufq-Ue-O6h" id="1dD-uU-af2"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Create" style="done" id="mVN-iu-dSg">
                             <connections>
                                 <action selector="createEventAction:" destination="ufq-Ue-O6h" id="nRc-ze-Xo1"/>
@@ -430,10 +449,11 @@
                     <connections>
                         <outlet property="descriptionField" destination="aoK-3O-x3i" id="EI4-dB-MaC"/>
                         <outlet property="endDateLabel" destination="xgo-5S-TBj" id="IFw-dR-fld"/>
-                        <outlet property="entryNotes" destination="cga-Qw-y5K" id="6jA-wg-Dud"/>
+                        <outlet property="entryNotesField" destination="cga-Qw-y5K" id="XNg-JE-bLm"/>
                         <outlet property="eventTitleField" destination="S6f-Uc-Y1P" id="9Ba-zP-uW1"/>
                         <outlet property="friendsCanInviteSwitch" destination="8u9-XB-gz0" id="8Sr-Ds-tix"/>
-                        <outlet property="locationField" destination="X1U-fJ-age" id="PkE-t5-IGx"/>
+                        <outlet property="locationAddressLabel" destination="znq-ZS-Yhy" id="9Ut-lD-5cw"/>
+                        <outlet property="locationLabel" destination="2JD-iu-p7m" id="dAt-iK-BeI"/>
                         <outlet property="privacyControl" destination="Ref-D1-hbF" id="HYa-99-CsJ"/>
                         <outlet property="sponsorField" destination="w6X-s2-3b0" id="Bju-ty-ac5"/>
                         <outlet property="startDateLabel" destination="Xs7-1n-Qj6" id="0M1-Sb-eYF"/>
@@ -441,7 +461,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCf-iA-U45" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2952.8000000000002" y="919.79010494752629"/>
+            <point key="canvasLocation" x="2952.1739130434785" y="919.56521739130437"/>
         </scene>
         <!--Select Location View Controller-->
         <scene sceneID="chH-2a-62d">

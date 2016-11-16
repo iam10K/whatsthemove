@@ -16,6 +16,7 @@ class WTMSingleton: NSObject {
     var dbRef: FIRDatabaseReference!
     var auth: FIRAuth!
     
+    var newEvent: Event = Event()
     
     private override init() {
         super.init()

@@ -78,7 +78,7 @@ class NewAccountViewController: UIViewController {
     }
     
     // Validate that the username matches the correct pattern
-    private func validateUsernamePattern(username: String) -> Bool {
+    private func validatePattern(of username: String) -> Bool {
         if let result = username.range(of: "^[a-zA-Z0-9_-]{4,20}$", options: .regularExpression) {
             if result.isEmpty {
                 // TODO: Message, username can only contain alphanumeric and underscore
@@ -115,7 +115,7 @@ class NewAccountViewController: UIViewController {
     // Validate username, first and last name. Displays popup messages if any field is invalid
     private func validateFields() -> Bool {
         if let username = usernameField.text {
-            if !validateUsernamePattern(username: username) {
+            if !validatePattern(of: username) {
                 return false
             }
             if !validateUsernameAvailable(username: username) {

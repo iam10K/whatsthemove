@@ -23,6 +23,10 @@
 		2F74EC531D91ACEE00CD1EBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F74EC511D91ACEE00CD1EBA /* LaunchScreen.storyboard */; };
 		2F74EC5E1D91ACEE00CD1EBA /* WhatsTheMoveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F74EC5D1D91ACEE00CD1EBA /* WhatsTheMoveTests.swift */; };
 		2F74EC691D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F74EC681D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift */; };
+		2F900D781DCBC4D200198AEA /* NewEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */; };
+		2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */; };
+		2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */; };
+		2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */; };
 		3039D0BEEA2E0D709AD773D2 /* Pods_WhatsTheMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */; };
 		6E53EAD380CD6BA50D1565AC /* Pods_WhatsTheMoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */; };
 		767C9340F707062CFCCFD011 /* Pods_WhatsTheMoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */; };
@@ -71,6 +75,11 @@
 		2F74EC641D91ACEE00CD1EBA /* WhatsTheMoveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsTheMoveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F74EC681D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsTheMoveUITests.swift; sourceTree = "<group>"; };
 		2F74EC6A1D91ACEE00CD1EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewEventTableViewController.swift; path = Views/NewEventTableViewController.swift; sourceTree = "<group>"; };
+		2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectDateViewController.swift; path = Views/SelectDateViewController.swift; sourceTree = "<group>"; };
+		2F9329C61DDA3E34004F3C9F /* WhatsTheMove-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhatsTheMove-Bridge-Header.h"; sourceTree = "<group>"; };
+		2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectLocationViewController.swift; path = Views/SelectLocationViewController.swift; sourceTree = "<group>"; };
+		2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchTableViewController.swift; path = Views/LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		3D60E4694E8D2691AEB84605 /* Pods-WhatsTheMoveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveTests/Pods-WhatsTheMoveTests.release.xcconfig"; sourceTree = "<group>"; };
 		559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMove.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		592CC708A9974C0672BF74C9 /* Pods-WhatsTheMove.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +185,7 @@
 				2F74EC511D91ACEE00CD1EBA /* LaunchScreen.storyboard */,
 				2F74EC541D91ACEE00CD1EBA /* Info.plist */,
 				2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */,
+				2F9329C61DDA3E34004F3C9F /* WhatsTheMove-Bridge-Header.h */,
 			);
 			path = WhatsTheMove;
 			sourceTree = "<group>";
@@ -201,6 +211,7 @@
 		2F8D64091D91B6190089FFCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2F9329C21DDA37CD004F3C9F /* NewEventViews */,
 				2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */,
 				2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */,
 				2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */,
@@ -208,6 +219,17 @@
 				2F65C54F1DC916120014AEBE /* MapViewController.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		2F9329C21DDA37CD004F3C9F /* NewEventViews */ = {
+			isa = PBXGroup;
+			children = (
+				2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */,
+				2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */,
+				2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */,
+				2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */,
+			);
+			name = NewEventViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -486,13 +508,17 @@
 			files = (
 				2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */,
 				2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */,
+				2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */,
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,
+				2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */,
 				2F65C5501DC916120014AEBE /* MapViewController.swift in Sources */,
 				2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */,
 				2F65C54E1DC8FB1D0014AEBE /* FeedTableViewController.swift in Sources */,
+				2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */,
 				2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */,
 				2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */,
 				2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */,
+				2F900D781DCBC4D200198AEA /* NewEventTableViewController.swift in Sources */,
 				2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,6 +619,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "WhatsTheMove/WhatsTheMove-Bridge-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -635,6 +662,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "WhatsTheMove/WhatsTheMove-Bridge-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -652,6 +680,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -667,6 +696,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

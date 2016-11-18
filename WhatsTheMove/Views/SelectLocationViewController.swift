@@ -98,6 +98,7 @@ extension SelectLocationViewController: HandleMapSearch {
             annotation.subtitle = "\(city) \(state)"
         }
         mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
@@ -144,7 +145,7 @@ extension SelectLocationViewController : MKMapViewDelegate {
     }
     
     // Parse address
-    func parseAddress(for selectedItem: MKPlacemark) -> String {
+    private func parseAddress(for selectedItem: MKPlacemark) -> String {
         // Put a space between "4" and "Melrose Place"
         let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
         // Put a comma between street and city/state

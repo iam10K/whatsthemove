@@ -13,15 +13,12 @@ class Event: NSObject {
     var eventDescription: String = ""
     var endDate: Date = Date()
     var entryNote: String = ""
-    var address: String = ""
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-    var addressName: String = ""
     var friendsCanInvite: Bool = true
     var privacyLevel: Int = 0
     var sponsor: String = ""
     var startDate: Date = Date()
     var title: String = ""
+    var location: EventLocation = EventLocation()
     
     public override init() {
         super.init()
@@ -34,10 +31,7 @@ class Event: NSObject {
         eventDescription = ""
         endDate = createDate()
         entryNote = ""
-        address = ""
-        latitude = 0.0
-        longitude = 0.0
-        addressName = ""
+        location = EventLocation()
         friendsCanInvite = true
         privacyLevel = 0
         sponsor = ""

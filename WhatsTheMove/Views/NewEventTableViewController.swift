@@ -48,18 +48,18 @@ class NewEventTableViewController: UITableViewController {
         
         
         // Set location to the selected location
-        if WTM.newEvent.addressName == "" {
+        if WTM.newEvent.location.addressName == "" {
             locationLabel.textColor = UIColor.lightGray
         } else {
             locationLabel.textColor = UIColor.black
-            locationLabel.text = WTM.newEvent.addressName
+            locationLabel.text = WTM.newEvent.location.addressName
         }
         
-        if WTM.newEvent.address == "" {
+        if WTM.newEvent.location.address == "" {
             locationAddressLabel.textColor = UIColor.lightGray
         } else {
             locationAddressLabel.textColor = UIColor.black
-            locationAddressLabel.text = WTM.newEvent.address
+            locationAddressLabel.text = WTM.newEvent.location.address
         }
         
     }
@@ -127,7 +127,7 @@ class NewEventTableViewController: UITableViewController {
     private func addToDatabase(for e: Event) {
         let newEventRef = WTM.dbRef.child("events").childByAutoId()
         if let user = WTM.auth.currentUser {
-            newEventRef.updateChildValues(["createdDate": Date().timeIntervalSince1970, "creatorId": user.uid, "description": e.eventDescription, "endDate": e.endDate.timeIntervalSince1970, "ended": 0, "entryNote": e.entryNote, "friendsCanInvite": e.friendsCanInvite ? 1 : 0, "location": ["address": e.address, "longitude": e.longitude, "latitude": e.latitude, "name": e.addressName], "privacyLevel": e.privacyLevel, "sponsor": e.sponsor, "startDate": e.startDate.timeIntervalSince1970, "title": e.title])
+            newEventRef.updateChildValues(["createdDate": Date().timeIntervalSince1970, "creatorId": user.uid, "description": e.eventDescription, "endDate": e.endDate.timeIntervalSince1970, "ended": 0, "entryNote": e.entryNote, "friendsCanInvite": e.friendsCanInvite ? 1 : 0, "location": ["address": e.location.address, "longitude": e.location.longitude, "latitude": e.location.latitude, "name": e.location.addressName], "privacyLevel": e.privacyLevel, "sponsor": e.sponsor, "startDate": e.startDate.timeIntervalSince1970, "title": e.title])
         }
         
         // TODO: Change this to Push to created event

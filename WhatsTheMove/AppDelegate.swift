@@ -20,11 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
+        
         if WTM.auth.currentUser != nil {
-            // Push to Feed View Controller
-            let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
+            WTM.auth.currentUser?.reload() { (err) in
+                if err == nil {
+                    // Push to Feed View Controller
+                    let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+                    self.window?.rootViewController = vc
+                    self.window?.makeKeyAndVisible()
+                }
+            }
         }
         
         return true

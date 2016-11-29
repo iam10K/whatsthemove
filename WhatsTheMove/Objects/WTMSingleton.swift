@@ -26,5 +26,5 @@ class WTMSingleton: NSObject {
         auth = FIRAuth.auth()
     }
 
-
+    
 }

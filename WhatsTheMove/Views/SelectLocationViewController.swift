@@ -132,11 +132,11 @@ extension SelectLocationViewController : MKMapViewDelegate {
         // Update newEvent with the location info
         if let selectedLocation = selectedLocation {
             if let location = selectedLocation.placemark.location {
-                WTM.newEvent.address = parseAddress(for: selectedLocation.placemark)
-                WTM.newEvent.longitude = location.coordinate.longitude
-                WTM.newEvent.latitude = location.coordinate.latitude
+                WTM.newEvent.location.address = parseAddress(for: selectedLocation.placemark)
+                WTM.newEvent.location.longitude = location.coordinate.longitude
+                WTM.newEvent.location.latitude = location.coordinate.latitude
                 if let addressName = selectedLocation.name {
-                    WTM.newEvent.addressName = addressName
+                    WTM.newEvent.location.addressName = addressName
                 }
                 // Return to new event view
                 _ = self.navigationController?.popViewController(animated: true)

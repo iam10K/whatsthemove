@@ -7,24 +7,83 @@
 //
 
 import UIKit
+import Firebase
 
 class Event: NSObject {
     
-    var eventDescription: String = ""
+    var ref: FIRDatabaseReference?
+    
+    var key: String = ""
+    
+    var createdDate: Date = Date()
+    var creatorId: String = ""
     var endDate: Date = Date()
     var entryNote: String = ""
+    var eventDescription: String = ""
     var friendsCanInvite: Bool = true
+    var location: EventLocation = EventLocation()
     var privacyLevel: Int = 0
     var sponsor: String = ""
     var startDate: Date = Date()
     var title: String = ""
-    var location: EventLocation = EventLocation()
     
     public override init() {
         super.init()
         
         endDate = createDate()
         startDate = createDate()
+    }
+    
+    public init(snapshot: FIRDataSnapshot) {
+        ref = snapshot.ref
+        
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        
+        key = snapshot.key
+        
+        if let createdDateValue = snapshotValue["createdDate"] as? Double {
+            createdDate = Date(timeIntervalSince1970: createdDateValue)
+        }
+        
+        if let creatorIdValue = snapshotValue["creatorId"] as? String {
+            creatorId = creatorIdValue
+        }
+        
+        if let endDateValue = snapshotValue["endDate"] as? Double {
+            endDate = Date(timeIntervalSince1970: endDateValue)
+        }
+        
+        if let entryNoteValue = snapshotValue["entryNote"] as? String {
+            entryNote = entryNoteValue
+        }
+        
+        if let eventDescriptionValue = snapshotValue["eventDescription"] as? String {
+            eventDescription = eventDescriptionValue
+        }
+        
+        if let friendsCanInviteValue = snapshotValue["friendsCanInvite"] as? Int {
+            friendsCanInvite = friendsCanInviteValue == 0 ? false : true
+        }
+        
+        if let locationValues = snapshotValue["location"] as? [String: AnyObject] {
+            location = EventLocation(values: locationValues)
+        }
+        
+        if let privacyLevelValue = snapshotValue["privacyLevel"] as? Int {
+            privacyLevel = privacyLevelValue
+        }
+        
+        if let sponsorValue = snapshotValue["sponsor"] as? String {
+            sponsor = sponsorValue
+        }
+        
+        if let startDateValue = snapshotValue["endDate"] as? Double {
+            endDate = Date(timeIntervalSince1970: startDateValue)
+        }
+
+        if let titleValue = snapshotValue["title"] as? String {
+            title = titleValue
+        }
     }
     
     func clear() {
@@ -67,6 +126,23 @@ class Event: NSObject {
             return date
         }
         return Date()
+    }
+    
+    public func toAnyObject() -> [AnyHashable: Any] {
+        return [
+            "createdDate": createdDate,
+            "creatorId": creatorId,
+            "description": eventDescription,
+            "endDate": endDate.timeIntervalSince1970,
+            "ended": 0,
+            "entryNote": entryNote,
+            "friendsCanInvite": friendsCanInvite ? 1 : 0,
+            "location": location.toAnyObject(),
+            "privacyLevel": privacyLevel,
+            "sponsor": sponsor,
+            "startDate": startDate.timeIntervalSince1970,
+            "title": title
+        ]
     }
 
 }

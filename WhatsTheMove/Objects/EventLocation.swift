@@ -15,5 +15,35 @@ class EventLocation: NSObject {
     var longitude: Double = 0.0
     var addressName: String = ""
     
+    public override init() {
+        super.init()
+    }
     
+    public init(values: [String: AnyObject]) {
+        
+        if let addressValue = values["address"] as? String {
+            address = addressValue
+        }
+        
+        if let latitudeValue = values["latitude"] as? Double {
+            latitude = latitudeValue
+        }
+        
+        if let longitudeValue = values["longitude"] as? Double {
+            longitude = longitudeValue
+        }
+        
+        if let addressNameValue = values["addressName"] as? String {
+            addressName = addressNameValue
+        }
+    }
+    
+    public func toAnyObject() -> Any {
+        return [
+            "address": address,
+            "longitude": longitude,
+            "latitude": latitude,
+            "addressName": addressName
+        ]
+    }
 }

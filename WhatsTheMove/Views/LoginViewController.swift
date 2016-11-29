@@ -8,18 +8,29 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
     
     let WTM = WTMSingleton.instance
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        // Uncomment to automatically sign in the user.
+        GIDSignIn.sharedInstance().signInSilently()
+        
+        // TODO(developer) Configure the sign-in button look/feel
+        googleSignInButton.style = GIDSignInButtonStyle.wide
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -45,10 +56,7 @@ class LoginViewController: UIViewController {
     // Login using Firebase Auth to authenticate with Facebook
     @IBAction func facebookLoginAction() {
         
-    }
-    
-    // Login using Firebase Auth to authenticate with Google
-    @IBAction func googleLoginAction() {
+        
         
     }
     

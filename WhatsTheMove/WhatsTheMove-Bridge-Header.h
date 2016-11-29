@@ -10,5 +10,6 @@
 #define WhatsTheMove_Bridge_Header_h
 
 #import "FSCalendar.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 
 #endif /* WhatsTheMove_Bridge_Header_h */

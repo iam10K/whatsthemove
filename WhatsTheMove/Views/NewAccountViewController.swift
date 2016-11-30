@@ -27,14 +27,9 @@ class NewAccountViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // Username has been entered. Check Firebase Database to make sure username does not exist.
-    // http://stackoverflow.com/questions/38134789
     @IBAction func usernameEditEnded() {
-    // TODO: Use link above, one of three options. Second or third option would be preferable.
         if let username = usernameField.text {
-            if !validateUsernameAvailable(username: username) {
-                // TODO: Display message to user that username is taken & not valid.
-            }
+            validateUsername(of: username)
         }
     }
     
@@ -46,19 +41,28 @@ class NewAccountViewController: UIViewController {
     // Create account action. Adds user info to the Firebase Database.
     @IBAction func createAccountAction() {
         // Validate entered values
-        if !validateFields() {
-            return
+        if let username = usernameField.text {
+            validateUsername(of: username, completion: { (result) in
+                if result {
+                    self.addUserToDatabase()
+                }
+            })
         }
-        
+    }
+    
+    private func addUserToDatabase() {
         if let username = usernameField.text,
             let name = nameField.text,
             let user = WTM.auth.currentUser {
+            
             WTM.dbRef.child("users").child(user.uid).updateChildValues(["username": username, "name": name, "privacyLevel": privacyLevelControl.selectedSegmentIndex])
+            WTM.dbRef.child("usernames").child(username).setValue(user.uid, andPriority: nil)
+            
+            // Push to Feed View Controller
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+            self.present(vc!, animated: true)
         }
-        
-        // Push to Feed View Controller
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-        self.present(vc!, animated: true)
+
     }
     
     // TODO Keyboard next button goes to next field.
@@ -78,54 +82,52 @@ class NewAccountViewController: UIViewController {
     }
     
     // Validate that the username matches the correct pattern
-    private func validatePattern(of username: String) -> Bool {
+    private func validateUsername(of username: String, completion: ((Bool) -> Void)? = nil) {
+        var validUsername = false
+        
+        if username == "" {
+            completion?(false)
+            return
+        }
+        
         if let result = username.range(of: "^[a-zA-Z0-9_-]{4,20}$", options: .regularExpression) {
             if result.isEmpty {
                 // TODO: Message, username can only contain alphanumeric and underscore
-                return false
+                completion?(false)
+                return
             } else {
-                return true
-            }
-        }
-        // TODO: Message, username can only contain alphanumeric and underscore
-        return false
-        
-    }
-    
-    // Validate that the username is not taken, true if it is taken
-    private func validateUsernameAvailable(username: String) -> Bool {
-        var valid = true
-        
-        // Use Firebase database to check if user name is take
-        WTM.dbRef.child("users").child(username).observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
-                // Username is taken already
-                valid = false
-            } else {
-                // Username is not taken
-                valid = true
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-        return valid
-
-    }
-    
-    // Validate username, first and last name. Displays popup messages if any field is invalid
-    private func validateFields() -> Bool {
-        if let username = usernameField.text {
-            if !validatePattern(of: username) {
-                return false
-            }
-            if !validateUsernameAvailable(username: username) {
-                // TODO: Display message to user that username is taken & not valid.
-                return false
+                validUsername = true
             }
         } else {
-            // TODO: Message, no username entered.
+            // TODO: Message, username can only contain alphanumeric and underscore
+            completion?(false)
+            return
         }
-        
-        return true
+
+        // Use Firebase database to check if user name is take
+        WTM.dbRef.child("usernames").observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.hasChild(username) {
+                // Username is taken already
+                
+                if completion != nil {
+                    // TODO: Message, username taken, only show if there is completion handler
+
+                }
+                
+                print("TAKEN")
+                completion?(false)
+                return
+            } else {
+                // Username is not taken
+                validUsername = true
+            }
+            
+            // Complete
+            completion?(validUsername)
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            completion?(false)
+        }
     }
 }

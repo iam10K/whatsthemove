@@ -9,6 +9,14 @@
 import UIKit
 
 class FeedTableViewController: UITableViewController {
+    
+    let WTM = WTMSingleton.instance
+    
+    var events: [Event]? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +26,8 @@ class FeedTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        events = WTM.events
     }
 
     override func didReceiveMemoryWarning() {

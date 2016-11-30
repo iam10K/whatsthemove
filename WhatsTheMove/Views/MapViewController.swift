@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,5 +35,13 @@ class MapViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+}
+
+extension MapViewController: MKMapViewDelegate {
 
 }

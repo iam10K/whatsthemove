@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */; };
 		2F1D55401DA99FD500B2A46C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */; };
+		2F33C4B41DEB600E004306E8 /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33C4B31DEB600E004306E8 /* EventLocation.swift */; };
 		2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */; };
 		2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */; };
 		2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */; };
@@ -54,6 +55,7 @@
 		0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WTMSingleton.swift; path = Objects/WTMSingleton.swift; sourceTree = "<group>"; };
 		2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2F33C4B31DEB600E004306E8 /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventLocation.swift; path = Objects/EventLocation.swift; sourceTree = "<group>"; };
 		2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Views/LoginViewController.swift; sourceTree = "<group>"; };
 		2F40E1D41DAABD5D0058EB76 /* WhatsTheMove.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatsTheMove.entitlements; sourceTree = "<group>"; };
 		2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = Views/RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				2F741AE61D9AD4A0009E6271 /* Event.swift */,
 				2F741AE81D9AD4B1009E6271 /* Comment.swift */,
 				2F741AEA1D9AD4C0009E6271 /* User.swift */,
+				2F33C4B31DEB600E004306E8 /* EventLocation.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -407,7 +410,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		19D80060F19BCFD20D6B900E /* [CP] Check Pods Manifest.lock */ = {
@@ -422,7 +425,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5142B1041D7B1B3D36D62DC7 /* [CP] Embed Pods Frameworks */ = {
@@ -452,7 +455,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		916B2FE14A1A57A8378ACC2E /* [CP] Copy Pods Resources */ = {
@@ -535,6 +538,7 @@
 				2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */,
 				2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */,
 				2F900D781DCBC4D200198AEA /* NewEventTableViewController.swift in Sources */,
+				2F33C4B41DEB600E004306E8 /* EventLocation.swift in Sources */,
 				2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

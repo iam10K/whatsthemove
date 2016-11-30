@@ -33,7 +33,7 @@ PODS:
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/Logger (~> 2.1)
-  - FSCalendar (2.5.1)
+  - FSCalendar (2.6.0)
   - GoogleAppUtilities (1.1.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleInterchangeUtilities (1.2.2):
@@ -80,7 +80,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 6de92187481ff0e8e124064f21742e95ee883b02
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseMessaging: acf66347e43c5637c697060c3001d25c809a4131
-  FSCalendar: 8efeb4b92240937204165c7743f4375923112fb5
+  FSCalendar: c00fa5f4c3ec343ee6f7b804ae19322e9898bb84
   GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSignIn: a8694c0a8e6d1b0ec77c58014de5bfd4ba2fa766
@@ -91,4 +91,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a7a2ee70e2fb7cf169f9d40f3450b45b4d3e5125
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.0.1

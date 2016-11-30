@@ -130,7 +130,7 @@ class Event: NSObject {
     
     public func toAnyObject() -> [AnyHashable: Any] {
         return [
-            "createdDate": createdDate,
+            "createdDate": createdDate.timeIntervalSince1970,
             "creatorId": creatorId,
             "description": eventDescription,
             "endDate": endDate.timeIntervalSince1970,

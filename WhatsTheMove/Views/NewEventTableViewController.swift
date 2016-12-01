@@ -106,7 +106,7 @@ class NewEventTableViewController: UITableViewController {
     }
     
     // Store all field values in the newEvent object
-    private func storeValuesInEvent() {
+    private func storeValuesInEvent(completion: () -> ()) {
         if let title = eventTitleField.text {
             WTM.newEvent.title = title
         }
@@ -121,20 +121,23 @@ class NewEventTableViewController: UITableViewController {
         if let entryNote = entryNotesField.text {
             WTM.newEvent.entryNote = entryNote
         }
+        completion()
     }
     
     // Add the new event to the database, validate value before!
     private func addToDatabase(for e: Event) {
-        let newEventRef = WTM.dbRef.child("events").childByAutoId()
-        if let user = WTM.auth.currentUser {
-            e.creatorId = user.uid
-            newEventRef.updateChildValues(e.toAnyObject())
-        }
+        storeValuesInEvent() {
+            let newEventRef = WTM.dbRef.child("events").childByAutoId()
+            if let user = WTM.auth.currentUser {
+                e.creatorId = user.uid
+                newEventRef.updateChildValues(e.toAnyObject())
+            }
         
-        // TODO: Change this to Push to created event
-        // Push to Feed View Controller
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-        self.present(vc!, animated: false)
+            // TODO: Change this to Push to created event
+            // Push to Feed View Controller
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+            self.present(vc!, animated: false)
+        }
     }
     
     // Formats the date based on how far in future it is.

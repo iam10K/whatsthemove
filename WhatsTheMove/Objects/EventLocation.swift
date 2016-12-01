@@ -46,4 +46,13 @@ class EventLocation: NSObject {
             "addressName": addressName
         ]
     }
+    
+    public func toJSONString() -> String {
+        return "[" +
+            "\n\"address\": \(address)," +
+            "\n\"longitude\": \(longitude)," +
+            "\n\"latitude\": \(latitude)," +
+            "\n\"addressName\": \(addressName)" +
+        "\n]"
+    }
 }

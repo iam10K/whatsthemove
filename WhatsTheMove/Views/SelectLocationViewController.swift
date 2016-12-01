@@ -64,7 +64,7 @@ class SelectLocationViewController: UIViewController {
     }
 }
 
-extension SelectLocationViewController : CLLocationManagerDelegate {
+extension SelectLocationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
@@ -110,7 +110,7 @@ extension SelectLocationViewController: HandleMapSearch {
     }
 }
 
-extension SelectLocationViewController : MKMapViewDelegate {
+extension SelectLocationViewController: MKMapViewDelegate {
     // Map view to add the annotation to the pin
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else { return nil }

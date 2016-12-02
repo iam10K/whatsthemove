@@ -22,13 +22,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         
-        if WTM.auth.currentUser != nil {
-            WTM.auth.currentUser?.reload() { (err) in
+        if let currentUser = WTM.auth.currentUser {
+            currentUser.reload() { (err) in
                 if err == nil {
-                    // Push to Feed View Controller
-                    let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-                    self.window?.rootViewController = vc
-                    self.window?.makeKeyAndVisible()
+                    self.userExists(of: currentUser.uid) { (exists) in
+                        if exists {
+                            // Push to Feed View Controller
+                            let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+                            self.window?.rootViewController = vc
+                            self.window?.makeKeyAndVisible()
+                        } else {
+                            // Push to New Account View Controller
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
+                            self.window?.rootViewController = vc
+                            self.window?.makeKeyAndVisible()
+                        }
+                    }
                 }
             }
         }
@@ -73,8 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         var options: [String: AnyObject] = [UIApplicationOpenURLOptionsKey.sourceApplication.rawValue: sourceApplication as AnyObject, UIApplicationOpenURLOptionsKey.annotation.rawValue: annotation as AnyObject]
         return GIDSignIn.sharedInstance().handle(url as URL!,
-                                                    sourceApplication: sourceApplication,
-                                                    annotation: annotation)
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation)
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -88,13 +98,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                                                           accessToken: (authentication?.accessToken)!)
         
         WTM.auth.signIn(with: credential) { (user, error) in
-            // Push to Feed View Controller
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
+            if let user = user {
+                print(user.uid)
+                // Validate user has set their username. If not send to NewAccountViewController
+                self.userExists(of: user.uid) { (exists) in
+                    if exists {
+                        // Push to Feed View Controller
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+                        self.window?.rootViewController = vc
+                        self.window?.makeKeyAndVisible()
+                    } else {
+                        // Push to New Account View Controller
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
+                        self.window?.rootViewController = vc
+                        self.window?.makeKeyAndVisible()
+                    }
+                }
+                
+            }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
         }
-     }
+    }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
@@ -106,7 +135,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         // TODO? If needed also clean up extra stuff here
     }
-
-
+    
+    // Validate user has set their username in the DB
+    private func userExists(of uid: String, completion: ((Bool) -> Void)?) {
+        WTM.dbRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.hasChild(uid) {
+                // User exists in DB
+                completion?(true)
+                return
+            } else {
+                // User is not in DB
+                completion?(false)
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            completion?(false)
+        }
+        
+    }
+    
+    
 }
 

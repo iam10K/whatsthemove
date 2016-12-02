@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Event-->
+        <!--Search-->
         <scene sceneID="mav-rd-jGc">
             <objects>
                 <tableViewController id="cyV-Xd-2X3" sceneMemberID="viewController">
@@ -21,7 +21,7 @@
                             <outlet property="delegate" destination="cyV-Xd-2X3" id="qk5-4n-NOx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Event" id="ZYG-OP-QZT"/>
+                    <navigationItem key="navigationItem" title="Search" id="ZYG-OP-QZT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bql-AD-coh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -90,7 +90,7 @@
             </objects>
             <point key="canvasLocation" x="3897" y="1310"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
@@ -112,7 +112,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Esa-Dj-PHl"/>
+                    <navigationItem key="navigationItem" title="Map" id="Esa-Dj-PHl"/>
                     <connections>
                         <outlet property="mapView" destination="XsP-yG-d06" id="9Nc-YM-xqN"/>
                     </connections>
@@ -121,7 +121,7 @@
             </objects>
             <point key="canvasLocation" x="2952.8000000000002" y="1718.5907046476764"/>
         </scene>
-        <!--Feed Table View Controller-->
+        <!--Feed-->
         <scene sceneID="mEG-W4-aRn">
             <objects>
                 <tableViewController storyboardIdentifier="feedTableViewController" id="ZkC-Ga-Bb4" customClass="FeedTableViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
@@ -153,7 +153,7 @@
                             <outlet property="delegate" destination="ZkC-Ga-Bb4" id="Ic8-T0-ep2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="kbU-rc-qR8"/>
+                    <navigationItem key="navigationItem" title="Feed" id="kbU-rc-qR8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a9p-w5-WA7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -616,22 +616,6 @@
                                 <state key="normal" title="Create Account"/>
                                 <connections>
                                     <action selector="createAccountAction" destination="fur-LU-9in" eventType="touchUpInside" id="Lp9-N4-ixQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6d-1W-dSo">
-                                <frame key="frameInset" minX="154" minY="291" width="67" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Facebook"/>
-                                <connections>
-                                    <action selector="facebookRegisterAction" destination="fur-LU-9in" eventType="touchUpInside" id="kPa-4V-Gzk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ke7-7M-SWM">
-                                <frame key="frameInset" minX="158" minY="329" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Google+"/>
-                                <connections>
-                                    <action selector="googleRegisterAction" destination="fur-LU-9in" eventType="touchUpInside" id="EZZ-dX-NyH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRa-Uy-UX0">

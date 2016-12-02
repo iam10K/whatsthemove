@@ -55,14 +55,21 @@ class NewAccountViewController: UIViewController {
             let name = nameField.text,
             let user = WTM.auth.currentUser {
             
-            WTM.dbRef.child("users").child(user.uid).updateChildValues(["username": username, "name": name, "privacyLevel": privacyLevelControl.selectedSegmentIndex])
-            WTM.dbRef.child("usernames").child(username).setValue(user.uid, andPriority: nil)
-            
-            // Push to Feed View Controller
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-            self.present(vc!, animated: true)
+            if let email = user.email {
+                
+                WTM.dbRef.child("users").child(user.uid).updateChildValues([
+                    "username": username,
+                    "name": name,
+                    "privacyLevel": privacyLevelControl.selectedSegmentIndex,
+                    "email": email
+                    ])
+                WTM.dbRef.child("usernames").child(username).setValue(user.uid, andPriority: nil)
+                
+                // Push to Feed View Controller
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+                self.present(vc!, animated: true)
+            }
         }
-
     }
     
     // TODO Keyboard next button goes to next field.
@@ -103,7 +110,7 @@ class NewAccountViewController: UIViewController {
             completion?(false)
             return
         }
-
+        
         // Use Firebase database to check if user name is take
         WTM.dbRef.child("usernames").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.hasChild(username) {
@@ -111,7 +118,7 @@ class NewAccountViewController: UIViewController {
                 
                 if completion != nil {
                     // TODO: Message, username taken, only show if there is completion handler
-
+                    
                 }
                 
                 print("TAKEN")

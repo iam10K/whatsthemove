@@ -36,7 +36,9 @@ class SelectLocationViewController: UIViewController {
         locationManager.requestLocation()
 
         // Hide back button
-        self.navigationItem.hidesBackButton = true
+        if let topItem = self.navigationController?.navigationBar.topItem {
+            topItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        }
         
         // Setup locationSearchResultsTable
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableViewController

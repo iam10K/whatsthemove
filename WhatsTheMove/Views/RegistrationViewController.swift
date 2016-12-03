@@ -49,8 +49,9 @@ class RegistrationViewController: UIViewController {
                     WTM.auth.createUser(withEmail: email, password: password) { (user, error) in
                         
                         // Success
-                        if let user = user {
-                            self.addNewUserToDatabase(user: user)
+                        if user != nil {
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
+                            self.present(vc!, animated: true)
                         }
                         
                         // Error
@@ -72,28 +73,9 @@ class RegistrationViewController: UIViewController {
         }
     }
     
-    // Use Firebase Auth to authenticate with Facebook
-    @IBAction func facebookRegisterAction() {
-        
-    }
-    
-    // Use Firebase Auth to authenticate with Google
-    @IBAction func googleRegisterAction() {
-        
-    }
-    
     
     // TODO Keyboard next button goes to next field.
     // http://stackoverflow.com/questions/9540500/ios-app-next-key-wont-go-to-the-next-text-field
     // http://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons
-    
-    // Adds the new user to the database. Adding email to user info.
-    private func addNewUserToDatabase(user: FIRUser) {
-        if let email = user.email {
-            WTM.dbRef.child("users").child(user.uid).setValue(["email": email])
-        }
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
-        self.present(vc!, animated: true)
-    }
     
 }

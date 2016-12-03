@@ -36,7 +36,9 @@ class SelectLocationViewController: UIViewController {
         locationManager.requestLocation()
 
         // Hide back button
-        self.navigationItem.hidesBackButton = true
+        if let topItem = self.navigationController?.navigationBar.topItem {
+            topItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        }
         
         // Setup locationSearchResultsTable
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableViewController
@@ -64,7 +66,7 @@ class SelectLocationViewController: UIViewController {
     }
 }
 
-extension SelectLocationViewController : CLLocationManagerDelegate {
+extension SelectLocationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
@@ -110,7 +112,7 @@ extension SelectLocationViewController: HandleMapSearch {
     }
 }
 
-extension SelectLocationViewController : MKMapViewDelegate {
+extension SelectLocationViewController: MKMapViewDelegate {
     // Map view to add the annotation to the pin
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else { return nil }

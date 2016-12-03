@@ -18,6 +18,7 @@ class Event: NSObject {
     var createdDate: Date = Date()
     var creatorId: String = ""
     var endDate: Date = Date()
+    var ended: Bool = false
     var entryNote: String = ""
     var eventDescription: String = ""
     var friendsCanInvite: Bool = true
@@ -51,6 +52,10 @@ class Event: NSObject {
         
         if let endDateValue = snapshotValue["endDate"] as? Double {
             endDate = Date(timeIntervalSince1970: endDateValue)
+        }
+        
+        if let endedValue = snapshotValue["ended"] as? Int {
+            ended = endedValue == 0 ? false : true
         }
         
         if let entryNoteValue = snapshotValue["entryNote"] as? String {
@@ -134,7 +139,7 @@ class Event: NSObject {
             "creatorId": creatorId,
             "description": eventDescription,
             "endDate": endDate.timeIntervalSince1970,
-            "ended": 0,
+            "ended": ended ? 1 : 0,
             "entryNote": entryNote,
             "friendsCanInvite": friendsCanInvite ? 1 : 0,
             "location": location.toAnyObject(),
@@ -144,5 +149,21 @@ class Event: NSObject {
             "title": title
         ]
     }
-
+    
+    public func toJSONString() -> String {
+        return "[" +
+            "\n\"createdDate\": \(createdDate.timeIntervalSince1970)," +
+            "\n\"creatorId\": \(creatorId)," +
+            "\n\"description\": \(eventDescription)," +
+            "\n\"endDate\": \(endDate.timeIntervalSince1970)," +
+            "\n\"ended\": \(ended)," +
+            "\n\"entryNote\": \(entryNote)," +
+            "\n\"friendsCanInvite\": \(friendsCanInvite ? 1 : 0)," +
+            "\n\"location\": \(location.toJSONString())," +
+            "\n\"privacyLevel\": \(privacyLevel)," +
+            "\n\"sponsor\": \(sponsor)," +
+            "\n\"startDate\": \(startDate.timeIntervalSince1970)," +
+            "\n\"title\": \(title)" +
+        "\n]"
+    }
 }

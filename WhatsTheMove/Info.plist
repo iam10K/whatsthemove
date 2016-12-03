@@ -26,6 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.985029368416-usto7044ols3u2h6evsjkhjreojdgj6g</string>
+				<string>fb1804148143140351</string>
 			</array>
 		</dict>
 	</array>
@@ -49,6 +50,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>1804148143140351</string>
+	<key>FacebookDisplayName</key>
+	<string>whatsthemove</string>
+	<key></key>
+	<string></string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

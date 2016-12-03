@@ -110,11 +110,3 @@ extension MapViewController: MKMapViewDelegate {
     }
     
 }
-
-extension MapViewController: CLLocationManagerDelegate {
-    
-}
-
-extension MapViewController: MKMapViewDelegate {
-
-}

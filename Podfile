@@ -12,6 +12,9 @@ target 'WhatsTheMove' do
   pod 'Firebase/Messaging'
   pod 'FSCalendar'
   pod 'GoogleSignIn'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
 #  pod 'LocationPicker'
 
   target 'WhatsTheMoveTests' do

@@ -712,7 +712,7 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="-2370.7646176911544"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Delegate-->
         <scene sceneID="G5E-b0-Hrc">
             <objects>
                 <viewController storyboardIdentifier="loginViewController" id="WYD-sw-KlX" customClass="LoginViewController" customModule="WhatsTheMove" customModuleProvider="target" sceneMemberID="viewController">
@@ -767,6 +767,14 @@
                                 <rect key="frame" x="87" y="271" width="201" height="33"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WNS-Jg-INX" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="87" y="231" width="201" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WYD-sw-KlX" id="ZT8-cf-PlD"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -791,6 +799,7 @@
                     </view>
                     <connections>
                         <outlet property="emailField" destination="DWf-iY-jxi" id="vAu-OM-gXX"/>
+                        <outlet property="facebookSignInButton" destination="WNS-Jg-INX" id="pSP-0m-EN3"/>
                         <outlet property="googleSignInButton" destination="Ir3-pj-BDN" id="9Fl-C9-1HW"/>
                         <outlet property="passwordField" destination="pow-jo-GR5" id="vkB-gt-zjf"/>
                     </connections>

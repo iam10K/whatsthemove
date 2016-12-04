@@ -9,14 +9,17 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class LoginViewController: UIViewController, GIDSignInUIDelegate {
+class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate {
     
     let WTM = WTMSingleton.instance
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var facebookSignInButton: FBSDKLoginButton!
     
     
     override func viewDidLoad() {
@@ -24,13 +27,14 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
         
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        // Uncomment to automatically sign in the user.
+        // Automatically sign in the user.
         GIDSignIn.sharedInstance().signInSilently()
-        
-        // TODO(developer) Configure the sign-in button look/feel
+        // Configure the sign-in button look/feel
         googleSignInButton.style = GIDSignInButtonStyle.wide
+        
+        // Facebook Signin
+        facebookSignInButton.readPermissions = ["public_profile", "email", "user_friends"]
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,30 +74,50 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
         }
     }
     
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            if let user = user {
+                print(user.uid)
+                // Validate user has set their username. If not send to NewAccountViewController
+                self.userExists(of: user.uid)
+            }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Logout Facebook")
+    }
+    
+    
     // Validate user has set their username in the DB
-    private func userExists(of uid: String, completion: ((Bool) -> Void)?) {
+    private func userExists(of uid: String) {
         WTM.dbRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.hasChild(uid) {
                 // User exists in DB
-                completion?(true)
+                
+                // Push to Feed View Controller
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+                self.present(vc!, animated: true)
                 return
             } else {
                 // User is not in DB
-                completion?(false)
+                
+                // Push to New Account View Controller
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
+                self.present(vc!, animated: true)
+                return
             }
             
         }) { (error) in
             print(error.localizedDescription)
-            completion?(false)
+            
+            // Failed Display message
         }
         
     }
-    
-    // Login using Firebase Auth to authenticate with Facebook
-    @IBAction func facebookLoginAction() {
-        
-        
-        
-    }
-    
 }

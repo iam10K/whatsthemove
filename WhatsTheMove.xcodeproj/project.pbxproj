@@ -31,10 +31,6 @@
 		3039D0BEEA2E0D709AD773D2 /* Pods_WhatsTheMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */; };
 		6E53EAD380CD6BA50D1565AC /* Pods_WhatsTheMoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */; };
 		767C9340F707062CFCCFD011 /* Pods_WhatsTheMoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */; };
-		96AD3E3C1DF346AE00E88018 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AD3E3B1DF346AE00E88018 /* Bolts.framework */; };
-		96AD3E3E1DF346CA00E88018 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AD3E3D1DF346CA00E88018 /* FBSDKCoreKit.framework */; };
-		96AD3E401DF346E000E88018 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AD3E3F1DF346E000E88018 /* FBSDKLoginKit.framework */; };
-		96AD3E421DF3470100E88018 /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AD3E411DF3470100E88018 /* AccountKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,10 +87,6 @@
 		592CC708A9974C0672BF74C9 /* Pods-WhatsTheMove.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.release.xcconfig"; sourceTree = "<group>"; };
 		6C4A946D90B6FFF296A1B3AA /* Pods-WhatsTheMoveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveTests/Pods-WhatsTheMoveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		848F002851529628B7BDF23F /* Pods-WhatsTheMove.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.debug.xcconfig"; sourceTree = "<group>"; };
-		96AD3E3B1DF346AE00E88018 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		96AD3E3D1DF346CA00E88018 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Bolts.framework/Headers/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		96AD3E3F1DF346E000E88018 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		96AD3E411DF3470100E88018 /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AccountKit.framework; sourceTree = "<group>"; };
 		B02B52A3F96CA64A38EF200D /* Pods-WhatsTheMoveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B8479894443451332A85681D /* Pods-WhatsTheMoveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,10 +97,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3039D0BEEA2E0D709AD773D2 /* Pods_WhatsTheMove.framework in Frameworks */,
-				96AD3E3E1DF346CA00E88018 /* FBSDKCoreKit.framework in Frameworks */,
-				96AD3E421DF3470100E88018 /* AccountKit.framework in Frameworks */,
-				96AD3E401DF346E000E88018 /* FBSDKLoginKit.framework in Frameworks */,
-				96AD3E3C1DF346AE00E88018 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,10 +135,6 @@
 		161BC8CA8F603A16B0E80701 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				96AD3E411DF3470100E88018 /* AccountKit.framework */,
-				96AD3E3F1DF346E000E88018 /* FBSDKLoginKit.framework */,
-				96AD3E3D1DF346CA00E88018 /* FBSDKCoreKit.framework */,
-				96AD3E3B1DF346AE00E88018 /* Bolts.framework */,
 				559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */,
 				07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */,
 				0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */,
@@ -425,7 +409,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		19D80060F19BCFD20D6B900E /* [CP] Check Pods Manifest.lock */ = {
@@ -440,7 +424,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5142B1041D7B1B3D36D62DC7 /* [CP] Embed Pods Frameworks */ = {
@@ -470,7 +454,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		916B2FE14A1A57A8378ACC2E /* [CP] Copy Pods Resources */ = {
@@ -716,7 +700,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Bolts.framework/Headers",
 				);
 				INFOPLIST_FILE = WhatsTheMove/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -740,7 +723,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Bolts.framework/Headers",
 				);
 				INFOPLIST_FILE = WhatsTheMove/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -12,7 +12,4 @@
 #import "FSCalendar.h"
 #import <GoogleSignIn/GoogleSignIn.h>
 
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-
 #endif /* WhatsTheMove_Bridge_Header_h */

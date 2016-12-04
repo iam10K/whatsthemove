@@ -44,9 +44,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
                 
                 WTM.auth.signIn(withEmail: email, password: password) { (user, error) in
                     if let user = user {
-                        print(user.uid)
                         // Validate user has set their username. If not send to NewAccountViewController
                         self.userExists(of: user.uid) { (exists) in
+                            // Load events
+                            self.WTM.reloadEvents()
+                            
                             if exists {
                                 // Push to Feed View Controller
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController

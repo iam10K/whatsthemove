@@ -50,6 +50,9 @@ class RegistrationViewController: UIViewController {
                         
                         // Success
                         if user != nil {
+                            // Load events
+                            self.WTM.reloadEvents()
+                            
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
                             self.present(vc!, animated: true)
                         }

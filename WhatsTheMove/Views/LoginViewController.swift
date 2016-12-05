@@ -48,22 +48,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
                 
                 WTM.auth.signIn(withEmail: email, password: password) { (user, error) in
                     if let user = user {
-                        // Validate user has set their username. If not send to NewAccountViewController
-                        self.userExists(of: user.uid) { (exists) in
-                            // Load events
-                            self.WTM.reloadEvents()
-                            
-                            if exists {
-                                // Push to Feed View Controller
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-                                self.present(vc!, animated: true)
-                            } else {
-                                // Push to New Account View Controller
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
-                                self.present(vc!, animated: true)
-                            }
-                        }
+                        // Load Events
+                        self.WTM.reloadEvents()
                         
+                        // Validate user has set their username. If not send to NewAccountViewController
+                        self.userExists(of: user.uid)
                     }
                     if let error = error {
                         print(error.localizedDescription)
@@ -77,9 +66,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         
-        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+        WTM.auth.signIn(with: credential) { (user, error) in
             if let user = user {
-                print(user.uid)
+                // Load Events
+                self.WTM.reloadEvents()
+                
                 // Validate user has set their username. If not send to NewAccountViewController
                 self.userExists(of: user.uid)
             }

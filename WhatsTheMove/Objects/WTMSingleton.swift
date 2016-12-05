@@ -26,8 +26,6 @@ class WTMSingleton: NSObject {
         
         dbRef = FIRDatabase.database().reference()
         auth = FIRAuth.auth()
-        
-        reloadEvents()
     }
     
     func reloadEvents() {

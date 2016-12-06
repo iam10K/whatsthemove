@@ -101,6 +101,8 @@ class ProfileTableViewController: UITableViewController {
             print("Error")
         }
         
+        // TODO: If logged in with facebook log out from facebook
+        
         // Push to Login View Controller
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as? LoginViewController
         self.present(vc!, animated: true)

@@ -49,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
         }
         
+        // TODO: Create blank screen as inital view controller so when opening app user does not see screens changing.
+        
         // Google SignIn
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self

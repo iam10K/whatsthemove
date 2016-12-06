@@ -15,3 +15,7 @@ We will develop an application that will let users:
   - Display a map of events nearby.
   - Comment on events.
   - Likes/Dislikes for comments and events.
+
+# Demo Account:
+  - Email: demo@demo.com
+  - Password: P@$$w0rd

@@ -26,7 +26,9 @@ class WTMSingleton: NSObject {
         
         dbRef = FIRDatabase.database().reference()
         auth = FIRAuth.auth()
-        
+    }
+    
+    func reloadEvents() {
         // Listen for new events
         dbRef.child("events").observe(.value, with: { snapshot in
             var newEvents: [Event] = []

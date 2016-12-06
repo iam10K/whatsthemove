@@ -13,7 +13,6 @@
 		2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */; };
 		2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */; };
 		2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */; };
-		2F65C54E1DC8FB1D0014AEBE /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F65C54D1DC8FB1D0014AEBE /* FeedTableViewController.swift */; };
 		2F65C5501DC916120014AEBE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F65C54F1DC916120014AEBE /* MapViewController.swift */; };
 		2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE61D9AD4A0009E6271 /* Event.swift */; };
 		2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE81D9AD4B1009E6271 /* Comment.swift */; };
@@ -25,6 +24,8 @@
 		2F74EC5E1D91ACEE00CD1EBA /* WhatsTheMoveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F74EC5D1D91ACEE00CD1EBA /* WhatsTheMoveTests.swift */; };
 		2F74EC691D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F74EC681D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift */; };
 		2F900D781DCBC4D200198AEA /* NewEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */; };
+		2F915DE71DF378FC00DDE1E0 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F915DE61DF378FC00DDE1E0 /* ProfileTableViewController.swift */; };
+		2F915DEB1DF3B33400DDE1E0 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F915DEA1DF3B33400DDE1E0 /* FeedTableViewController.swift */; };
 		2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */; };
 		2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */; };
 		2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */; };
@@ -60,7 +61,6 @@
 		2F40E1D41DAABD5D0058EB76 /* WhatsTheMove.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatsTheMove.entitlements; sourceTree = "<group>"; };
 		2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = Views/RegistrationViewController.swift; sourceTree = "<group>"; };
 		2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewAccountViewController.swift; path = Views/NewAccountViewController.swift; sourceTree = "<group>"; };
-		2F65C54D1DC8FB1D0014AEBE /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTableViewController.swift; path = Views/FeedTableViewController.swift; sourceTree = "<group>"; };
 		2F65C54F1DC916120014AEBE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Views/MapViewController.swift; sourceTree = "<group>"; };
 		2F741AE61D9AD4A0009E6271 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Objects/Event.swift; sourceTree = "<group>"; };
 		2F741AE81D9AD4B1009E6271 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Comment.swift; path = Objects/Comment.swift; sourceTree = "<group>"; };
@@ -78,6 +78,8 @@
 		2F74EC681D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsTheMoveUITests.swift; sourceTree = "<group>"; };
 		2F74EC6A1D91ACEE00CD1EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewEventTableViewController.swift; path = Views/NewEventTableViewController.swift; sourceTree = "<group>"; };
+		2F915DE61DF378FC00DDE1E0 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewController.swift; path = Views/ProfileTableViewController.swift; sourceTree = "<group>"; };
+		2F915DEA1DF3B33400DDE1E0 /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTableViewController.swift; path = Views/FeedTableViewController.swift; sourceTree = "<group>"; };
 		2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectDateViewController.swift; path = Views/SelectDateViewController.swift; sourceTree = "<group>"; };
 		2F9329C61DDA3E34004F3C9F /* WhatsTheMove-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhatsTheMove-Bridge-Header.h"; sourceTree = "<group>"; };
 		2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectLocationViewController.swift; path = Views/SelectLocationViewController.swift; sourceTree = "<group>"; };
@@ -218,8 +220,9 @@
 				2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */,
 				2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */,
 				2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */,
-				2F65C54D1DC8FB1D0014AEBE /* FeedTableViewController.swift */,
 				2F65C54F1DC916120014AEBE /* MapViewController.swift */,
+				2F915DE61DF378FC00DDE1E0 /* ProfileTableViewController.swift */,
+				2F915DEA1DF3B33400DDE1E0 /* FeedTableViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -527,11 +530,12 @@
 				2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */,
 				2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */,
 				2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */,
+				2F915DEB1DF3B33400DDE1E0 /* FeedTableViewController.swift in Sources */,
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,
 				2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */,
 				2F65C5501DC916120014AEBE /* MapViewController.swift in Sources */,
+				2F915DE71DF378FC00DDE1E0 /* ProfileTableViewController.swift in Sources */,
 				2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */,
-				2F65C54E1DC8FB1D0014AEBE /* FeedTableViewController.swift in Sources */,
 				2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */,
 				2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */,
 				2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */,

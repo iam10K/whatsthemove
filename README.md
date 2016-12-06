@@ -16,12 +16,6 @@ We will develop an application that will let users:
   - Comment on events.
   - Likes/Dislikes for comments and events.
 
-Change Made
-deairab
-wtfgarrett
-alcena15
-alcena15 git add
-alcena15
-laurenhicks108
-wtfgarrett
-wtfgarrett
+# Demo Account:
+  - Email: demo@demo.com
+  - Password: P@$$w0rd

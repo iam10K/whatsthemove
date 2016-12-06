@@ -50,6 +50,7 @@ class RegistrationViewController: UIViewController {
                         
                         // Success
                         if user != nil {
+                            // Push to create a new account
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
                             self.present(vc!, animated: true)
                         }

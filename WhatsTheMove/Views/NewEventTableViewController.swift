@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewEventTableViewController: UITableViewController {
+class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     
     let WTM = WTMSingleton.instance
 
@@ -35,6 +35,8 @@ class NewEventTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Date formatter
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, yyyy \'at\' h:mm a"
@@ -61,7 +63,10 @@ class NewEventTableViewController: UITableViewController {
             locationAddressLabel.textColor = UIColor.black
             locationAddressLabel.text = WTM.newEvent.location.address
         }
-        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -153,4 +158,5 @@ class NewEventTableViewController: UITableViewController {
     // TODO Keyboard next button goes to next field.
     // http://stackoverflow.com/questions/9540500/ios-app-next-key-wont-go-to-the-next-text-field
     // http://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons
+    
 }

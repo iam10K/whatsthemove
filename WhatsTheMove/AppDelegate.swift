@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if let currentUser = WTM.auth.currentUser {
             currentUser.reload() { (err) in
                 if err == nil {
+                    // Load Events
+                    self.WTM.reloadEvents()
+                    
+                    // Check if user needs to create an account or has one already
                     self.userExists(of: currentUser.uid) { (exists) in
                         if exists {
                             // Push to Feed View Controller
@@ -44,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 }
             }
         }
+        
+        // TODO: Create blank screen as inital view controller so when opening app user does not see screens changing.
         
         // Google SignIn
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID

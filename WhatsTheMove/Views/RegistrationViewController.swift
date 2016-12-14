@@ -20,6 +20,7 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.hideKeyboardWhenTappedAround() 
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,22 +47,7 @@ class RegistrationViewController: UIViewController {
                         }
                     }
                     
-                    WTM.auth.createUser(withEmail: email, password: password) { (user, error) in
-                        
-                        // Success
-                        if user != nil {
-                            // Push to create a new account
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
-                            self.present(vc!, animated: true)
-                        }
-                        
-                        // Error
-                        if let error = error {
-                            // TODO: Handle errors, print messages, etcs
-                            print(error.localizedDescription)
-                        }
-                        
-                    }
+                    self.createUserAccount(with: email, and: password)
                     
                 } else {
                     // TODO: Message, Password not confirmed
@@ -79,4 +65,24 @@ class RegistrationViewController: UIViewController {
     // http://stackoverflow.com/questions/9540500/ios-app-next-key-wont-go-to-the-next-text-field
     // http://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons
     
+    
+    /// Creates the user within Firebase auth using email/password.
+    private func createUserAccount(with email: String, and password: String) {
+        WTM.auth.createUser(withEmail: email, password: password) { (user, error) in
+            
+            // Success
+            if user != nil {
+                // Push to create a new account
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
+                self.present(vc!, animated: true)
+            }
+            
+            // Error
+            if let error = error {
+                // TODO: Handle errors, print messages, etcs
+                print(error.localizedDescription)
+            }
+            
+        }
+    }
 }

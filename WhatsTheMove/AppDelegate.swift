@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
         
         if let currentUser = WTM.auth.currentUser {
             currentUser.reload() { (err) in
@@ -31,20 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     self.WTM.reloadEvents()
                     
                     // Check if user needs to create an account or has one already
-                    self.userExists(of: currentUser.uid) { (exists) in
-                        if exists {
-                            // Push to Feed View Controller
-                            let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-                            self.window?.rootViewController = vc
-                            self.window?.makeKeyAndVisible()
-                        } else {
-                            // Push to New Account View Controller
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let vc = storyboard.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
-                            self.window?.rootViewController = vc
-                            self.window?.makeKeyAndVisible()
-                        }
-                    }
+                    self.userExists(of: currentUser.uid)
                 }
             }
         }
@@ -101,8 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //var options: [String: AnyObject] = [UIApplicationOpenURLOptionsKey.sourceApplication.rawValue: sourceApplication as AnyObject, UIApplicationOpenURLOptionsKey.annotation.rawValue: annotation as AnyObject]
         
         let googleSignIn = GIDSignIn.sharedInstance().handle(url as URL!,
-                                                 sourceApplication: sourceApplication,
-                                                 annotation: annotation)
+                                                             sourceApplication: sourceApplication,
+                                                             annotation: annotation)
         let facebookSignIn = FBSDKApplicationDelegate.sharedInstance().application(
             application,
             open: url as URL!,
@@ -126,22 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             if let user = user {
                 print(user.uid)
                 // Validate user has set their username. If not send to NewAccountViewController
-                self.userExists(of: user.uid) { (exists) in
-                    if exists {
-                        // Push to Feed View Controller
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-                        self.window?.rootViewController = vc
-                        self.window?.makeKeyAndVisible()
-                    } else {
-                        // Push to New Account View Controller
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
-                        self.window?.rootViewController = vc
-                        self.window?.makeKeyAndVisible()
-                    }
-                }
-                
+                self.userExists(of: user.uid)
             }
             if let error = error {
                 print(error.localizedDescription)
@@ -161,23 +131,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // TODO? If needed also clean up extra stuff here
     }
     
-    // Validate user has set their username in the DB
-    private func userExists(of uid: String, completion: ((Bool) -> Void)?) {
-        WTM.dbRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.hasChild(uid) {
-                // User exists in DB
-                completion?(true)
-                return
+    // Handle checking user account status here
+    private func userExists(of uid: String) {
+        WTM.userExists(of: uid) { (exists) in
+            if exists {
+                // Push to Feed View Controller
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+                self.window?.rootViewController = vc
+                self.window?.makeKeyAndVisible()
             } else {
-                // User is not in DB
-                completion?(false)
+                // Push to New Account View Controller
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "newAccountViewController") as? NewAccountViewController
+                self.window?.rootViewController = vc
+                self.window?.makeKeyAndVisible()
             }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-            completion?(false)
         }
-        
     }
+    
+}
 
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

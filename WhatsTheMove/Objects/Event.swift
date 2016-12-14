@@ -92,9 +92,11 @@ class Event: NSObject {
     }
     
     func clear() {
-        eventDescription = ""
+        creatorId = ""
+        ended = false
         endDate = createDate()
         entryNote = ""
+        eventDescription = ""
         location = EventLocation()
         friendsCanInvite = true
         privacyLevel = 0
@@ -133,7 +135,7 @@ class Event: NSObject {
         return Date()
     }
     
-    public func toAnyObject() -> [AnyHashable: Any] {
+    func toAnyObject() -> [AnyHashable: Any] {
         return [
             "createdDate": createdDate.timeIntervalSince1970,
             "creatorId": creatorId,
@@ -150,7 +152,7 @@ class Event: NSObject {
         ]
     }
     
-    public func toJSONString() -> String {
+    func toJSONString() -> String {
         return "[" +
             "\n\"createdDate\": \(createdDate.timeIntervalSince1970)," +
             "\n\"creatorId\": \(creatorId)," +

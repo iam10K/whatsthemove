@@ -24,6 +24,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         GIDSignIn.sharedInstance().uiDelegate = self
         
@@ -84,13 +85,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
         print("Logout Facebook")
     }
     
-    
-    // Validate user has set their username in the DB
+    // Handle checking if user exists for login view
     private func userExists(of uid: String) {
-        WTM.dbRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.hasChild(uid) {
+        WTM.userExists(of: uid) { (exists) in
+            if exists {
                 // User exists in DB
-                
                 // Push to Feed View Controller
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
                 self.present(vc!, animated: true)
@@ -103,12 +102,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
                 self.present(vc!, animated: true)
                 return
             }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-            
-            // Failed Display message
         }
-        
     }
 }

@@ -19,6 +19,8 @@ class EventLocation: NSObject {
         super.init()
     }
     
+    
+    
     public init(values: [String: AnyObject]) {
         
         if let addressValue = values["address"] as? String {
@@ -38,7 +40,14 @@ class EventLocation: NSObject {
         }
     }
     
-    public func toAnyObject() -> Any {
+    func clear() {
+        address = ""
+        addressName = ""
+        latitude = 0.0
+        longitude = 0.0
+    }
+    
+    func toAnyObject() -> Any {
         return [
             "address": address,
             "longitude": longitude,
@@ -47,7 +56,7 @@ class EventLocation: NSObject {
         ]
     }
     
-    public func toJSONString() -> String {
+    func toJSONString() -> String {
         return "[" +
             "\n\"address\": \(address)," +
             "\n\"longitude\": \(longitude)," +

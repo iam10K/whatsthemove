@@ -103,7 +103,7 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func cancelAction(_ sender: AnyObject) {
         // Clear newEvent
-        WTM.newEvent.clear()
+        WTM.newEvent = Event()
         
         // Push to Feed View Controller
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
@@ -135,7 +135,18 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
             let newEventRef = WTM.dbRef.child("events").childByAutoId()
             if let user = WTM.auth.currentUser {
                 e.creatorId = user.uid
-                newEventRef.updateChildValues(e.toAnyObject())
+                e.createdDate = Date()
+                newEventRef.updateChildValues(e.toAnyObject()) { (error, _) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        // Clear newEvent
+                        self.WTM.newEvent = Event()
+                    }
+                }
+                
+                // Clear newEvent
+                WTM.newEvent = Event()
             }
         
             // TODO: Change this to Push to created event

@@ -40,7 +40,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
+        // Facebook SignIn
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // Navigation customization
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.isTranslucent = false;
+        navigationBarAppearance.tintColor = UIColor.white
+        navigationBarAppearance.barTintColor = UIColor(red:0.42, green:0.08, blue:0.44, alpha:1.0)
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.tintColor = UIColor.white
+        tabBarAppearance.barTintColor = UIColor(red:0.42, green:0.08, blue:0.44, alpha:1.0)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
         
         return true
     }

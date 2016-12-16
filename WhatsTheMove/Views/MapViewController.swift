@@ -33,6 +33,11 @@ class MapViewController: UIViewController {
         
         mapView.removeAnnotations(mapView.annotations)
         populatePins()
+        
+        if let userLocation = locationManager.location {
+            let region = MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10))
+            mapView.setRegion(region, animated: false)
+        }
     }
     
     override func didReceiveMemoryWarning() {

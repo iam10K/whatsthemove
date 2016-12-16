@@ -163,6 +163,7 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     // Else MMM d, yyyy at h:mm a
     private func format(date: Date) -> String {
         // TODO
+        // TODO Also move to event class.
         return ""
     }
     

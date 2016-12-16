@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */; };
 		2F1D55401DA99FD500B2A46C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */; };
+		2F3278F91E045EC300BFE0F4 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3278F81E045EC300BFE0F4 /* FeedTableViewCell.swift */; };
 		2F33C4B41DEB600E004306E8 /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33C4B31DEB600E004306E8 /* EventLocation.swift */; };
 		2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */; };
 		2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */; };
@@ -56,6 +57,7 @@
 		0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WTMSingleton.swift; path = Objects/WTMSingleton.swift; sourceTree = "<group>"; };
 		2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2F3278F81E045EC300BFE0F4 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTableViewCell.swift; path = Views/FeedTableViewCell.swift; sourceTree = "<group>"; };
 		2F33C4B31DEB600E004306E8 /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventLocation.swift; path = Objects/EventLocation.swift; sourceTree = "<group>"; };
 		2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Views/LoginViewController.swift; sourceTree = "<group>"; };
 		2F40E1D41DAABD5D0058EB76 /* WhatsTheMove.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatsTheMove.entitlements; sourceTree = "<group>"; };
@@ -144,6 +146,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2F3278F71E045EA600BFE0F4 /* FeedViews */ = {
+			isa = PBXGroup;
+			children = (
+				2F915DEA1DF3B33400DDE1E0 /* FeedTableViewController.swift */,
+				2F3278F81E045EC300BFE0F4 /* FeedTableViewCell.swift */,
+			);
+			name = FeedViews;
+			sourceTree = "<group>";
+		};
+		2F3278FA1E045ECE00BFE0F4 /* LoginViews */ = {
+			isa = PBXGroup;
+			children = (
+				2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */,
+				2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */,
+				2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */,
+			);
+			name = LoginViews;
+			sourceTree = "<group>";
+		};
 		2F741AE51D9AD454009E6271 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,13 +237,11 @@
 		2F8D64091D91B6190089FFCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2F3278FA1E045ECE00BFE0F4 /* LoginViews */,
+				2F3278F71E045EA600BFE0F4 /* FeedViews */,
 				2F9329C21DDA37CD004F3C9F /* NewEventViews */,
-				2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */,
-				2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */,
-				2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */,
 				2F65C54F1DC916120014AEBE /* MapViewController.swift */,
 				2F915DE61DF378FC00DDE1E0 /* ProfileTableViewController.swift */,
-				2F915DEA1DF3B33400DDE1E0 /* FeedTableViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -530,6 +549,7 @@
 				2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */,
 				2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */,
 				2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */,
+				2F3278F91E045EC300BFE0F4 /* FeedTableViewCell.swift in Sources */,
 				2F915DEB1DF3B33400DDE1E0 /* FeedTableViewController.swift in Sources */,
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,
 				2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */,

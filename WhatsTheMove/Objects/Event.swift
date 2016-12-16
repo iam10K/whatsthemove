@@ -24,6 +24,7 @@ class Event: NSObject {
     var friendsCanInvite: Bool = true
     var location: EventLocation = EventLocation()
     var privacyLevel: Int = 0
+    var rating: Int = 0
     var sponsor: String = ""
     var startDate: Date = Date()
     var title: String = ""
@@ -78,12 +79,16 @@ class Event: NSObject {
             privacyLevel = privacyLevelValue
         }
         
+        if let ratingValue = snapshotValue["rating"] as? Int {
+            rating = ratingValue
+        }
+        
         if let sponsorValue = snapshotValue["sponsor"] as? String {
             sponsor = sponsorValue
         }
         
-        if let startDateValue = snapshotValue["endDate"] as? Double {
-            endDate = Date(timeIntervalSince1970: startDateValue)
+        if let startDateValue = snapshotValue["startDate"] as? Double {
+            startDate = Date(timeIntervalSince1970: startDateValue)
         }
 
         if let titleValue = snapshotValue["title"] as? String {
@@ -146,6 +151,7 @@ class Event: NSObject {
             "friendsCanInvite": friendsCanInvite ? 1 : 0,
             "location": location.toAnyObject(),
             "privacyLevel": privacyLevel,
+            "rating": rating,
             "sponsor": sponsor,
             "startDate": startDate.timeIntervalSince1970,
             "title": title
@@ -163,6 +169,7 @@ class Event: NSObject {
             "\n\"friendsCanInvite\": \(friendsCanInvite ? 1 : 0)," +
             "\n\"location\": \(location.toJSONString())," +
             "\n\"privacyLevel\": \(privacyLevel)," +
+            "\n\"rating\": \(rating)," +
             "\n\"sponsor\": \(sponsor)," +
             "\n\"startDate\": \(startDate.timeIntervalSince1970)," +
             "\n\"title\": \(title)" +

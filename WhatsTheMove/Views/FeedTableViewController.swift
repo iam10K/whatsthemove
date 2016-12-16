@@ -51,11 +51,22 @@ class FeedTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
 
         if let events = events {
-            cell.textLabel?.text = events[indexPath.item].title
-            cell.detailTextLabel?.text = events[indexPath.item].location.addressName
+            cell.titleLabel.text = events[indexPath.row].title
+            cell.addressNameLabel.text = events[indexPath.row].location.addressName
+            cell.ratingLabel.text = String(events[indexPath.row].rating)
+            
+            // Date formatter
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d, yyyy \'at\' h:mm a"
+            
+            // Generate string for start date
+            let startDateString = formatter.string(from: events[indexPath.row].startDate)
+            // Set the label value for start and end date each time view appears
+            cell.dateLabel.text = startDateString
+            
         }
 
         return cell

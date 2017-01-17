@@ -169,10 +169,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     
-    func dismissKeyboard() {
+    func dismissKeyboard(sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
 }

@@ -10,5 +10,7 @@
 #define Bridging_Header_h
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "FSCalendar.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 
 #endif /* Bridging_Header_h */

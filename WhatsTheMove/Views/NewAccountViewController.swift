@@ -51,7 +51,7 @@ class NewAccountViewController: UIViewController {
         }
     }
     
-    private func addUserToDatabase() {
+    func addUserToDatabase() {
         if let username = usernameField.text,
             let name = nameField.text,
             let user = WTM.auth.currentUser {
@@ -78,7 +78,7 @@ class NewAccountViewController: UIViewController {
     // http://stackoverflow.com/questions/1347779
     
     // Returns the info about privacy levels 0,1,2.
-    private func getPrivacyLevelInfoText(index: Int) -> String {
+    func getPrivacyLevelInfoText(index: Int) -> String {
         switch (index) {
         case 0: // Public
             return "Everyone can view your profile, full name, bio, and events."
@@ -90,7 +90,7 @@ class NewAccountViewController: UIViewController {
     }
     
     // Validate that the username matches the correct pattern
-    private func validateUsername(of username: String, completion: ((Bool) -> Void)? = nil) {
+    func validateUsername(of username: String, completion: ((Bool) -> Void)? = nil) {
         var validUsername = false
         
         if username == "" {
@@ -119,7 +119,6 @@ class NewAccountViewController: UIViewController {
                 
                 if completion != nil {
                     // TODO: Message, username taken, only show if there is completion handler
-                    
                 }
                 
                 print("TAKEN")

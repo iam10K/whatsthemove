@@ -29,30 +29,6 @@ class LocationSearchTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func parseAddress(for selectedItem: MKPlacemark) -> String {
-        // Put a space between "4" and "Melrose Place"
-        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
-        // Put a comma between street and city/state
-        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
-        // Put a space between "Washington" and "DC"
-        let secondSpace = (selectedItem.subAdministrativeArea != nil && selectedItem.administrativeArea != nil) ? " " : ""
-        let addressLine = String(
-            format:"%@%@%@%@%@%@%@",
-            // Street number
-            selectedItem.subThoroughfare ?? "",
-            firstSpace,
-            // Street name
-            selectedItem.thoroughfare ?? "",
-            comma,
-            // City
-            selectedItem.locality ?? "",
-            secondSpace,
-            // State
-            selectedItem.administrativeArea ?? ""
-        )
-        return addressLine
-    }
 
 }
 
@@ -83,7 +59,7 @@ extension LocationSearchTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         let selectedItem = matchingItems[indexPath.row].placemark
         cell.textLabel?.text = selectedItem.name
-        cell.detailTextLabel?.text = parseAddress(for: selectedItem)
+        cell.detailTextLabel?.text = Utils.parseAddress(for: selectedItem)
         return cell
     }
 }

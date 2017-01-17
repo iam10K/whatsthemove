@@ -30,9 +30,10 @@
 		2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */; };
 		2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */; };
 		2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */; };
+		2FFC25001E2E782000D55546 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFC24FF1E2E782000D55546 /* Utils.swift */; };
 		3039D0BEEA2E0D709AD773D2 /* Pods_WhatsTheMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */; };
 		6E53EAD380CD6BA50D1565AC /* Pods_WhatsTheMoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */; };
-		767C9340F707062CFCCFD011 /* Pods_WhatsTheMoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */; };
+		DBC95C8EA89A0031A570D18A /* libPods-WhatsTheMoveUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B858F6EB3D8CF92B76DE5B09 /* libPods-WhatsTheMoveUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +55,6 @@
 
 /* Begin PBXFileReference section */
 		07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WTMSingleton.swift; path = Objects/WTMSingleton.swift; sourceTree = "<group>"; };
 		2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F3278F81E045EC300BFE0F4 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTableViewCell.swift; path = Views/FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -79,13 +79,14 @@
 		2F74EC641D91ACEE00CD1EBA /* WhatsTheMoveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsTheMoveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F74EC681D91ACEE00CD1EBA /* WhatsTheMoveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsTheMoveUITests.swift; sourceTree = "<group>"; };
 		2F74EC6A1D91ACEE00CD1EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F7865651E2DDC2900AE1610 /* WhatsTheMove-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhatsTheMove-Bridging-Header.h"; sourceTree = "<group>"; };
 		2F900D771DCBC4D200198AEA /* NewEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewEventTableViewController.swift; path = Views/NewEventTableViewController.swift; sourceTree = "<group>"; };
 		2F915DE61DF378FC00DDE1E0 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewController.swift; path = Views/ProfileTableViewController.swift; sourceTree = "<group>"; };
 		2F915DEA1DF3B33400DDE1E0 /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTableViewController.swift; path = Views/FeedTableViewController.swift; sourceTree = "<group>"; };
 		2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectDateViewController.swift; path = Views/SelectDateViewController.swift; sourceTree = "<group>"; };
-		2F9329C61DDA3E34004F3C9F /* WhatsTheMove-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhatsTheMove-Bridge-Header.h"; sourceTree = "<group>"; };
 		2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectLocationViewController.swift; path = Views/SelectLocationViewController.swift; sourceTree = "<group>"; };
 		2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchTableViewController.swift; path = Views/LocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		2FFC24FF1E2E782000D55546 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Objects/Utils.swift; sourceTree = "<group>"; };
 		3D60E4694E8D2691AEB84605 /* Pods-WhatsTheMoveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveTests/Pods-WhatsTheMoveTests.release.xcconfig"; sourceTree = "<group>"; };
 		559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMove.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		592CC708A9974C0672BF74C9 /* Pods-WhatsTheMove.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 		848F002851529628B7BDF23F /* Pods-WhatsTheMove.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.debug.xcconfig"; sourceTree = "<group>"; };
 		B02B52A3F96CA64A38EF200D /* Pods-WhatsTheMoveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B8479894443451332A85681D /* Pods-WhatsTheMoveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B858F6EB3D8CF92B76DE5B09 /* libPods-WhatsTheMoveUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhatsTheMoveUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767C9340F707062CFCCFD011 /* Pods_WhatsTheMoveUITests.framework in Frameworks */,
+				DBC95C8EA89A0031A570D18A /* libPods-WhatsTheMoveUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +143,7 @@
 			children = (
 				559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */,
 				07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */,
-				0B8A1ED5C8C414FADACCE471 /* Pods_WhatsTheMoveUITests.framework */,
+				B858F6EB3D8CF92B76DE5B09 /* libPods-WhatsTheMoveUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,6 +175,7 @@
 				2F741AE81D9AD4B1009E6271 /* Comment.swift */,
 				2F741AEA1D9AD4C0009E6271 /* User.swift */,
 				2F33C4B31DEB600E004306E8 /* EventLocation.swift */,
+				2FFC24FF1E2E782000D55546 /* Utils.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -211,7 +214,7 @@
 				2F74EC511D91ACEE00CD1EBA /* LaunchScreen.storyboard */,
 				2F74EC541D91ACEE00CD1EBA /* Info.plist */,
 				2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */,
-				2F9329C61DDA3E34004F3C9F /* WhatsTheMove-Bridge-Header.h */,
+				2F7865651E2DDC2900AE1610 /* WhatsTheMove-Bridging-Header.h */,
 			);
 			path = WhatsTheMove;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				2F915DE71DF378FC00DDE1E0 /* ProfileTableViewController.swift in Sources */,
 				2F741AEB1D9AD4C0009E6271 /* User.swift in Sources */,
 				2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */,
+				2FFC25001E2E782000D55546 /* Utils.swift in Sources */,
 				2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */,
 				2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */,
 				2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */,
@@ -729,7 +733,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WhatsTheMove/WhatsTheMove-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -752,7 +756,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WhatsTheMove/WhatsTheMove-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -770,6 +774,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMoveTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhatsTheMove.app/WhatsTheMove";
 			};
@@ -787,6 +792,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMoveTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhatsTheMove.app/WhatsTheMove";
 			};
@@ -802,6 +808,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMoveUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = WhatsTheMove;
 			};
@@ -817,6 +824,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whatsthemove.WhatsTheMoveUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = WhatsTheMove;
 			};

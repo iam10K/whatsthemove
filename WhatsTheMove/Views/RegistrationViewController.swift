@@ -67,7 +67,7 @@ class RegistrationViewController: UIViewController {
     
     
     /// Creates the user within Firebase auth using email/password.
-    private func createUserAccount(with email: String, and password: String) {
+    func createUserAccount(with email: String, and password: String) {
         WTM.auth.createUser(withEmail: email, password: password) { (user, error) in
             
             // Success

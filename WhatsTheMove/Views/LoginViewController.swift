@@ -86,7 +86,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     }
     
     // Handle checking if user exists for login view
-    private func userExists(of uid: String) {
+    func userExists(of uid: String) {
         WTM.userExists(of: uid) { (exists) in
             if exists {
                 // User exists in DB

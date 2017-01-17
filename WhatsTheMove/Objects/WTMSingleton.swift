@@ -47,9 +47,6 @@ class WTMSingleton: NSObject {
     }
     
     // Validate user has set their username in the DB
-    /**
-     Test
-    */
     func userExists(of uid: String, completion: @escaping (Bool) -> Void) {
         self.dbRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.hasChild(uid) {

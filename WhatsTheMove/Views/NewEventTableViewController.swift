@@ -37,13 +37,9 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Date formatter
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy \'at\' h:mm a"
-        
         // Generate string for start and end date
-        let startDateString = formatter.string(from: WTM.newEvent.startDate)
-        let endDateString = formatter.string(from: WTM.newEvent.endDate)
+        let startDateString = Utils.format(date: WTM.newEvent.startDate)
+        let endDateString = Utils.format(date: WTM.newEvent.endDate)
         // Set the label value for start and end date each time view appears
         startDateLabel.text = startDateString
         endDateLabel.text = endDateString
@@ -111,7 +107,7 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     // Store all field values in the newEvent object
-    private func storeValuesInEvent(completion: () -> ()) {
+    func storeValuesInEvent(completion: () -> ()) {
         if let title = eventTitleField.text {
             WTM.newEvent.title = title
         }
@@ -130,7 +126,7 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     // Add the new event to the database, validate value before!
-    private func addToDatabase(for e: Event) {
+    func addToDatabase(for e: Event) {
         storeValuesInEvent() {
             let newEventRef = WTM.dbRef.child("events").childByAutoId()
             if let user = WTM.auth.currentUser {
@@ -154,17 +150,6 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
             self.present(vc!, animated: false)
         }
-    }
-    
-    // Formats the date based on how far in future it is.
-    // Dates == today will format as Today at h:mm a
-    // Dates within 7 days will format EEE at h:mm a
-    // In same year will format MMMM d at h:mm a
-    // Else MMM d, yyyy at h:mm a
-    private func format(date: Date) -> String {
-        // TODO
-        // TODO Also move to event class.
-        return ""
     }
     
     // TODO Keyboard next button goes to next field.

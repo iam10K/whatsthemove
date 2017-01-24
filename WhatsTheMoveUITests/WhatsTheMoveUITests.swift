@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import WhatsTheMove
 
 class WhatsTheMoveUITests: XCTestCase {
         
@@ -21,11 +22,31 @@ class WhatsTheMoveUITests: XCTestCase {
         XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        testLoginEmailPassword()
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        testLogout()
+    }
+    
+    private func testLoginEmailPassword() {
+        let app = XCUIApplication()
+        let emailTextField = app.textFields["Email"]
+        emailTextField.tap()
+        emailTextField.typeText("demo@demo.com")
+        
+        let passwordSecureTextField = app.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("P@$$w0rd")
+        app.buttons["Login"].tap()
+    }
+    
+    private func testLogout() {
+        let app = XCUIApplication()
+        app.tabBars.children(matching: .button).element(boundBy: 4).tap()
+        app.navigationBars["Profile"].buttons["Logout"].tap()
     }
     
     func testExample() {

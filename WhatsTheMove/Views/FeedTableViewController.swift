@@ -54,22 +54,25 @@ class FeedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
 
         if let events = events {
-            cell.titleLabel.text = events[indexPath.row].title
-            cell.addressNameLabel.text = events[indexPath.row].location.addressName
-            cell.ratingLabel.text = String(events[indexPath.row].rating)
-            
-            // Date formatter
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, yyyy \'at\' h:mm a"
-            
-            // Generate string for start date
-            let startDateString = formatter.string(from: events[indexPath.row].startDate)
-            // Set the label value for start and end date each time view appears
-            cell.dateLabel.text = startDateString
-            
+            if indexPath.row < events.count {
+                let event = events[indexPath.row]
+                cell.populate(with: event)
+            }
         }
 
         return cell
+    }
+    
+    func upButtonHandler(event: Event) {
+        if let user = WTM.auth.currentUser {
+            event.rateEvent(ofUser: user.uid, vote: true)
+        }
+    }
+    
+    func downButtonHandler(event: Event) {
+        if let user = WTM.auth.currentUser {
+            event.rateEvent(ofUser: user.uid, vote: false)
+        }
     }
 
     /*

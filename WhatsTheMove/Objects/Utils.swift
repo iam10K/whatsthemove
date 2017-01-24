@@ -13,7 +13,7 @@ class Utils: NSObject {
     
     // Formats the date based on how far in future it is.
     // Dates == today will format as Today at h:mm a
-    // Dates within 7 days will format EEE at h:mm a
+    // Dates within 7 days will format EEEE at h:mm a
     // In same year will format MMM d at h:mm a
     // Else MMM d, yyyy at h:mm a
     static func format(date: Date) -> String {
@@ -42,7 +42,7 @@ class Utils: NSObject {
         if NSCalendar.current.isDateInToday(date) {
             formatter.dateFormat = "\'Today at\' h:mm a"
         } else if withinWeekDate != nil && date.compare(withinWeekDate!) == .orderedAscending {
-            formatter.dateFormat = "EEE \'at\' h:mm a"
+            formatter.dateFormat = "EEEE \'at\' h:mm a"
         } else if nextYearDate != nil && NSCalendar.current.compare(date, to: nextYearDate!, toGranularity: .year) == .orderedAscending {
             formatter.dateFormat = "MMM d \'at\' h:mm a"
         } else {

@@ -32,5 +32,6 @@ end
 target 'WhatsTheMoveUITests' do 
   inherit! :search_paths
   # Pods for testing
+  shared_pods
 end
 

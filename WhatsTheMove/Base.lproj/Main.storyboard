@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E144f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8xa-s9-Qs4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="16D30a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8xa-s9-Qs4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1067,7 +1067,13 @@
                             <outlet property="delegate" destination="ED1-Dd-5fD" id="WJq-dv-9oD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Feed" id="1t2-rz-ZeX"/>
+                    <navigationItem key="navigationItem" title="Feed" id="1t2-rz-ZeX">
+                        <barButtonItem key="leftBarButtonItem" image="star" id="oIL-Tg-Qd7">
+                            <connections>
+                                <segue destination="mg1-UK-d2a" kind="show" id="wjm-js-GMd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="IVM-zT-JUE" kind="show" identifier="eventTableViewSegue" id="Yl5-s5-IRq"/>
                     </connections>
@@ -1075,6 +1081,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3xm-J1-4bY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2952.8000000000002" y="-645.42728635682158"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="ew7-VG-lVp">
+            <objects>
+                <tableViewController id="mg1-UK-d2a" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cb8-iU-mbR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="aa8-cj-PXH">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aa8-cj-PXH" id="2Tg-aA-Sb4">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mg1-UK-d2a" id="eVC-Zk-alQ"/>
+                            <outlet property="delegate" destination="mg1-UK-d2a" id="4At-Za-7ZA"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r6O-xj-D00" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3927" y="-645"/>
         </scene>
         <!--WTM-->
         <scene sceneID="Eya-JB-d6Z">
@@ -1554,6 +1588,7 @@
         <image name="plus" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
+        <image name="star" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CmN-sE-3Fe"/>

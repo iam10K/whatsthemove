@@ -94,7 +94,6 @@
 		592CC708A9974C0672BF74C9 /* Pods-WhatsTheMove.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.release.xcconfig"; sourceTree = "<group>"; };
 		6C4A946D90B6FFF296A1B3AA /* Pods-WhatsTheMoveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveTests/Pods-WhatsTheMoveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		848F002851529628B7BDF23F /* Pods-WhatsTheMove.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.debug.xcconfig"; sourceTree = "<group>"; };
-		8E270CC41E3EA6FE00CB7945 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = Views/SettingsTableViewController.swift; sourceTree = "<group>"; };
 		B02B52A3F96CA64A38EF200D /* Pods-WhatsTheMoveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B8479894443451332A85681D /* Pods-WhatsTheMoveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8E41E23396E99A7C34AC242 /* Pods_WhatsTheMoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -462,7 +461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		19D80060F19BCFD20D6B900E /* [CP] Check Pods Manifest.lock */ = {
@@ -477,7 +476,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5142B1041D7B1B3D36D62DC7 /* [CP] Embed Pods Frameworks */ = {
@@ -507,7 +506,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		916B2FE14A1A57A8378ACC2E /* [CP] Copy Pods Resources */ = {
@@ -594,7 +593,6 @@
 				2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */,
 				2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */,
 				2F900D781DCBC4D200198AEA /* NewEventTableViewController.swift in Sources */,
-				8E270CC51E3EA6FE00CB7945 /* SettingsTableViewController.swift in Sources */,
 				2F33C4B41DEB600E004306E8 /* EventLocation.swift in Sources */,
 				2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */,
 			);

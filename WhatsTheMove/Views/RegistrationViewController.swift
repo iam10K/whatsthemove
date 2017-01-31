@@ -35,14 +35,28 @@ class RegistrationViewController: UIViewController {
                     
                     if password != passwordConfirm {
                         // TODO: Message, Passwords do not match
+                        let alert = UIAlertController(title: "Alert", message: "Passwords Dont Match", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+        
                         return
                     } else {
                         if password.characters.count < 6 {
                             // TODO: Message, Password is too short
+                            let alert = UIAlertController(title: "Alert", message: "Password Too Short", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            
+
                             return
                         }
                         if password.characters.count > 32 {
                             // TODO: Message. Password is too long
+                            let alert = UIAlertController(title: "Alert", message: "Password Too Long", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            
+
                             return
                         }
                     }
@@ -51,12 +65,27 @@ class RegistrationViewController: UIViewController {
                     
                 } else {
                     // TODO: Message, Password not confirmed
+                    let alert = UIAlertController(title: "Alert", message: "Password Not Confirmed", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
+
                 }
             } else {
                 // TODO: Message, No password entered
+                    let alert = UIAlertController(title: "Alert", message: "No Password entered", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+
             }
         } else {
             // TODO: Message, No email entered
+            let alert = UIAlertController(title: "Alert", message: "No Email Entered", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+
         }
     }
     

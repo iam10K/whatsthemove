@@ -102,6 +102,12 @@ class NewAccountViewController: UIViewController {
             if result.isEmpty {
                 // TODO: Message, username can only contain alphanumeric and underscore
                 completion?(false)
+                
+                let alert = UIAlertController(title: "Alert", message: "Username Contains illegal Characters", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+
                 return
             } else {
                 validUsername = true
@@ -109,6 +115,12 @@ class NewAccountViewController: UIViewController {
         } else {
             // TODO: Message, username can only contain alphanumeric and underscore
             completion?(false)
+            
+            let alert = UIAlertController(title: "Alert", message: "Username has illegal Characters", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+
             return
         }
         
@@ -119,6 +131,11 @@ class NewAccountViewController: UIViewController {
                 
                 if completion != nil {
                     // TODO: Message, username taken, only show if there is completion handler
+                    let alert = UIAlertController(title: "Alert", message: "Username Taken", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
+
                 }
                 
                 print("TAKEN")

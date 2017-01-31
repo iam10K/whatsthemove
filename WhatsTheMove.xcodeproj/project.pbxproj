@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */; };
-		2F1D55401DA99FD500B2A46C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */; };
+		2F1C663A1E3F19FB00D087E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F1C66391E3F19FB00D087E5 /* GoogleService-Info.plist */; };
 		2F3278F91E045EC300BFE0F4 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3278F81E045EC300BFE0F4 /* FeedTableViewCell.swift */; };
 		2F33C4B41DEB600E004306E8 /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33C4B31DEB600E004306E8 /* EventLocation.swift */; };
 		2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */; };
@@ -30,10 +30,10 @@
 		2F9329C41DDA37FD004F3C9F /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */; };
 		2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */; };
 		2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */; };
+		2FA291E01E37AD0200B26986 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA291DF1E37AD0200B26986 /* EventTableViewController.swift */; };
 		2FFC25001E2E782000D55546 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFC24FF1E2E782000D55546 /* Utils.swift */; };
 		3039D0BEEA2E0D709AD773D2 /* Pods_WhatsTheMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */; };
 		6E53EAD380CD6BA50D1565AC /* Pods_WhatsTheMoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */; };
-		8E270CC51E3EA6FE00CB7945 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E270CC41E3EA6FE00CB7945 /* SettingsTableViewController.swift */; };
 		9F94F585E58D2206000B73E7 /* Pods_WhatsTheMoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8E41E23396E99A7C34AC242 /* Pods_WhatsTheMoveUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +57,7 @@
 /* Begin PBXFileReference section */
 		07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1B2CAB1DC28AA400D341ED /* WTMSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WTMSingleton.swift; path = Objects/WTMSingleton.swift; sourceTree = "<group>"; };
-		2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2F1C66391E3F19FB00D087E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F3278F81E045EC300BFE0F4 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTableViewCell.swift; path = Views/FeedTableViewCell.swift; sourceTree = "<group>"; };
 		2F33C4B31DEB600E004306E8 /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventLocation.swift; path = Objects/EventLocation.swift; sourceTree = "<group>"; };
 		2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Views/LoginViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +87,7 @@
 		2F9329C31DDA37FD004F3C9F /* SelectDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectDateViewController.swift; path = Views/SelectDateViewController.swift; sourceTree = "<group>"; };
 		2F9329D11DDB96EE004F3C9F /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectLocationViewController.swift; path = Views/SelectLocationViewController.swift; sourceTree = "<group>"; };
 		2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchTableViewController.swift; path = Views/LocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		2FA291DF1E37AD0200B26986 /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventTableViewController.swift; path = Views/EventTableViewController.swift; sourceTree = "<group>"; };
 		2FFC24FF1E2E782000D55546 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Objects/Utils.swift; sourceTree = "<group>"; };
 		3D60E4694E8D2691AEB84605 /* Pods-WhatsTheMoveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveTests/Pods-WhatsTheMoveTests.release.xcconfig"; sourceTree = "<group>"; };
 		559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMove.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,7 +216,7 @@
 				2F74EC4F1D91ACEE00CD1EBA /* Assets.xcassets */,
 				2F74EC511D91ACEE00CD1EBA /* LaunchScreen.storyboard */,
 				2F74EC541D91ACEE00CD1EBA /* Info.plist */,
-				2F1D553F1DA99FD500B2A46C /* GoogleService-Info.plist */,
+				2F1C66391E3F19FB00D087E5 /* GoogleService-Info.plist */,
 				2F7865651E2DDC2900AE1610 /* WhatsTheMove-Bridging-Header.h */,
 			);
 			path = WhatsTheMove;
@@ -242,12 +243,12 @@
 		2F8D64091D91B6190089FFCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2FA291DE1E37AB7C00B26986 /* EventViews */,
+				2FA291DD1E37AB6900B26986 /* ProfileViews */,
+				2FA291DC1E37AB5B00B26986 /* MapViews */,
 				2F3278FA1E045ECE00BFE0F4 /* LoginViews */,
 				2F3278F71E045EA600BFE0F4 /* FeedViews */,
 				2F9329C21DDA37CD004F3C9F /* NewEventViews */,
-				2F65C54F1DC916120014AEBE /* MapViewController.swift */,
-				2F915DE61DF378FC00DDE1E0 /* ProfileTableViewController.swift */,
-				8E270CC41E3EA6FE00CB7945 /* SettingsTableViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -261,6 +262,30 @@
 				2F9329D31DDB97A9004F3C9F /* LocationSearchTableViewController.swift */,
 			);
 			name = NewEventViews;
+			sourceTree = "<group>";
+		};
+		2FA291DC1E37AB5B00B26986 /* MapViews */ = {
+			isa = PBXGroup;
+			children = (
+				2F65C54F1DC916120014AEBE /* MapViewController.swift */,
+			);
+			name = MapViews;
+			sourceTree = "<group>";
+		};
+		2FA291DD1E37AB6900B26986 /* ProfileViews */ = {
+			isa = PBXGroup;
+			children = (
+				2F915DE61DF378FC00DDE1E0 /* ProfileTableViewController.swift */,
+			);
+			name = ProfileViews;
+			sourceTree = "<group>";
+		};
+		2FA291DE1E37AB7C00B26986 /* EventViews */ = {
+			isa = PBXGroup;
+			children = (
+				2FA291DF1E37AD0200B26986 /* EventTableViewController.swift */,
+			);
+			name = EventViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,7 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F74EC531D91ACEE00CD1EBA /* LaunchScreen.storyboard in Resources */,
-				2F1D55401DA99FD500B2A46C /* GoogleService-Info.plist in Resources */,
+				2F1C663A1E3F19FB00D087E5 /* GoogleService-Info.plist in Resources */,
 				2F74EC501D91ACEE00CD1EBA /* Assets.xcassets in Resources */,
 				2F74EC4E1D91ACEE00CD1EBA /* Main.storyboard in Resources */,
 			);
@@ -555,6 +580,7 @@
 				2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */,
 				2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */,
 				2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */,
+				2FA291E01E37AD0200B26986 /* EventTableViewController.swift in Sources */,
 				2F3278F91E045EC300BFE0F4 /* FeedTableViewCell.swift in Sources */,
 				2F915DEB1DF3B33400DDE1E0 /* FeedTableViewController.swift in Sources */,
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,

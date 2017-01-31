@@ -18,8 +18,7 @@ class FeedTableViewController: UITableViewController {
         }
     }
 
-    override func viewDidLoad(
-        ) {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -63,15 +62,21 @@ class FeedTableViewController: UITableViewController {
         return cell
     }
     
-    func upButtonHandler(event: Event) {
-        if let user = WTM.auth.currentUser {
-            event.rateEvent(ofUser: user.uid, vote: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let events = events {
+            if indexPath.row < events.count {
+                let event = events[indexPath.row]
+                
+                // Push to event view
+                performSegue(withIdentifier: "eventTableViewSegue", sender: event)
+            }
         }
     }
     
-    func downButtonHandler(event: Event) {
-        if let user = WTM.auth.currentUser {
-            event.rateEvent(ofUser: user.uid, vote: false)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "eventTableViewSegue" {
+            let vc = segue.destination as! EventTableViewController
+            vc.event = sender as? Event
         }
     }
 

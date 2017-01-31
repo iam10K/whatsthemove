@@ -32,6 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     self.userExists(of: currentUser.uid)
                 }
             }
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "loginViewController") as? LoginViewController
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
         }
         
         // TODO: Create blank screen as inital view controller so when opening app user does not see screens changing.

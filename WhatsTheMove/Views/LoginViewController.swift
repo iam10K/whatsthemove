@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
         GIDSignIn.sharedInstance().uiDelegate = self
         
         // Automatically sign in the user.
-        GIDSignIn.sharedInstance().signInSilently()
+        //GIDSignIn.sharedInstance().signInSilently() // Causing crashes right now and I don't know if we need to keep this
         // Configure the sign-in button look/feel
         googleSignInButton.style = GIDSignInButtonStyle.wide
         

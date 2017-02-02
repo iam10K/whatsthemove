@@ -78,6 +78,13 @@ class EventTableViewController: UITableViewController {
             if let user = WTM.auth.currentUser {
                 event.updateRatingArrows(ofUser: user.uid, upButton: upButton, downButton: downButton)
             }
+            
+            // If event is happening now allow checkin
+            if event.isOccuring() {
+                // TODO: Set button text to Check-In
+            } else if event.willOccur() {
+                // TODO: set button text to Attend
+            }
         }
     }
     
@@ -97,9 +104,16 @@ class EventTableViewController: UITableViewController {
     
     @IBAction func checkinAction(_ sender: UIBarButtonItem) {
         if let user = WTM.auth.currentUser, let event = event {
+            // If event is happening now allow checkin
+            if event.isOccuring() {
+                event.checkin(user: user.uid, checkInLabel: checkedInLabel)
+            } else if event.willOccur() {
+                // Event will occur in the future
+            }
             event.checkin(user: user.uid, checkInLabel: checkedInLabel)
         }
     }
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension

@@ -278,6 +278,14 @@ class Event: NSObject {
         })
     }
     
+    func isOccuring() -> Bool {
+        return true
+    }
+    
+    func willOccur() -> Bool {
+        return false
+    }
+    
     func toAnyObject() -> [AnyHashable: Any] {
         return [
             "checkedIn": checkedIn,

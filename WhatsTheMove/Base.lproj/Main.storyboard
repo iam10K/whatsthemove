@@ -1408,7 +1408,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="WTM" id="QBI-Oq-pgI">
-                        <barButtonItem key="rightBarButtonItem" image="check" id="Pkv-L4-iX8"/>
+                        <barButtonItem key="rightBarButtonItem" image="check" id="Pkv-L4-iX8">
+                            <connections>
+                                <action selector="checkinAction:" destination="IVM-zT-JUE" id="D61-8X-myA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="xcA-5Z-LjM" id="1Yn-8t-nve"/>

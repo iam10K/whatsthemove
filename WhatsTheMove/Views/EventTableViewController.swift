@@ -73,7 +73,7 @@ class EventTableViewController: UITableViewController {
             
             attendingLabel.text = "0"
             ratingLabel.text = String(event.rating)
-            checkedInLabel.text = "0"
+            checkedInLabel.text = String(event.checkedIn)
             
             if let user = WTM.auth.currentUser {
                 event.updateRatingArrows(ofUser: user.uid, upButton: upButton, downButton: downButton)
@@ -92,6 +92,12 @@ class EventTableViewController: UITableViewController {
         if let user = WTM.auth.currentUser, let event = event {
             event.rateEvent(ofUser: user.uid, vote: false, ratingLabel: ratingLabel)
             event.updateRatingArrows(ofUser: user.uid, upButton: upButton, downButton: downButton)
+        }
+    }
+    
+    @IBAction func checkinAction(_ sender: UIBarButtonItem) {
+        if let user = WTM.auth.currentUser, let event = event {
+            event.checkin(user: user.uid, checkInLabel: checkedInLabel)
         }
     }
     

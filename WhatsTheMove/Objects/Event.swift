@@ -15,6 +15,7 @@ class Event: NSObject {
     
     var key: String = ""
     
+    var checkedIn: Int = 0
     var createdDate: Date = Date()
     var creatorId: String = ""
     var endDate: Date = Date()
@@ -25,10 +26,10 @@ class Event: NSObject {
     var location: EventLocation = EventLocation()
     var privacyLevel: Int = 0
     var rating: Int = 0
-    var userRating: Bool?
     var sponsor: String = ""
     var startDate: Date = Date()
     var title: String = ""
+    var userRating: Bool?
     
     public override init() {
         super.init()
@@ -44,6 +45,10 @@ class Event: NSObject {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         
         key = snapshot.key
+        
+        if let checkedInValue = snapshotValue["checkedIn"] as? Int {
+            checkedIn = checkedInValue
+        }
         
         if let createdDateValue = snapshotValue["createdDate"] as? Double {
             createdDate = Date(timeIntervalSince1970: createdDateValue)
@@ -99,6 +104,7 @@ class Event: NSObject {
     }
     
     func clear() {
+        checkedIn = 0
         creatorId = ""
         ended = false
         endDate = createDate()
@@ -229,8 +235,52 @@ class Event: NSObject {
         button.tintColor = color
     }
     
+    // Check the user into event
+    func checkin(user: String, checkInLabel: UILabel? = nil) {
+        let WTM = WTMSingleton.instance
+        
+        WTM.dbRef.child("checkedIn").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.exists() {
+                // TODO: Check if user is near location, task for later
+                WTM.dbRef.child("checkedIn").child(self.key).child(user).setValue(
+                    ["date": Date().timeIntervalSince1970,
+                     "atLocation": false])
+                
+                // Validate ref and that the user has not checked in
+                if let ref = self.ref {
+                    ref.child("checkedIn").runTransactionBlock({ (checkedInValue) -> FIRTransactionResult in
+                        if let newCheckedIn = checkedInValue.value as? Int {
+                            checkedInValue.value = newCheckedIn + 1
+                            return FIRTransactionResult.success(withValue: checkedInValue)
+                        } else {
+                            return FIRTransactionResult.success(withValue: checkedInValue)
+                        }
+                    }, andCompletionBlock: { (error, completion, snap) in
+                        if let error = error {
+                            // TODO: Handle failed vote? reset userRating, show message?
+                            print(error.localizedDescription)
+                        }
+                        if !completion {
+                            print("Completed")
+                        } else if let snap = snap {
+                            // Update rating for event object
+                            if let checkedInValue = snap.value as? Int {
+                                self.checkedIn = checkedInValue
+                                // If ratingLabel is specified update the label
+                                if let checkedInLabel = checkInLabel {
+                                    checkedInLabel.text = String(self.checkedIn)
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+    
     func toAnyObject() -> [AnyHashable: Any] {
         return [
+            "checkedIn": checkedIn,
             "createdDate": createdDate.timeIntervalSince1970,
             "creatorId": creatorId,
             "description": eventDescription,
@@ -249,6 +299,7 @@ class Event: NSObject {
     
     func toJSONString() -> String {
         return "[" +
+            "\n\"checkedIn\": \(checkedIn)," +
             "\n\"createdDate\": \(createdDate.timeIntervalSince1970)," +
             "\n\"creatorId\": \(creatorId)," +
             "\n\"description\": \(eventDescription)," +

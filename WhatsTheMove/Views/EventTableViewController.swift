@@ -24,7 +24,7 @@ class EventTableViewController: UITableViewController {
     @IBOutlet weak var sponsorLabel: UILabel!
     @IBOutlet weak var entryLabel: UILabel!
     
-    @IBOutlet weak var attendingLabel: UILabel!
+    @IBOutlet weak var interestedLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var checkedInLabel: UILabel!
     
@@ -71,7 +71,7 @@ class EventTableViewController: UITableViewController {
             sponsorLabel.text = event.sponsor
             entryLabel.text = event.entryNote
             
-            attendingLabel.text = "0"
+            interestedLabel.text = String(event.interested)
             ratingLabel.text = String(event.rating)
             checkedInLabel.text = String(event.checkedIn)
             
@@ -81,9 +81,9 @@ class EventTableViewController: UITableViewController {
             
             // If event is happening now allow checkin
             if event.isOccuring() {
-                // TODO: Set button text to Check-In
+                // TODO: Enable Check-In
             } else if event.willOccur() {
-                // TODO: set button text to Attend
+                // TODO: Disable Checkin
             }
         }
     }
@@ -102,18 +102,26 @@ class EventTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func checkinAction(_ sender: UIBarButtonItem) {
+    @IBAction func checkInAction() {
         if let user = WTM.auth.currentUser, let event = event {
             // If event is happening now allow checkin
             if event.isOccuring() {
                 event.checkin(user: user.uid, checkInLabel: checkedInLabel)
             } else if event.willOccur() {
                 // Event will occur in the future
+                // TODO: Message saying event is not occuring now
             }
-            event.checkin(user: user.uid, checkInLabel: checkedInLabel)
         }
     }
     
+    @IBAction func interestedAction() {
+        if let user = WTM.auth.currentUser, let event = event {
+            event.interest(user: user.uid, interestedLabel: interestedLabel)
+        }
+    }
+    
+    @IBAction func moreAction() {
+    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension

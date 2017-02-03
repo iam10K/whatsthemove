@@ -23,6 +23,7 @@ class Event: NSObject {
     var entryNote: String = ""
     var eventDescription: String = ""
     var friendsCanInvite: Bool = true
+    var interested: Int = 0
     var location: EventLocation = EventLocation()
     var privacyLevel: Int = 0
     var rating: Int = 0
@@ -78,6 +79,10 @@ class Event: NSObject {
             friendsCanInvite = friendsCanInviteValue == 0 ? false : true
         }
         
+        if let interestedValue = snapshotValue["interested"] as? Int {
+            interested = interestedValue
+        }
+        
         if let locationValues = snapshotValue["location"] as? [String: AnyObject] {
             location = EventLocation(values: locationValues)
         }
@@ -112,6 +117,7 @@ class Event: NSObject {
         eventDescription = ""
         location = EventLocation()
         friendsCanInvite = true
+        interested = 0
         privacyLevel = 0
         sponsor = ""
         startDate = createDate()
@@ -235,16 +241,12 @@ class Event: NSObject {
         button.tintColor = color
     }
     
-    // Check the user into event
+    // Check the user into event, does not check if the event is occuring
     func checkin(user: String, checkInLabel: UILabel? = nil) {
         let WTM = WTMSingleton.instance
         
         WTM.dbRef.child("checkedIn").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.exists() {
-                // TODO: Check if user is near location, task for later
-                WTM.dbRef.child("checkedIn").child(self.key).child(user).setValue(
-                    ["date": Date().timeIntervalSince1970,
-                     "atLocation": false])
                 
                 // Validate ref and that the user has not checked in
                 if let ref = self.ref {
@@ -261,8 +263,14 @@ class Event: NSObject {
                             print(error.localizedDescription)
                         }
                         if !completion {
-                            print("Completed")
+                            print("Not completed")
                         } else if let snap = snap {
+                            // TODO: Check if user is near location, task for later
+                            // FUTURE: Possibly include user name for performance increase(less connections to database)
+                            WTM.dbRef.child("checkedIn").child(self.key).child(user).setValue(
+                                ["date": Date().timeIntervalSince1970,
+                                 "atLocation": false])
+                            
                             // Update rating for event object
                             if let checkedInValue = snap.value as? Int {
                                 self.checkedIn = checkedInValue
@@ -275,6 +283,68 @@ class Event: NSObject {
                     })
                 }
             }
+        })
+    }
+    
+    // Check the user into event
+    func interest(user: String, interestedLabel: UILabel? = nil) {
+        let WTM = WTMSingleton.instance
+        
+        var removingInterest = false
+        
+        WTM.dbRef.child("interested").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
+            // If user has not said interested in, add to the interested in
+            if snapshot.exists() {
+                if let hasInterest = snapshot.value as? Bool {
+                    if hasInterest {
+                        removingInterest = true
+                    }
+                }
+            }
+            
+            // Validate ref and update # of users interested
+            if let ref = self.ref {
+                ref.child("interested").runTransactionBlock({ (interestedValue) -> FIRTransactionResult in
+                    if let newInterested = interestedValue.value as? Int {
+                        if removingInterest {
+                            interestedValue.value = newInterested - 1
+                        } else {
+                            interestedValue.value = newInterested + 1
+                        }
+                        return FIRTransactionResult.success(withValue: interestedValue)
+                    } else {
+                        return FIRTransactionResult.success(withValue: interestedValue)
+                    }
+                }, andCompletionBlock: { (error, completion, snap) in
+                    if let error = error {
+                        // TODO: Handle failed vote? reset userRating, show message?
+                        print(error.localizedDescription)
+                    }
+                    if !completion {
+                        print("Not completed")
+                    } else if let snap = snap {
+                        // FUTURE: Possibly include user name for performance increase(less connections to database)
+                        if !removingInterest {
+                            WTM.dbRef.child("interested").child(self.key).child(user).setValue(true)
+                        }
+                        
+                        // Update rating for event object
+                        if let interestedValue = snap.value as? Int {
+                            self.interested = interestedValue
+                            // If ratingLabel is specified update the label
+                            if let interestedLabel = interestedLabel {
+                                interestedLabel.text = String(self.interested)
+                            }
+                        }
+                    }
+                })
+            }
+            
+            if removingInterest {
+                // Remove from DB
+                WTM.dbRef.child("interested").child(self.key).child(user).removeValue()
+            }
+            
         })
     }
     
@@ -296,6 +366,7 @@ class Event: NSObject {
             "ended": ended ? 1 : 0,
             "entryNote": entryNote,
             "friendsCanInvite": friendsCanInvite ? 1 : 0,
+            "interested": interested,
             "location": location.toAnyObject(),
             "privacyLevel": privacyLevel,
             "rating": rating,
@@ -315,6 +386,7 @@ class Event: NSObject {
             "\n\"ended\": \(ended)," +
             "\n\"entryNote\": \(entryNote)," +
             "\n\"friendsCanInvite\": \(friendsCanInvite ? 1 : 0)," +
+            "\n\"interested\": \(interested)," +
             "\n\"location\": \(location.toJSONString())," +
             "\n\"privacyLevel\": \(privacyLevel)," +
             "\n\"rating\": \(rating)," +

@@ -50,6 +50,10 @@ class EventTableViewController: UITableViewController {
         
         populateTable()
         
+        // Add tap gestures to address
+        let addressLabelTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EventTableViewController.addressAlert))
+        addressLabel.addGestureRecognizer(addressLabelTap)
+        addressNameLabel.addGestureRecognizer(addressLabelTap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -125,6 +129,35 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    
+    // Display alert to user prompting to go to Maps
+    func addressAlert() {
+        if let event = event {
+            let alertController = UIAlertController(title: event.location.addressName, message: event.location.address, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.cancel,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Open in Maps", style: UIAlertActionStyle.default,handler: { action in self.addressLabelAction() }))
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    // Open the Maps app with address
+    func addressLabelAction() {
+        var newAddress = ""
+        if let event = event {
+            let addressValue = event.location.address
+            
+            newAddress = addressValue.replacingOccurrences(of: " ", with: "+").replacingOccurrences(of: "\n", with: "+")
+            
+            let addressUrl = "https://maps.apple.com/?q=" + newAddress
+            let url = URL(string: addressUrl)
+            if let url = url {
+                UIApplication.shared.openURL(url as URL)
+            } else {
+                print("There was an error opening the Maps App")
+            }
+        }
     }
     
     // MARK: - Table view data source

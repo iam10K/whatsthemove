@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController {
+class EventTableViewController: UITableViewController, UITextFieldDelegate {
     
     let WTM = WTMSingleton.instance
     
@@ -158,6 +158,43 @@ class EventTableViewController: UITableViewController {
                 print("There was an error opening the Maps App")
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Dismiss the keyboard
+        
+        // Submit comment. Validate that length is acceptable
+        if let comment = textField.text {
+            if comment.characters.count > 2 {
+                if comment.characters.count < 200 {
+                    if let event = event, let user = WTM.user {
+                        // Create comment and add to Firebase
+                        let newComment = Comment(comment: comment, user: user)
+                        let newCommentRef = WTM.dbRef.child("comments").child(event.key).childByAutoId()
+                        newCommentRef.updateChildValues(newComment.toAnyObject()) { (error, _) in
+                            if let error = error {
+                                // TODO: Handle errors
+                                print(error)
+                            } else {
+                                // Clear textfield
+                                textField.text = ""
+                                
+                                // TODO: add new comment to table view
+                            }
+                        }
+
+                    } else {
+                        // TODO: Message, There was a problem commenting on this event.
+                    }
+                } else {
+                    // TODO: Message, Comment must be under 200 characters.
+                }
+            } else {
+                // TODO: Message, Comment must be longer than 2 characters.
+            }
+        }
+        
+        return true
     }
     
     // MARK: - Table view data source

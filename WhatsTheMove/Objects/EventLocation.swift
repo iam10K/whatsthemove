@@ -19,8 +19,6 @@ class EventLocation: NSObject {
         super.init()
     }
     
-    
-    
     public init(values: [String: AnyObject]) {
         
         if let addressValue = values["address"] as? String {

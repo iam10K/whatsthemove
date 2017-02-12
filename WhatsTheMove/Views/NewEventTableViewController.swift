@@ -134,10 +134,15 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
                 e.createdDate = Date()
                 newEventRef.updateChildValues(e.toAnyObject()) { (error, _) in
                     if let error = error {
+                        // TODO: Handle errors
                         print(error)
                     } else {
+                        // Add to user profile
+                        self.WTM.user?.add(newEvent: self.WTM.newEvent)
+                        
                         // Clear newEvent
                         self.WTM.newEvent = Event()
+                        
                     }
                 }
                 

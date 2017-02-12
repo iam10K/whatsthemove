@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if let currentUser = WTM.auth.currentUser {
             currentUser.reload() { (err) in
                 if err == nil {
+                    // Load User
+                    self.WTM.loadUser(currentUser: currentUser)
+                    
                     // Load Events
                     self.WTM.reloadEvents()
                     

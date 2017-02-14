@@ -30,6 +30,9 @@ class Event: NSObject {
     var sponsor: String = ""
     var startDate: Date = Date()
     var title: String = ""
+    
+    var comments: [Comment] = []
+    
     var userRating: Bool?
     
     public override init() {
@@ -40,6 +43,7 @@ class Event: NSObject {
     }
     
     public init(snapshot: FIRDataSnapshot) {
+        super.init()
         
         ref = snapshot.ref
         
@@ -106,6 +110,8 @@ class Event: NSObject {
         if let titleValue = snapshotValue["title"] as? String {
             title = titleValue
         }
+        
+        loadComments()
     }
     
     func clear() {
@@ -154,8 +160,25 @@ class Event: NSObject {
         return Date()
     }
     
+    func loadComments() {
+        // Listen for new events
+        if let ref = ref {
+            var commentsQuery = ref.root.child("comments").child(key).queryOrdered(byChild: "createdDate")
+            if let lastComment = comments.last {
+                commentsQuery = commentsQuery.queryStarting(atValue: lastComment.key)
+            }
+            
+            commentsQuery.observe(.value, with: { snapshot in
+                for comment in snapshot.children {
+                    let commentObject = Comment(snapshot: comment as! FIRDataSnapshot)
+                    self.comments.append(commentObject)
+                }
+            })
+        }
+    }
+    
     // Set the users rating of event
-    func rateEvent(ofUser user: String, vote: Bool, ratingLabel: UILabel? = nil) {
+    func rateEvent(ofUser user: String, vote: Bool, ratingLabel: UILabel? = nil, completionHandler: (() -> Void)? = nil) {
         // Keep track if user is changing vote. If so increment/decrement by 2 instead of 1
         var changingVote = false
         if let userRating = userRating {
@@ -190,11 +213,12 @@ class Event: NSObject {
                     print(error.localizedDescription)
                 }
                 if !completion {
-                    print("Completed")
+                    print("Not completed")
                 } else if let snap = snap {
                     // Update rating for event object
                     if let ratingValue = snap.value as? Int {
                         self.rating = ratingValue
+                        completionHandler?()
                         // If ratingLabel is specified update the label
                         if let ratingLabel = ratingLabel {
                             ratingLabel.text = String(self.rating)
@@ -242,7 +266,7 @@ class Event: NSObject {
     }
     
     // Check the user into event, does not check if the event is occuring
-    func checkin(user: String, checkInLabel: UILabel? = nil) {
+    func checkin(user: String, completionHandler: (() -> Void)? = nil) {
         let WTM = WTMSingleton.instance
         
         WTM.dbRef.child("checkedIn").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -274,10 +298,7 @@ class Event: NSObject {
                             // Update rating for event object
                             if let checkedInValue = snap.value as? Int {
                                 self.checkedIn = checkedInValue
-                                // If ratingLabel is specified update the label
-                                if let checkedInLabel = checkInLabel {
-                                    checkedInLabel.text = String(self.checkedIn)
-                                }
+                                completionHandler?()
                             }
                         }
                     })
@@ -287,7 +308,7 @@ class Event: NSObject {
     }
     
     // Check the user into event
-    func interest(user: String, interestedLabel: UILabel? = nil) {
+    func interest(user: String, completionHandler: (() -> Void)? = nil) {
         let WTM = WTMSingleton.instance
         
         var removingInterest = false
@@ -331,10 +352,7 @@ class Event: NSObject {
                         // Update rating for event object
                         if let interestedValue = snap.value as? Int {
                             self.interested = interestedValue
-                            // If ratingLabel is specified update the label
-                            if let interestedLabel = interestedLabel {
-                                interestedLabel.text = String(self.interested)
-                            }
+                            completionHandler?()
                         }
                     }
                 })
@@ -348,10 +366,12 @@ class Event: NSObject {
         })
     }
     
+    // TODO: If the event is occuring or not
     func isOccuring() -> Bool {
         return true
     }
     
+    // TODO: If the event is going to occur in the future
     func willOccur() -> Bool {
         return false
     }

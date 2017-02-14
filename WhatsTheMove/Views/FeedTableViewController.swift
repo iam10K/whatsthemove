@@ -32,6 +32,8 @@ class FeedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

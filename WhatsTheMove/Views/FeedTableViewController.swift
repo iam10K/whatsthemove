@@ -10,6 +10,8 @@ import UIKit
 
 class FeedTableViewController: UITableViewController {
     
+    @IBOutlet weak var SortFeedControl: UISegmentedControl!
+    
     let WTM = WTMSingleton.instance
     
     var events: [Event]? {
@@ -53,7 +55,9 @@ class FeedTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
-
+        
+        //events.sort({$0.Date > $1.Date}); default should do this (I think)
+        
         if let events = events {
             if indexPath.row < events.count {
                 let event = events[indexPath.row]
@@ -64,6 +68,36 @@ class FeedTableViewController: UITableViewController {
         return cell
     }
     
+    //Sorts the events array by popularity to be used in sortfeedchange method
+    func sortByPopularity(){
+        
+        if let events = events {
+            self.events = events.sorted(by: {$0.rating > $1.rating});
+        }
+    }
+    
+    //sorts the events array by date to be used in sortfeedchange method
+    func sortByDate(){
+        
+        if let events = events {
+            self.events = events.sorted(by: {$0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970});
+        }
+    }
+    
+    // When the desired feed sort changes update the list of events
+    @IBAction func sortFeedChange(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex
+        {
+            case 0:
+                sortByPopularity()
+            case 1:
+                sortByDate()
+            default:
+                sortByPopularity()
+        }
+    }
+    
+   
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let events = events {
             if indexPath.row < events.count {

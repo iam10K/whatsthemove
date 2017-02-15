@@ -19,13 +19,13 @@ class FeedTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
@@ -35,28 +35,29 @@ class FeedTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Default sort by popularity
+        sortByPopularity()
+        
         self.tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard events != nil else { return 0 }
         return events!.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
-        
-        //events.sort({$0.Date > $1.Date}); default should do this (I think)
         
         if let events = events {
             if indexPath.row < events.count {
@@ -64,7 +65,7 @@ class FeedTableViewController: UITableViewController {
                 cell.populate(with: event)
             }
         }
-
+        
         return cell
     }
     
@@ -86,18 +87,17 @@ class FeedTableViewController: UITableViewController {
     
     // When the desired feed sort changes update the list of events
     @IBAction func sortFeedChange(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex
-        {
-            case 0:
-                sortByPopularity()
-            case 1:
-                sortByDate()
-            default:
-                sortByPopularity()
+        switch sender.selectedSegmentIndex {
+        case 0:
+            sortByPopularity()
+        case 1:
+            sortByDate()
+        default:
+            sortByPopularity()
         }
     }
     
-   
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let events = events {
             if indexPath.row < events.count {
@@ -115,15 +115,15 @@ class FeedTableViewController: UITableViewController {
             vc.event = sender as? Event
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -66,6 +66,9 @@ class NewAccountViewController: UIViewController {
                     ])
                 WTM.dbRef.child("usernames").child(username).setValue(user.uid, andPriority: nil)
                 
+                // Load events
+                self.WTM.reloadEvents()
+                
                 // Push to Feed View Controller
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
                 self.present(vc!, animated: true)

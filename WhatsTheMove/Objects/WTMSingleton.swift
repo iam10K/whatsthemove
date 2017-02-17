@@ -19,6 +19,7 @@ class WTMSingleton: NSObject {
     var newEvent: Event = Event()
     
     var events: [Event]?
+    var user: User?
     
     private override init() {
         super.init()
@@ -43,6 +44,13 @@ class WTMSingleton: NSObject {
             
             // Set list to temporary list created
             self.events = newEvents
+        })
+    }
+    
+    func loadUser(currentUser: FIRUser) {
+        // Listen for user changes
+        dbRef.child("users").child(currentUser.uid).observe(.value, with: { snapshot in
+            self.user = User(snapshot: snapshot)
         })
     }
     

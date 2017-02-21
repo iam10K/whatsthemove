@@ -14,7 +14,7 @@ class FeedTableViewController: UITableViewController {
     
     let WTM = WTMSingleton.instance
     
-    var events: [Event]? {
+    var events: [Event] = [] {
         didSet {
             self.tableView.reloadData()
         }
@@ -29,7 +29,9 @@ class FeedTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        events = WTM.events
+        if let allEvents = WTM.events {
+            events = allEvents
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,18 +54,15 @@ class FeedTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard events != nil else { return 0 }
-        return events!.count
+        return events.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
         
-        if let events = events {
-            if indexPath.row < events.count {
-                let event = events[indexPath.row]
-                cell.populate(with: event)
-            }
+        if indexPath.row < events.count {
+            let event = events[indexPath.row]
+            cell.populate(with: event)
         }
         
         return cell
@@ -72,17 +71,14 @@ class FeedTableViewController: UITableViewController {
     //Sorts the events array by popularity to be used in sortfeedchange method
     func sortByPopularity(){
         
-        if let events = events {
-            self.events = events.sorted(by: {$0.rating > $1.rating});
-        }
+        self.events = events.sorted(by: {$0.rating > $1.rating});
     }
     
     //sorts the events array by date to be used in sortfeedchange method
     func sortByDate(){
         
-        if let events = events {
-            self.events = events.sorted(by: {$0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970});
-        }
+        self.events = events.sorted(by: {$0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970});
+        
     }
     
     // When the desired feed sort changes update the list of events
@@ -99,13 +95,11 @@ class FeedTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let events = events {
-            if indexPath.row < events.count {
-                let event = events[indexPath.row]
-                
-                // Push to event view
-                performSegue(withIdentifier: "eventTableViewSegue", sender: event)
-            }
+        if indexPath.row < events.count {
+            let event = events[indexPath.row]
+            
+            // Push to event view
+            performSegue(withIdentifier: "eventTableViewSegue", sender: event)
         }
     }
     
@@ -116,6 +110,17 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func showInterestedAction(_ sender: Any) {
+        if let user = WTM.user {
+            if events == user.interested {
+                if let allEvents = WTM.events {
+                    events = allEvents
+                }
+            } else {
+                events = user.interested
+            }
+        }
+    }
     /*
      // MARK: - Navigation
      

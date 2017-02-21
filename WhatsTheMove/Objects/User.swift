@@ -21,6 +21,7 @@ class User: NSObject {
     var email: String = ""
     var friends: [User]? = nil
     var image: String = ""
+    var interested: [Event] = []
     var name: String = ""
     var privacyLevel: Int = 0
     var username: String = ""

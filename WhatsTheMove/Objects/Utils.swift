@@ -20,7 +20,7 @@ class Utils: NSObject {
         
         // Gather all the date components to construct new date
         let curCalendar = Calendar.current
-        let dateComponents = curCalendar.dateComponents([.year, .month, .day], from: Date())
+        let dateComponents = curCalendar.dateComponents([.year, .month, .day], from: date)
         
         // Create new date from components to remove time
         var futureComponents = DateComponents()
@@ -32,18 +32,14 @@ class Utils: NSObject {
         // Add 7 days in seconds
         withinWeekDate?.addTimeInterval(604800)
         
-        futureComponents.year = dateComponents.year! + 1
-        let nextYearDate = curCalendar.date(from: futureComponents)
-
-        
         // Date formatter
         let formatter = DateFormatter()
         
         if NSCalendar.current.isDateInToday(date) {
             formatter.dateFormat = "\'Today at\' h:mm a"
-        } else if withinWeekDate != nil && date.compare(withinWeekDate!) == .orderedAscending {
+        } else if withinWeekDate != nil && date.compare(Date()) == .orderedDescending && date.compare(withinWeekDate!) == .orderedAscending {
             formatter.dateFormat = "EEEE \'at\' h:mm a"
-        } else if nextYearDate != nil && NSCalendar.current.compare(date, to: nextYearDate!, toGranularity: .year) == .orderedAscending {
+        } else if NSCalendar.current.compare(date, to: Date(), toGranularity: .year) == .orderedSame {
             formatter.dateFormat = "MMM d \'at\' h:mm a"
         } else {
             formatter.dateFormat = "MMM d, yyyy \'at\' h:mm a"
@@ -90,5 +86,15 @@ class Utils: NSObject {
             selectedItem.administrativeArea ?? ""
         )
         return addressLine
+    }
+    
+    // Change the tint and image of a button
+    static func changeTint(forButton button: UIButton, toColor color: UIColor? = nil, withImage image: UIImage) {
+        var newImage = image.withRenderingMode(.alwaysTemplate)
+        if color == nil {
+            newImage = image
+        }
+        button.setImage(newImage, for: .normal)
+        button.tintColor = color
     }
 }

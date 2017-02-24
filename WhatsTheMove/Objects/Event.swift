@@ -116,6 +116,7 @@ class Event: NSObject {
     
     func clear() {
         checkedIn = 0
+        comments = []
         creatorId = ""
         ended = false
         endDate = createDate()
@@ -163,18 +164,38 @@ class Event: NSObject {
     func loadComments() {
         // Listen for new events
         if let ref = ref {
-            var commentsQuery = ref.root.child("comments").child(key).queryOrdered(byChild: "createdDate")
+            let commentsQuery = ref.root.child("comments").child(key)
+            /*.queryOrdered(byChild: "createdDate").queryLimited(toFirst: 10)
             if let lastComment = comments.last {
                 commentsQuery = commentsQuery.queryStarting(atValue: lastComment.key)
-            }
+            }*/
             
             commentsQuery.observe(.value, with: { snapshot in
                 for comment in snapshot.children {
                     let commentObject = Comment(snapshot: comment as! FIRDataSnapshot)
-                    self.comments.append(commentObject)
+                    self.addComment(commentObject)
                 }
             })
         }
+    }
+    
+    func addComment(_ comment: Comment) {
+        var foundComment: Comment? = getComment(comment.key)
+        // If comment is new just add it. If not then replace the original
+        if foundComment == nil {
+            comments.append(comment)
+        } else {
+            foundComment = comment
+        }
+    }
+    
+    func getComment(_ key: String) -> Comment? {
+        for comment in comments {
+            if comment.key == key {
+                return comment
+            }
+        }
+        return nil
     }
     
     // Set the users rating of event
@@ -247,22 +268,12 @@ class Event: NSObject {
     // Set the tint for buttons based on user rating
     private func setRating(rating: Bool, upButton: UIButton, downButton: UIButton) {
         if rating {
-            changeTint(forButton: upButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-up"))
-            changeTint(forButton: downButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-down"))
+            Utils.changeTint(forButton: upButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-up"))
+            Utils.changeTint(forButton: downButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-down"))
         } else {
-            changeTint(forButton: upButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-up"))
-            changeTint(forButton: downButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-down"))
+            Utils.changeTint(forButton: upButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-up"))
+            Utils.changeTint(forButton: downButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-down"))
         }
-    }
-    
-    // Change the tint and image of a button
-    func changeTint(forButton button: UIButton, toColor color: UIColor? = nil, withImage image: UIImage) {
-        var newImage = image.withRenderingMode(.alwaysTemplate)
-        if color == nil {
-            newImage = image
-        }
-        button.setImage(newImage, for: .normal)
-        button.tintColor = color
     }
     
     // Check the user into event, does not check if the event is occuring

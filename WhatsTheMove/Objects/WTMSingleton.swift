@@ -18,15 +18,33 @@ class WTMSingleton: NSObject {
     
     var newEvent: Event = Event()
     
-    var events: [Event]?
     var user: User?
     
+    var eventsObservable: Observable<[Event]>
+    
     private override init() {
+        eventsObservable = Observable<[Event]>(initialValue: Array<Event>())
+        
         super.init()
+        
+        
         FIRApp.configure()
         
         dbRef = FIRDatabase.database().reference()
         auth = FIRAuth.auth()
+        
+        auth.addStateDidChangeListener({ (auth, firUser) in
+            if let firUser = firUser {
+                // Load User
+                self.loadUser(currentUser: firUser) {
+                    // Load Events
+                    self.reloadEvents()
+                }
+            } else {
+                // Clear events and user data, since user logged out
+                self.clearData()
+            }
+        })
     }
     
     func reloadEvents() {
@@ -43,15 +61,26 @@ class WTMSingleton: NSObject {
             }
             
             // Set list to temporary list created
-            self.events = newEvents
+            self.eventsObservable.observableProperty = newEvents
         })
     }
     
-    func loadUser(currentUser: FIRUser) {
+    func loadUser(currentUser: FIRUser, completion: (() -> Void)? = nil) {
         // Listen for user changes
         dbRef.child("users").child(currentUser.uid).observe(.value, with: { snapshot in
-            self.user = User(snapshot: snapshot)
+            if snapshot.exists() {
+                self.user = User(snapshot: snapshot)
+            }
+            if let completion = completion {
+                completion()
+            }
         })
+    }
+    
+    // Clears the user and events from the singleton
+    func clearData() {
+        self.eventsObservable.observableProperty = []
+        self.user = nil
     }
     
     // Validate user has set their username in the DB

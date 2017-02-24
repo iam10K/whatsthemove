@@ -23,7 +23,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         // Set events
-        events = WTM.events
+        events = WTM.eventsObservable.observableProperty
         
         // Enable location services
         locationManager.delegate = self

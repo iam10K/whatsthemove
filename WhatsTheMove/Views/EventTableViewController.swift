@@ -105,7 +105,22 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func moreAction() {
-        
+    }
+    
+    func commentUpArrowAction(_ commentKey: String) {
+        if let user = WTMSingleton.instance.auth.currentUser, let event = event, let comment = event.getComment(commentKey) {
+            comment.rateComment(ofUser: user.uid, vote: true, completionHandler: {
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
+    func commentDownArrowAction(_ commentKey: String) {
+        if let user = WTMSingleton.instance.auth.currentUser, let event = event, let comment = event.getComment(commentKey) {
+            comment.rateComment(ofUser: user.uid, vote: false, completionHandler: {
+                self.tableView.reloadData()
+            })
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -117,17 +132,22 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
                 if comment.characters.count < 200 {
                     if let event = event, let user = WTM.user {
                         // Create comment and add to Firebase
-                        let newComment = Comment(comment: comment, user: user)
                         let newCommentRef = WTM.dbRef.child("comments").child(event.key).childByAutoId()
+                        let newComment = Comment(key: newCommentRef.key, comment: comment, user: user)
+                        
                         newCommentRef.updateChildValues(newComment.toAnyObject()) { (error, _) in
                             if let error = error {
                                 // TODO: Handle errors
                                 print(error)
                             } else {
-                                // Clear textfield
+                                // Clear text field
                                 textField.text = ""
                                 
-                                // TODO: add new comment to table view
+                                // Add to event
+                                event.addComment(newComment)
+                                
+                                // Reload table view
+                                self.tableView.reloadData()
                             }
                         }
                         
@@ -208,19 +228,18 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
                 
                 // Event comments section
             } else if indexPath.section == 1 {
-                if indexPath.row == event.comments.count || indexPath.row == 11 {
+                if indexPath.row == event.comments.count || indexPath.row == 10 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "eventNewCommentTableViewCell", for: indexPath) as! EventNewCommentTableViewCell
                     return cell
                 }
                 let comment = event.comments[indexPath.row]
                 let cell = tableView.dequeueReusableCell(withIdentifier: "eventCommentTableViewCell", for: indexPath) as! EventCommentTableViewCell
-                cell.initialize(with: comment)
+                cell.initialize(with: comment, tableController: self)
                 return cell
                 
             }
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        return cell
+        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -45,11 +45,11 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     func filterEvents(_ searchString: String) {
         var filtered: [Event] = []
-        if let events = WTM.events {
-            for event in events {
-                if event.title.lowercased().contains(searchString.lowercased()) {
-                    filtered.append(event)
-                }
+        let events = self.WTM.eventsObservable.observableProperty
+        
+        for event in events {
+            if event.title.lowercased().contains(searchString.lowercased()) {
+                filtered.append(event)
             }
         }
         results = filtered

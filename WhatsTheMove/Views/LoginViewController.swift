@@ -49,9 +49,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
                 
                 WTM.auth.signIn(withEmail: email, password: password) { (user, error) in
                     if let user = user {
-                        // Load Events
-                        self.WTM.reloadEvents()
-                        
                         // Validate user has set their username. If not send to NewAccountViewController
                         self.userExists(of: user.uid)
                     }
@@ -69,9 +66,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
         
         WTM.auth.signIn(with: credential) { (user, error) in
             if let user = user {
-                // Load Events
-                self.WTM.reloadEvents()
-                
                 // Validate user has set their username. If not send to NewAccountViewController
                 self.userExists(of: user.uid)
             }
@@ -90,6 +84,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
         WTM.userExists(of: uid) { (exists) in
             if exists {
                 // User exists in DB
+                // Load Events
+                self.WTM.reloadEvents()
+                
                 // Push to Feed View Controller
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
                 self.present(vc!, animated: true)

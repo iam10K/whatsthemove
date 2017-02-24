@@ -15,11 +15,14 @@ class User: NSObject {
     
     var key: String = ""
     
-    var attendedEvents: [Event]? = nil
+    var attendedEventsKeys: [String] = []
+    var attendedEvents: [Event] = []
     var bio: String = ""
-    var createdEvents: [Event]? = nil
+    var createdEventsKeys: [String] = []
+    var createdEvents: [Event] = []
     var email: String = ""
-    var friends: [User]? = nil
+    var friendsKeys: [String] = []
+    var friends: [User] = []
     var image: String = ""
     var interested: [Event] = []
     var name: String = ""

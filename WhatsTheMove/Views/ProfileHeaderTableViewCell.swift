@@ -15,6 +15,10 @@ class ProfileHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var friendsLabel: UILabel!
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var bioLabel: UILabel!
+
+    @IBOutlet weak var profileButton: UIButton!
+    
+    var profileController: ProfileTableViewController? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,12 +31,28 @@ class ProfileHeaderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func initialize(with user: User) {
+    func initialize(with user: User, profileController: ProfileTableViewController) {
         // Set labels to values from user
         eventsCreatedLabel.text = String(user.createdEventsKeys.count)
         eventsAttendedLabel.text = String(user.attendedEventsKeys.count)
         friendsLabel.text = String(user.friendsKeys.count)
         displayNameLabel.text = user.name
         bioLabel.text = user.bio
+        
+        self.profileController = profileController
+        
+        if let WTMUser = profileController.WTM.user {
+            if WTMUser.areFriends(user.key) {
+                profileButton.isHidden = true
+            }
+        }
+        
+        self.profileButton.addTarget(self, action: #selector(profileButtonAction), for: .touchUpInside)
+    }
+    
+    func profileButtonAction() {
+        if let profileController = profileController {
+            profileController.profileButtonAction()
+        }
     }
 }

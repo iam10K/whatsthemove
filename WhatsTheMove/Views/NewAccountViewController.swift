@@ -103,7 +103,7 @@ class NewAccountViewController: UIViewController {
         
         if let result = username.range(of: "^[a-zA-Z0-9_-]{4,20}$", options: .regularExpression) {
             if result.isEmpty {
-                // TODO: Message, username can only contain alphanumeric and underscore
+                // Message, username can only contain alphanumeric and underscore
                 completion?(false)
                 
                 let alert = UIAlertController(title: "Alert", message: "Username Contains illegal Characters", preferredStyle: UIAlertControllerStyle.alert)
@@ -116,9 +116,9 @@ class NewAccountViewController: UIViewController {
                 validUsername = true
             }
         } else {
-            // TODO: Message, username can only contain alphanumeric and underscore
             completion?(false)
             
+            // Message, username can only contain alphanumeric and underscore
             let alert = UIAlertController(title: "Alert", message: "Username has illegal Characters", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -133,14 +133,13 @@ class NewAccountViewController: UIViewController {
                 // Username is taken already
                 
                 if completion != nil {
-                    // TODO: Message, username taken, only show if there is completion handler
+                    // Message, username taken, only show if there is completion handler
                     let alert = UIAlertController(title: "Alert", message: "Username Taken", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
 
                 }
                 
-                print("TAKEN")
                 completion?(false)
                 return
             } else {

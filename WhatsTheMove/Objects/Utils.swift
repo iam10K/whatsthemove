@@ -52,15 +52,13 @@ class Utils: NSObject {
     }
     
     // Formats the date based on how far apart they are.
+    // Format the combined dates
+    // Not sure on format yet. Maybe if today: Today 6:00PM - 7:00PM
+    // If ends on different day: Today 6:00PM - Tuesday 6:00PM
+    // If starts and ends on different days not in same week Jan 7 at 6:00PM - Jan 17 at 8:00PM
+    // else: Dec 28, 2016 at 6:00PM - Jan 1, 2017 at 2:00PM
     static func format(startDate: Date, endDate: Date) -> String {
-        // TODO: Format the combined dates
-        // Not sure on format yet. Maybe if today: Today 6:00PM - 7:00PM
-        // If ends on different day: Today 6:00PM - Tuesday 6:00PM
-        // If starts and ends on different days not in same week Jan 7 at 6:00PM - Jan 17 at 8:00PM
-        // else: Dec 28, 2016 at 6:00PM - Jan 1, 2017 at 2:00PM
-        
-        // For now just return start date
-        return format(date: startDate)
+        return format(date: startDate) + " - " + format(date: endDate)
     }
     
     // Parse address
@@ -96,5 +94,16 @@ class Utils: NSObject {
         }
         button.setImage(newImage, for: .normal)
         button.tintColor = color
+    }
+    
+    // Set the tint for buttons based on user rating
+    static func setRating(rating: Bool, upButton: UIButton, downButton: UIButton) {
+        if rating {
+            changeTint(forButton: upButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-up"))
+            changeTint(forButton: downButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-down"))
+        } else {
+            changeTint(forButton: upButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-up"))
+            changeTint(forButton: downButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-down"))
+        }
     }
 }

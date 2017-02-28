@@ -53,6 +53,25 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
                         self.userExists(of: user.uid)
                     }
                     if let error = error {
+                        // Handle error
+                        if let errCode = FIRAuthErrorCode(rawValue: error._code) {
+                            var errorMsg = ""
+                            switch errCode {
+                            case .errorCodeInvalidEmail:
+                                errorMsg = "Invalid email or password entered."
+                            case .errorCodeWrongPassword:
+                                errorMsg = "Invalid email or password entered."
+                            case .errorCodeUserNotFound:
+                                errorMsg = "User does not exist."
+                            default:
+                                errorMsg = "Login failed. Please try again."
+                            // FUTURE: Handle more such as failed connection
+                                //https://firebase.google.com/docs/reference/ios/firebaseauth/api/reference/Classes#/c:objc(cs)FIRAuthErrors
+                            }
+                            let alert = UIAlertController(title: "Alert", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
                         print(error.localizedDescription)
                     }
                 }

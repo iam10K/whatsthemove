@@ -45,16 +45,6 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     private func populatePins() {
         if let events = events {
             for event in events {
@@ -70,6 +60,13 @@ class MapViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "eventTableViewSegue" {
+            let vc = segue.destination as! EventTableViewController
+            vc.event = sender as? Event
+        }
+    }
+
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -111,7 +108,19 @@ extension MapViewController: MKMapViewDelegate {
     
     // Function to open maps app when clicking map annotation
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        //TODO: Push to event info
+
+        if let events = events {
+            for event in events {
+                if let annotation = view.annotation {
+                    if let title = annotation.title {
+                        if event.title == title {
+                            performSegue(withIdentifier: "eventTableViewSegue", sender: event)
+                            return
+                        }
+                    }
+                }
+            }
+        }
     }
     
 }

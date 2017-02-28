@@ -18,12 +18,14 @@ class User: NSObject {
     var attendedEventsKeys: [String] = []
     var attendedEvents: [Event] = []
     var bio: String = ""
+    //var blockedUsers: [String] = []
     var createdEventsKeys: [String] = []
     var createdEvents: [Event] = []
     var email: String = ""
     var friendsKeys: [String] = []
     var friends: [User] = []
     var image: String = ""
+    var interestedKeys: [String] = []
     var interested: [Event] = []
     var name: String = ""
     var privacyLevel: Int = 0
@@ -34,6 +36,7 @@ class User: NSObject {
     }
     
     public init(snapshot: FIRDataSnapshot) {
+        super.init()
         
         ref = snapshot.ref
         
@@ -60,27 +63,324 @@ class User: NSObject {
         if let usernameValue = snapshotValue["username"] as? String {
             username = usernameValue
         }
+        
+        //if let eventInvitesValue = snapshotValue["eventInvites"] as? [AnyHashable: Any] {
+        // Add all keys to the string list
+        // FUTURE:
+        //}
+        
+        if let attendedEventsValue = snapshotValue["attendedEvents"] as? [String: AnyObject] {
+            // Add all keys to the string list
+            attendedEventsKeys.append(contentsOf: Array(attendedEventsValue.keys))
+            
+        }
+        
+        if let createdEventsValue = snapshotValue["createdEvents"] as? [String: AnyObject] {
+            // Add all keys to the string list
+            createdEventsKeys.append(contentsOf: Array(createdEventsValue.keys))
+            
+        }
+
     }
     
-    public func displayName() -> String {
+    public convenience init(selfSnapshot: FIRDataSnapshot) {
+        self.init(snapshot: selfSnapshot)
+        
+        let snapshotValue = selfSnapshot.value as! [String: AnyObject]
+        
+        if let interestedEventsValue = snapshotValue["interestedEvents"] as? [String: Bool] {
+            for (eventId,value) in interestedEventsValue {
+                if value {
+                    selfSnapshot.ref.database.reference().child("events").child(eventId).observe(.value, with: { snapshot in
+                        if snapshot.exists() {
+                            let event = Event(snapshot: snapshot)
+                            self.interested.append(event)
+                            self.interestedKeys.append(event.key)
+                        }
+                        
+                    })
+                }
+            }
+        }
+        
+        if let friendsValue = snapshotValue["friends"] as? [String: Bool] {
+            // Add all keys to the string list
+            for (friendId,value) in friendsValue {
+                if value {
+                    self.friendsKeys.append(friendId)
+                    
+                    // Observe the user once
+                    selfSnapshot.ref.database.reference().child("users").child(friendId).observeSingleEvent(of: .value, with: { snapshot in
+                        if snapshot.exists() {
+                            let friend = User(snapshot: snapshot)
+                            self.friends.append(friend)
+                        }
+                    })
+                } else {
+                    // FUTURE: Maybe use false for blocked users
+                }
+            }
+        }
+        
+        // Load attended and created for user
+        loadCreatedEvents()
+        loadAttendedEvents()
+    }
+    
+    public convenience init(friendSnapshot: FIRDataSnapshot) {
+        self.init(snapshot: friendSnapshot)
+        
+        let snapshotValue = friendSnapshot.value as! [String: AnyObject]
+        
+        if let friendsValue = snapshotValue["friends"] as? [String: Bool] {
+            // Add all keys to the string list
+            for (friendId,value) in friendsValue {
+                if value {
+                    self.friendsKeys.append(friendId)
+                }
+            }
+        }
+    }
+    
+    // TODO FUTURE: BUG Solution: Fix so all events are loaded from WTM events
+    
+    func loadAttendedEvents(completion: (() -> Void)? = nil) {
+        attendedEvents = []
+        if let ref = ref {
+            for eventId in attendedEventsKeys {
+                ref.database.reference().child("events").child(eventId).observeSingleEvent(of: .value, with: { snapshot in
+                    if snapshot.exists() {
+                        let event = Event(snapshot: snapshot)
+                        self.attendedEvents.append(event)
+                        
+                        if let last = self.attendedEventsKeys.last {
+                            if last == eventId {
+                                completion?()
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
+    func loadCreatedEvents(completion: (() -> Void)? = nil) {
+        createdEvents = []
+        if let ref = ref {
+            for eventId in createdEventsKeys {
+                ref.database.reference().child("events").child(eventId).observeSingleEvent(of: .value, with: { snapshot in
+                    if snapshot.exists() {
+                        let event = Event(snapshot: snapshot)
+                        self.createdEvents.append(event)
+                        
+                        if let last = self.createdEventsKeys.last {
+                            if last == eventId {
+                                completion?()
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
+    // ???maybe make work w/ passed in user
+    func displayName() -> String {
         switch privacyLevel {
         case 0:
             return name
         case 1:
-            return username
-        case 2:
             return username
         default:
             return username
         }
     }
     
-    public func add(newEvent: Event) {
+    func isInterested(_ event: Event) -> Bool {
+        return self.interestedKeys.contains(event.key)
+    }
+    
+    func isAttending(_ event: Event) -> Bool {
+        return self.attendedEventsKeys.contains(event.key)
+    }
+    
+    func create(_ event: Event) {
+        // Add created lists
+        self.createdEvents.append(event)
+        self.createdEventsKeys.append(event.key)
         if let ref = ref {
-            // TODO: Transaction block
+            // Add to firebase
+            ref.child("createdEvents").updateChildValues([event.key:true]) { error,_ in
+                if error != nil {
+                    // Remove event from created since error occured
+                    if let index = self.createdEvents.index(of: event) {
+                        self.createdEvents.remove(at: index)
+                    }
+                    // Remove event from created keys
+                    if let index = self.createdEventsKeys.index(of: event.key) {
+                        self.createdEventsKeys.remove(at: index)
+                    }
+                    print(error!)
+                }
+            }
+        }
+    }
+    
+    func removeCreated(_ event: Event) {
+        // Remove event from created
+        if let index = self.createdEvents.index(of: event) {
+            self.createdEvents.remove(at: index)
+        }
+        // Remove event from created keys
+        if let index = self.createdEventsKeys.index(of: event.key) {
+            self.createdEventsKeys.remove(at: index)
+        }
+        if let ref = ref {
+            // Remove from firebase
+            ref.child("createdEvents").child(event.key).removeValue() { error,_ in
+                if error == nil {
+                    // Add back to created lists because error occured
+                    self.createdEvents.append(event)
+                    self.createdEventsKeys.append(event.key)
+                    print(error!)
+                }
+            }
         }
     }
 
+    func interest(_ event: Event) {
+        // Add to interested array
+        self.interested.append(event)
+        self.interestedKeys.append(event.key)
+        if let ref = ref {
+            // Add to firebase
+            ref.child("interestedEvents").updateChildValues([event.key:true]) { error,_ in
+                if error != nil {
+                    // Remove from array since error occured
+                    if let index = self.interested.index(of: event) {
+                        self.interested.remove(at: index)
+                    }
+                    if let index = self.interestedKeys.index(of: event.key) {
+                        self.interestedKeys.remove(at: index)
+                    }
+                    print(error!)
+                } else {
+                    // Add interested for event
+                    let dbRef = ref.database.reference()
+                    dbRef.child("interested").child(event.key).child(self.key).setValue(true)
+                }
+            }
+        }
+    }
+    
+    func removeInterest(_ event: Event) {
+        // Remove from interested array
+        if let index = self.interested.index(of: event) {
+            self.interested.remove(at: index)
+        }
+        if let index = self.interestedKeys.index(of: event.key) {
+            self.interestedKeys.remove(at: index)
+        }
+        if let ref = ref {
+            // Remove interest from user firebase
+            ref.child("interestedEvents").child(event.key).removeValue() { error,_ in
+                if error != nil {
+                    // Add back because error occured
+                    self.interested.append(event)
+                    self.interestedKeys.append(event.key)
+                    print(error!)
+                } else {
+                    // Remove interested for event
+                    let dbRef = ref.database.reference()
+                    dbRef.child("interested").child(event.key).child(self.key).removeValue()
+                }
+            }
+        }
+    }
+    
+    func attend(_ event: Event) {
+        // Add to attended array
+        self.attendedEvents.append(event)
+        self.attendedEventsKeys.append(event.key)
+        if let ref = ref {
+            // Add to firebase for user
+            ref.child("attendedEvents").updateChildValues([event.key:true]) { error,_ in
+                if error != nil {
+                    // Remove since error occured
+                    if let index = self.attendedEvents.index(of: event) {
+                        self.attendedEvents.remove(at: index)
+                    }
+                    if let index = self.attendedEventsKeys.index(of: event.key) {
+                        self.attendedEventsKeys.remove(at: index)
+                    }
+                    print(error!)
+                } else {
+                    // FUTURE: Check if user is near location, task for later
+                    // FUTURE: Possibly include user name for performance increase(less connections to database)
+                    let dbRef = ref.database.reference()
+                    dbRef.child("checkedIn").child(event.key).child(self.key).setValue(
+                        ["date": Date().timeIntervalSince1970,
+                         "atLocation": false])
+                }
+            }
+        }
+    }
+    
+    func friendRequest(_ otherUser: User) {
+        // FUTURE:
+    }
+    
+    func addFriend(_ friend: User) {
+        if self.friendsKeys.contains(friend.key) {
+            return
+        }
+        
+        // Add friend to list
+        self.friends.append(friend)
+        self.friendsKeys.append(friend.key)
+        if let ref = ref {
+            // Add to firebase for user
+            ref.child("friends").updateChildValues([friend.key:true]) { error,_ in
+                if let error = error {
+                    // Remove since error occured
+                    if let index = self.friends.index(of: friend) {
+                        self.friends.remove(at: index)
+                    }
+                    if let index = self.friendsKeys.index(of: friend.key) {
+                        self.friendsKeys.remove(at: index)
+                    }
+                    print(error)
+                } else {
+                    // Add friend for other user
+                    friend.addFriend(self)
+                }
+            }
+        }
+    }
+    
+    func removeFriend(_ friend: User) {
+        if !self.friendsKeys.contains(friend.key) {
+            return
+        }
+        
+        // Remove friend
+        if let index = self.friends.index(of: friend) {
+            self.friends.remove(at: index)
+        }
+        if let index = self.friendsKeys.index(of: friend.key) {
+            self.friendsKeys.remove(at: index)
+        }
+        if let ref = ref {
+            // Add to firebase for user
+            ref.child("friends").child(friend.key).removeValue()
+            friend.removeFriend(self)
+        }
+    }
+    
+    func areFriends(_ userId: String) -> Bool {
+        return friendsKeys.contains(userId)
+    }
+    
     func toAnyObject() -> [AnyHashable: Any] {
         return [
             "bio": bio,

@@ -63,11 +63,11 @@ class NewAccountViewController: UIViewController {
                     "name": name,
                     "privacyLevel": privacyLevelControl.selectedSegmentIndex,
                     "email": email
-                    ])
+                ])
                 WTM.dbRef.child("usernames").child(username).setValue(user.uid, andPriority: nil)
                 
-                // Load events
-                self.WTM.reloadEvents()
+                // Load Events
+                WTM.reloadEvents()
                 
                 // Push to Feed View Controller
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
@@ -84,9 +84,9 @@ class NewAccountViewController: UIViewController {
     func getPrivacyLevelInfoText(index: Int) -> String {
         switch (index) {
         case 0: // Public
-            return "Everyone can view your profile, full name, bio, and events."
+            return "Everyone can view your full name and events."
         case 1: // Private
-            return "Only your friends can view your profile, full name, bio, and events."
+            return "Only your friends can view your full name and events."
         default: // None selected
             return "Select a privacy level for your account."
         }
@@ -137,7 +137,6 @@ class NewAccountViewController: UIViewController {
                     let alert = UIAlertController(title: "Alert", message: "Username Taken", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
-                    
 
                 }
                 

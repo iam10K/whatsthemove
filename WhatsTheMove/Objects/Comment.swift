@@ -101,7 +101,13 @@ class Comment: NSObject {
                 }
             }, andCompletionBlock: { (error, completion, snap) in
                 if let error = error {
-                    // TODO: Handle failed vote? reset userRating, show message?
+                    // reset userRating
+                    if changingVote {
+                        self.userRating = !vote
+                    } else {
+                        self.userRating = nil
+                    }
+                    
                     print(error.localizedDescription)
                 }
                 if !completion {
@@ -124,26 +130,15 @@ class Comment: NSObject {
     // Get the rating by the current user, if any
     func updateRatingArrows(ofUser user: String, upButton: UIButton, downButton: UIButton) {
         if let userRating = userRating {
-            setRating(rating: userRating, upButton: upButton, downButton: downButton)
+            Utils.setRating(rating: userRating, upButton: upButton, downButton: downButton)
         } else {
             let WTM = WTMSingleton.instance
             WTM.dbRef.child("commentLikes").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let rating = snapshot.value as? Bool {
                     self.userRating = rating
-                    self.setRating(rating: rating, upButton: upButton, downButton: downButton)
+                    Utils.setRating(rating: rating, upButton: upButton, downButton: downButton)
                 }
             })
-        }
-    }
-    
-    // Set the tint for buttons based on user rating
-    private func setRating(rating: Bool, upButton: UIButton, downButton: UIButton) {
-        if rating {
-            Utils.changeTint(forButton: upButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-up"))
-            Utils.changeTint(forButton: downButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-down"))
-        } else {
-            Utils.changeTint(forButton: upButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-up"))
-            Utils.changeTint(forButton: downButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-down"))
         }
     }
     

@@ -36,8 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             self.window?.makeKeyAndVisible()
         }
         
-        // TODO: Create blank screen as inital view controller so when opening app user does not see screens changing.
-        
         // Google SignIn
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
@@ -130,6 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 self.userExists(of: user.uid)
             }
             if let error = error {
+                // TODO: Handle errors
                 print(error.localizedDescription)
             }
             
@@ -144,7 +143,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         self.window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         
-        // TODO? If needed also clean up extra stuff here
+        // Clear data
+        self.WTM.clearData()
     }
     
     // Handle checking user account status here

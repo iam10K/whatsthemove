@@ -83,28 +83,46 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func checkInAction() {
-        if let user = WTM.auth.currentUser, let event = event {
+        if let user = WTM.user, let event = event {
             // If event is happening now allow checkin
             if event.isOccuring() {
-                event.checkin(user: user.uid, completionHandler: {
+                event.checkin(user, completionHandler: {
                     self.tableView.reloadData()
                 })
             } else if event.willOccur() {
                 // Event will occur in the future
-                // TODO: Message saying event is not occuring now
+                // Message, event is not occuring now
+                let alert = UIAlertController(title: "Alert", message: "Event is not occuring now.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
     func interestedAction() {
-        if let user = WTM.auth.currentUser, let event = event {
-            event.interest(user: user.uid, completionHandler: {
+        if let user = WTM.user, let event = event {
+            event.interest(user, completionHandler: {
                 self.tableView.reloadData()
             })
         }
     }
     
     func moreAction() {
+        // Event options
+        // FUTURE: Invite option?
+        let alertController = UIAlertController(title: "Event Options", message: "", preferredStyle: .actionSheet)
+        
+        if let user = WTM.user, let event = event {
+            if user.key != event.creatorId {
+                alertController.addAction(UIAlertAction(title: "Creator Profile", style: UIAlertActionStyle.default,handler: { action in self.selectUser() }))
+            }
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Open in Maps", style: UIAlertActionStyle.default, handler: { action in self.addressLabelAction() }))
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func commentUpArrowAction(_ commentKey: String) {
@@ -123,6 +141,20 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    func selectUser() {
+        if let user = WTM.user, let event = event {
+            if user.key != event.creatorId {
+                WTM.dbRef.child("users").child(event.creatorId).observeSingleEvent(of: .value, with: { snapshot in
+                    if snapshot.exists() {
+                        let otherUser = User(friendSnapshot: snapshot)
+                        // Push to users profile
+                        self.performSegue(withIdentifier: "userProfileViewSegue", sender: otherUser)
+                    }
+                })
+            }
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // Dismiss the keyboard
         
@@ -137,7 +169,7 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
                         
                         newCommentRef.updateChildValues(newComment.toAnyObject()) { (error, _) in
                             if let error = error {
-                                // TODO: Handle errors
+                                // TODO: Handle errors, message failed to submit
                                 print(error)
                             } else {
                                 // Clear text field
@@ -152,20 +184,27 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
                         }
                         
                     } else {
-                        // TODO: Message, There was a problem commenting on this event.
+                        // Message, There was a problem commenting on this event.
+                        let alert = UIAlertController(title: "Alert", message: "Adding comment failed. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                     }
                 } else {
-                    // TODO: Message, Comment must be under 200 characters.
+                    // Message, Comment must be under 200 characters.
+                    let alert = UIAlertController(title: "Alert", message: "Comment must be less than 200 characters.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             } else {
-                // TODO: Message, Comment must be longer than 2 characters.
+                // Message, Comment must be longer than 2 characters.
+                let alert = UIAlertController(title: "Alert", message: "Comment must be more than 2 characters.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
         
         return true
     }
-    
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // return the number of sections
@@ -178,9 +217,10 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
         if let event = event {
             switch section {
             case 0:
+                // Return event details section
                 return 5
             case 1:
-                // TODO: Return number of comments + 1
+                // Return number of comments + 1
                 if event.comments.count > 10 {
                     return 11
                 }
@@ -191,7 +231,6 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
         }
         return 0
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let event = event, let user = WTM.user {
@@ -206,7 +245,7 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
                     return cell
                 case 1:
                     let cell = tableView.dequeueReusableCell(withIdentifier: "eventOptionsTableViewCell", for: indexPath) as! EventOptionsTableViewCell
-                    cell.initialize(with: event)
+                    cell.initialize(with: event, user: user)
                     cell.addActions(self, interestedAction: #selector(interestedAction), checkInAction: #selector(checkInAction), moreAction: #selector(moreAction))
                     return cell
                 case 2:
@@ -243,7 +282,6 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         // Display option to open maps when the user selects the address row.
         if indexPath.section == 0 && indexPath.row == 2 {
             addressAlert()
@@ -259,6 +297,13 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
             return "Comments"
         }
         return nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userProfileViewSegue" {
+            let vc = segue.destination as! ProfileTableViewController
+            vc.user = sender as? User
+        }
     }
     
 }

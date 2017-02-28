@@ -34,7 +34,7 @@ class RegistrationViewController: UIViewController {
                 if let passwordConfirm = passwordConfirmField.text {
                     
                     if password != passwordConfirm {
-                        // TODO: Message, Passwords do not match
+                        // Message, Passwords do not match
                         let alert = UIAlertController(title: "Alert", message: "Passwords Dont Match", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
@@ -42,7 +42,7 @@ class RegistrationViewController: UIViewController {
                         return
                     } else {
                         if password.characters.count < 6 {
-                            // TODO: Message, Password is too short
+                            // Message, Password is too short
                             let alert = UIAlertController(title: "Alert", message: "Password Too Short", preferredStyle: UIAlertControllerStyle.alert)
                             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
                             self.present(alert, animated: true, completion: nil)
@@ -51,7 +51,7 @@ class RegistrationViewController: UIViewController {
                             return
                         }
                         if password.characters.count > 32 {
-                            // TODO: Message. Password is too long
+                            // Message. Password is too long
                             let alert = UIAlertController(title: "Alert", message: "Password Too Long", preferredStyle: UIAlertControllerStyle.alert)
                             alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
                             self.present(alert, animated: true, completion: nil)
@@ -64,7 +64,7 @@ class RegistrationViewController: UIViewController {
                     self.createUserAccount(with: email, and: password)
                     
                 } else {
-                    // TODO: Message, Password not confirmed
+                    // Message, Password not confirmed
                     let alert = UIAlertController(title: "Alert", message: "Password Not Confirmed", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
@@ -72,7 +72,7 @@ class RegistrationViewController: UIViewController {
 
                 }
             } else {
-                // TODO: Message, No password entered
+                // Message, No password entered
                     let alert = UIAlertController(title: "Alert", message: "No Password entered", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -80,7 +80,7 @@ class RegistrationViewController: UIViewController {
 
             }
         } else {
-            // TODO: Message, No email entered
+            // Message, No email entered
             let alert = UIAlertController(title: "Alert", message: "No Email Entered", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -108,7 +108,25 @@ class RegistrationViewController: UIViewController {
             
             // Error
             if let error = error {
-                // TODO: Handle errors, print messages, etcs
+                // Handle error
+                if let errCode = FIRAuthErrorCode(rawValue: error._code) {
+                    var errorMsg = ""
+                    switch errCode {
+                    case .errorCodeInvalidEmail:
+                        errorMsg = "Invalid email or password entered."
+                    case .errorCodeEmailAlreadyInUse:
+                        errorMsg = "Email is already in use."
+                    case .errorCodeWeakPassword:
+                        errorMsg = "Password does not meet requirements."
+                    default:
+                        errorMsg = "Login failed"
+                        // FUTURE: Handle more such as failed connection
+                        //https://firebase.google.com/docs/reference/ios/firebaseauth/api/reference/Classes#/c:objc(cs)FIRAuthErrors
+                    }
+                    let alert = UIAlertController(title: "Alert", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
                 print(error.localizedDescription)
             }
             

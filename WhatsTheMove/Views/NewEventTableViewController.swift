@@ -91,7 +91,34 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func createEventAction(_ sender: AnyObject) {
-        // TODO Validate Event Values
+        // Validate event values
+        var errorMsg = ""
+        if let eventTitle = eventTitleField.text {
+            if eventTitle.characters.count > 80 || eventTitle.characters.count < 4 {
+                errorMsg = "Event title must be 4-80 characters."
+            }
+        } else {
+            errorMsg = "Event must have a title."
+        }
+        
+        if locationLabel.text == nil {
+            errorMsg = "No location has been selected."
+        }
+        
+        if WTM.newEvent.startDate == WTM.newEvent.endDate {
+            errorMsg = "Start and End date must be different."
+        } else {
+            if WTM.newEvent.startDate > WTM.newEvent.endDate {
+                errorMsg = "Start date is after End date."
+            }
+        }
+        
+        if errorMsg.characters.count > 0 {
+            let alert = UIAlertController(title: "Alert", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+        }
         
         // If valid add to database, if not display error messages
         addToDatabase(for: WTM.newEvent)
@@ -129,31 +156,33 @@ class NewEventTableViewController: UITableViewController, UITextFieldDelegate {
     func addToDatabase(for e: Event) {
         storeValuesInEvent() {
             let newEventRef = WTM.dbRef.child("events").childByAutoId()
+            e.key = newEventRef.key
             if let user = WTM.auth.currentUser {
                 e.creatorId = user.uid
                 e.createdDate = Date()
                 newEventRef.updateChildValues(e.toAnyObject()) { (error, _) in
                     if let error = error {
-                        // TODO: Handle errors
+                        // Show error that creating event failed
+                        let alert = UIAlertController(title: "Alert", message: "Failed to create event. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
                         print(error)
                     } else {
                         // Add to user profile
-                        self.WTM.user?.add(newEvent: self.WTM.newEvent)
+                        if let user = self.WTM.user {
+                            user.create(e)
+                        }
                         
                         // Clear newEvent
                         self.WTM.newEvent = Event()
                         
+                        // Push to Feed View Controller
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+                        self.present(vc!, animated: false)
                     }
                 }
-                
-                // Clear newEvent
-                WTM.newEvent = Event()
             }
-        
-            // TODO: Change this to Push to created event
-            // Push to Feed View Controller
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
-            self.present(vc!, animated: false)
         }
     }
     

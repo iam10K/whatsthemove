@@ -25,9 +25,15 @@ class EventOptionsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func initialize(with event: Event) {
+    func initialize(with event: Event, user: User) {
         
-        // TODO: Set interest button to be filled in if user has shown interest
+        // TEMP: FUTURE CHANGE: Set interest button to be filled in if user has shown interest
+        if user.isInterested(event) {
+            let image:UIImage = #imageLiteral(resourceName: "star")
+            let newImage = image.withRenderingMode(.alwaysTemplate)
+            interestedButton.setImage(newImage, for: .normal)
+            interestedButton.tintColor = UIColor.green
+        }
     }
     
     func addActions(_ target: Any, interestedAction a1: Selector, checkInAction a2: Selector, moreAction a3: Selector) {

@@ -38,8 +38,7 @@ class Event: NSObject {
     public override init() {
         super.init()
         
-        endDate = createDate()
-        startDate = createDate()
+        createDates()
     }
     
     public init(snapshot: FIRDataSnapshot) {
@@ -75,7 +74,7 @@ class Event: NSObject {
             entryNote = entryNoteValue
         }
         
-        if let eventDescriptionValue = snapshotValue["eventDescription"] as? String {
+        if let eventDescriptionValue = snapshotValue["description"] as? String {
             eventDescription = eventDescriptionValue
         }
         
@@ -119,7 +118,6 @@ class Event: NSObject {
         comments = []
         creatorId = ""
         ended = false
-        endDate = createDate()
         entryNote = ""
         eventDescription = ""
         location = EventLocation()
@@ -127,11 +125,11 @@ class Event: NSObject {
         interested = 0
         privacyLevel = 0
         sponsor = ""
-        startDate = createDate()
         title = ""
+        createDates()
     }
     
-    private func createDate() -> Date {
+    private func createDates() {
         let curCalendar = Calendar.current
         let dateComponents = curCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date() as Date)
         
@@ -156,9 +154,13 @@ class Event: NSObject {
         selectedComponents.hour = hour
         selectedComponents.minute = minute
         if let date = curCalendar.date(from: selectedComponents) {
-            return date
+            startDate = date
+            endDate = date
+        } else {
+            let genericDate = Date()
+            startDate = genericDate
+            endDate = genericDate
         }
-        return Date()
     }
     
     func loadComments() {
@@ -166,9 +168,9 @@ class Event: NSObject {
         if let ref = ref {
             let commentsQuery = ref.root.child("comments").child(key)
             /*.queryOrdered(byChild: "createdDate").queryLimited(toFirst: 10)
-            if let lastComment = comments.last {
-                commentsQuery = commentsQuery.queryStarting(atValue: lastComment.key)
-            }*/
+             if let lastComment = comments.last {
+             commentsQuery = commentsQuery.queryStarting(atValue: lastComment.key)
+             }*/
             
             commentsQuery.observe(.value, with: { snapshot in
                 for comment in snapshot.children {
@@ -212,6 +214,7 @@ class Event: NSObject {
         userRating = vote
         
         let WTM = WTMSingleton.instance
+        // Update vote in eventLikes
         WTM.dbRef.child("eventLikes").child(key).child(user).setValue(vote)
         
         if let ref = ref {
@@ -230,7 +233,13 @@ class Event: NSObject {
                 }
             }, andCompletionBlock: { (error, completion, snap) in
                 if let error = error {
-                    // TODO: Handle failed vote? reset userRating, show message?
+                    // reset userRating
+                    if changingVote {
+                        self.userRating = !vote
+                    } else {
+                        self.userRating = nil
+                    }
+                    
                     print(error.localizedDescription)
                 }
                 if !completion {
@@ -253,138 +262,111 @@ class Event: NSObject {
     // Get the rating by the current user, if any
     func updateRatingArrows(ofUser user: String, upButton: UIButton, downButton: UIButton) {
         if let userRating = userRating {
-            setRating(rating: userRating, upButton: upButton, downButton: downButton)
+            Utils.setRating(rating: userRating, upButton: upButton, downButton: downButton)
         } else {
             let WTM = WTMSingleton.instance
             WTM.dbRef.child("eventLikes").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let rating = snapshot.value as? Bool {
                     self.userRating = rating
-                    self.setRating(rating: rating, upButton: upButton, downButton: downButton)
+                    Utils.setRating(rating: rating, upButton: upButton, downButton: downButton)
                 }
             })
         }
     }
     
-    // Set the tint for buttons based on user rating
-    private func setRating(rating: Bool, upButton: UIButton, downButton: UIButton) {
-        if rating {
-            Utils.changeTint(forButton: upButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-up"))
-            Utils.changeTint(forButton: downButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-down"))
-        } else {
-            Utils.changeTint(forButton: upButton, toColor: nil, withImage: #imageLiteral(resourceName: "arrow-up"))
-            Utils.changeTint(forButton: downButton, toColor: UIColor.green, withImage: #imageLiteral(resourceName: "arrow-down"))
-        }
-    }
-    
     // Check the user into event, does not check if the event is occuring
-    func checkin(user: String, completionHandler: (() -> Void)? = nil) {
-        let WTM = WTMSingleton.instance
-        
-        WTM.dbRef.child("checkedIn").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
-            if !snapshot.exists() {
-                
-                // Validate ref and that the user has not checked in
-                if let ref = self.ref {
-                    ref.child("checkedIn").runTransactionBlock({ (checkedInValue) -> FIRTransactionResult in
-                        if let newCheckedIn = checkedInValue.value as? Int {
-                            checkedInValue.value = newCheckedIn + 1
-                            return FIRTransactionResult.success(withValue: checkedInValue)
-                        } else {
-                            return FIRTransactionResult.success(withValue: checkedInValue)
-                        }
-                    }, andCompletionBlock: { (error, completion, snap) in
-                        if let error = error {
-                            // TODO: Handle failed vote? reset userRating, show message?
-                            print(error.localizedDescription)
-                        }
-                        if !completion {
-                            print("Not completed")
-                        } else if let snap = snap {
-                            // TODO: Check if user is near location, task for later
-                            // FUTURE: Possibly include user name for performance increase(less connections to database)
-                            WTM.dbRef.child("checkedIn").child(self.key).child(user).setValue(
-                                ["date": Date().timeIntervalSince1970,
-                                 "atLocation": false])
-                            
-                            // Update rating for event object
-                            if let checkedInValue = snap.value as? Int {
-                                self.checkedIn = checkedInValue
-                                completionHandler?()
-                            }
-                        }
-                    })
-                }
-            }
-        })
-    }
-    
-    // Check the user into event
-    func interest(user: String, completionHandler: (() -> Void)? = nil) {
-        let WTM = WTMSingleton.instance
-        
-        var removingInterest = false
-        
-        WTM.dbRef.child("interested").child(key).child(user).observeSingleEvent(of: .value, with: { (snapshot) in
-            // If user has not said interested in, add to the interested in
-            if snapshot.exists() {
-                if let hasInterest = snapshot.value as? Bool {
-                    if hasInterest {
-                        removingInterest = true
-                    }
-                }
-            }
+    func checkin(_ user: User, completionHandler: (() -> Void)? = nil) {
+        if !user.isAttending(self) {
             
-            // Validate ref and update # of users interested
+            // Validate ref and that the user has not checked in
             if let ref = self.ref {
-                ref.child("interested").runTransactionBlock({ (interestedValue) -> FIRTransactionResult in
-                    if let newInterested = interestedValue.value as? Int {
-                        if removingInterest {
-                            interestedValue.value = newInterested - 1
-                        } else {
-                            interestedValue.value = newInterested + 1
-                        }
-                        return FIRTransactionResult.success(withValue: interestedValue)
+                ref.child("checkedIn").runTransactionBlock({ (checkedInValue) -> FIRTransactionResult in
+                    if let newCheckedIn = checkedInValue.value as? Int {
+                        checkedInValue.value = newCheckedIn + 1
+                        return FIRTransactionResult.success(withValue: checkedInValue)
                     } else {
-                        return FIRTransactionResult.success(withValue: interestedValue)
+                        return FIRTransactionResult.success(withValue: checkedInValue)
                     }
                 }, andCompletionBlock: { (error, completion, snap) in
                     if let error = error {
-                        // TODO: Handle failed vote? reset userRating, show message?
                         print(error.localizedDescription)
                     }
                     if !completion {
                         print("Not completed")
                     } else if let snap = snap {
-                        // FUTURE: Possibly include user name for performance increase(less connections to database)
-                        if !removingInterest {
-                            WTM.dbRef.child("interested").child(self.key).child(user).setValue(true)
-                        }
+                        user.attend(self)
                         
                         // Update rating for event object
-                        if let interestedValue = snap.value as? Int {
-                            self.interested = interestedValue
+                        if let checkedInValue = snap.value as? Int {
+                            self.checkedIn = checkedInValue
                             completionHandler?()
                         }
                     }
                 })
             }
-            
-            if removingInterest {
-                // Remove from DB
-                WTM.dbRef.child("interested").child(self.key).child(user).removeValue()
-            }
-            
-        })
+        }
     }
     
-    // TODO: If the event is occuring or not
+    // Check the user into event
+    func interest(_ user: User, completionHandler: (() -> Void)? = nil) {
+        let removingInterest = user.isInterested(self)
+        
+        // Validate ref and update # of users interested
+        if let ref = self.ref {
+            ref.child("interested").runTransactionBlock({ (interestedValue) -> FIRTransactionResult in
+                if let newInterested = interestedValue.value as? Int {
+                    if removingInterest {
+                        interestedValue.value = newInterested - 1
+                        
+                        // Prevent going below 0 for interested
+                        if let value = interestedValue.value as? Int {
+                            if value < 0 {
+                                interestedValue.value = 0
+                            }
+                        }
+                    } else {
+                        interestedValue.value = newInterested + 1
+                    }
+                    return FIRTransactionResult.success(withValue: interestedValue)
+                } else {
+                    return FIRTransactionResult.success(withValue: interestedValue)
+                }
+            }, andCompletionBlock: { (error, completion, snap) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                if !completion {
+                    print("Not completed")
+                } else if let snap = snap {
+                    // FUTURE: Possibly include user name for performance increase(less connections to database)
+                    
+                    if !removingInterest {
+                        user.interest(self)
+                    } else {
+                        user.removeInterest(self)
+                    }
+                    
+                    // Update rating for event object
+                    if let interestedValue = snap.value as? Int {
+                        self.interested = interestedValue
+                        completionHandler?()
+                    }
+                }
+            })
+        }
+        
+    }
+    
+    // If the event is occuring or not
     func isOccuring() -> Bool {
-        return true
+        let date: Date = Date()
+        return date.compare(startDate) == .orderedDescending && date.compare(endDate) == .orderedAscending
     }
     
-    // TODO: If the event is going to occur in the future
+    // If the event is going to occur in the future
     func willOccur() -> Bool {
-        return false
+        let date: Date = Date()
+        return date.compare(startDate) == .orderedAscending
     }
     
     func toAnyObject() -> [AnyHashable: Any] {

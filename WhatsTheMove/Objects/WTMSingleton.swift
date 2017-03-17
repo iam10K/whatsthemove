@@ -52,12 +52,33 @@ class WTMSingleton: NSObject {
         dbRef.child("events").observe(.value, with: { snapshot in
             var newEvents: [Event] = []
             
-            // TODO: Filter events
-            // Add all events from database
+            // Filter events
             for event in snapshot.children {
-                // 4
                 let eventObject = Event(snapshot: event as! FIRDataSnapshot)
-                newEvents.append(eventObject)
+                
+                if eventObject.privacyLevel == 0 {  // Public
+                    // Public
+                    newEvents.append(eventObject)
+                    continue
+                } else if eventObject.privacyLevel == 1 {   // Friends Only
+                    if let user = self.user {
+                        // If event creator or users are friends add
+                        if eventObject.creatorId == user.key || user.areFriends(eventObject.creatorId) {
+                            newEvents.append(eventObject)
+                            continue
+                        }
+                    }
+                } else if eventObject.privacyLevel == 2 {   // Invite Only
+                    // If event creator add
+                    if let user = self.user {
+                        if eventObject.creatorId == user.key {
+                            newEvents.append(eventObject)
+                            continue
+                        }
+                    }
+                    
+                    // FUTURE: If user has invite to event
+                }
             }
             
             // Set list to temporary list created
@@ -69,7 +90,7 @@ class WTMSingleton: NSObject {
         // Listen for user changes
         dbRef.child("users").child(currentUser.uid).observe(.value, with: { snapshot in
             if snapshot.exists() {
-                self.user = User(snapshot: snapshot)
+                self.user = User(selfSnapshot: snapshot)
             }
             if let completion = completion {
                 completion()

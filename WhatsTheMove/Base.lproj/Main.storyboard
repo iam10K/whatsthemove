@@ -231,6 +231,7 @@
                     <navigationItem key="navigationItem" title="Map" id="Esa-Dj-PHl"/>
                     <connections>
                         <outlet property="mapView" destination="XsP-yG-d06" id="9Nc-YM-xqN"/>
+                        <segue destination="IVM-zT-JUE" kind="show" identifier="eventTableViewSegue" id="3bE-sb-1QG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -291,13 +292,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGa-4c-mqU">
-                                            <rect key="frame" x="8" y="141" width="359" height="17"/>
+                                            <rect key="frame" x="8" y="141" width="359" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University of South Carolina Junior My bio is the best" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoY-YE-lld">
-                                            <rect key="frame" x="8" y="166" width="359" height="18"/>
+                                            <rect key="frame" x="8" y="165" width="359" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="TOG-Yz-njl"/>
                                             </constraints>
@@ -388,6 +389,7 @@
                                     <outlet property="eventsAttendedLabel" destination="wAI-7E-zUm" id="Nbs-Ox-nWy"/>
                                     <outlet property="eventsCreatedLabel" destination="L0p-Ti-x5V" id="hLk-1t-JHk"/>
                                     <outlet property="friendsLabel" destination="89v-t8-LwB" id="sgn-9E-Wwh"/>
+                                    <outlet property="profileButton" destination="4tF-Ci-anA" id="jiE-jc-9Au"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="profileSwitchTableViewCell" rowHeight="32" id="meG-cS-q5j" customClass="ProfileSwitchTableViewCell" customModule="WhatsTheMove" customModuleProvider="target">
@@ -397,7 +399,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eP0-c0-vyE">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eP0-c0-vyE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="33"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="wiZ-IZ-jHc"/>
@@ -513,6 +515,7 @@
                                     <outlet property="ratingLabel" destination="an2-hd-z5q" id="CBc-BD-E4f"/>
                                     <outlet property="titleLabel" destination="Un6-kx-WYO" id="NN7-Uh-PxU"/>
                                     <outlet property="upButton" destination="4kD-ep-c3D" id="8a0-OU-OxD"/>
+                                    <segue destination="IVM-zT-JUE" kind="show" identifier="eventTableViewSegue" id="Gzb-MY-LNE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -578,7 +581,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGz-RT-0Hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3897" y="2543"/>
+            <point key="canvasLocation" x="3895" y="2543"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hOe-cr-FGc">
@@ -810,7 +813,7 @@
                                                     <segments>
                                                         <segment title="Public"/>
                                                         <segment title="Friends Only"/>
-                                                        <segment title="Invite Only"/>
+                                                        <segment title="Invite Only" enabled="NO"/>
                                                     </segments>
                                                     <color key="tintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </segmentedControl>
@@ -1763,7 +1766,7 @@
                                         <constraint firstItem="Rmj-tb-N74" firstAttribute="leading" secondItem="Jvw-m7-GnV" secondAttribute="trailing" constant="8" symbolic="YES" id="8R8-kI-GE1"/>
                                         <constraint firstItem="hlL-IZ-iTy" firstAttribute="top" secondItem="Rmj-tb-N74" secondAttribute="bottom" id="DJd-G5-691"/>
                                         <constraint firstItem="Rmj-tb-N74" firstAttribute="top" secondItem="sgg-hz-dad" secondAttribute="topMargin" constant="-6" id="EDK-78-6TI"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="txs-Hx-IhJ" secondAttribute="bottom" constant="21" id="ONl-F0-2zP"/>
+                                        <constraint firstAttribute="bottomMargin" relation="lessThanOrEqual" secondItem="txs-Hx-IhJ" secondAttribute="bottom" constant="21" id="ONl-F0-2zP"/>
                                         <constraint firstItem="Jvw-m7-GnV" firstAttribute="top" secondItem="sgg-hz-dad" secondAttribute="top" id="Psc-Xy-YsZ"/>
                                         <constraint firstItem="Rmj-tb-N74" firstAttribute="trailing" secondItem="sgg-hz-dad" secondAttribute="trailingMargin" id="TAB-Co-Cl1"/>
                                         <constraint firstItem="hlL-IZ-iTy" firstAttribute="trailing" secondItem="eu1-Ug-FuC" secondAttribute="trailing" id="Wi8-eS-J7o"/>
@@ -1821,6 +1824,9 @@
                     <navigationItem key="navigationItem" title="WTM" id="QBI-Oq-pgI">
                         <barButtonItem key="rightBarButtonItem" image="settings" id="1UB-5E-LBN"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="DjO-tZ-9oj" kind="show" identifier="userProfileViewSegue" id="xNh-YL-zsW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bc-ae-UgB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2578,8 +2584,8 @@ AEEAAAAAAAAAAAAAAAAAABQQA
         <image name="star" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Gzb-MY-LNE"/>
         <segue reference="Ejm-Tc-bIc"/>
-        <segue reference="Yl5-s5-IRq"/>
         <segue reference="CmN-sE-3Fe"/>
     </inferredMetricsTieBreakers>
 </document>

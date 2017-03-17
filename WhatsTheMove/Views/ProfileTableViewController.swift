@@ -25,13 +25,29 @@ class ProfileTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        if let user = WTM.user {
-            self.user = user
+        if let user = user {
             self.navigationItem.title = user.username
+            user.loadCreatedEvents() {
+                self.tableView.reloadData()
+            }
+            user.loadAttendedEvents() {
+                self.tableView.reloadData()
+            }
+        } else {
+            if let user = WTM.user {
+                self.user = user
+                self.navigationItem.title = user.username
+            }
         }
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 70
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,6 +73,9 @@ class ProfileTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row > 1 {
+            return 100
+        }
         return UITableViewAutomaticDimension
     }
     
@@ -66,7 +85,7 @@ class ProfileTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderTableViewCell", for: indexPath) as! ProfileHeaderTableViewCell
-                cell.initialize(with: user)
+                cell.initialize(with: user, profileController: self)
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "profileSwitchTableViewCell", for: indexPath) as! ProfileSwitchTableViewCell
@@ -74,15 +93,14 @@ class ProfileTableViewController: UITableViewController {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
-                
                 if showingCreated {
-                    if indexPath.row < user.attendedEvents.count {
-                        let event = user.attendedEvents[indexPath.row]
+                    if indexPath.row-2 < user.attendedEvents.count {
+                        let event = user.attendedEvents[indexPath.row-2]
                         cell.populate(with: event)
                     }
                 } else {
-                    if indexPath.row < user.createdEvents.count {
-                        let event = user.createdEvents[indexPath.row]
+                    if indexPath.row-2 < user.createdEvents.count {
+                        let event = user.createdEvents[indexPath.row-2]
                         cell.populate(with: event)
                     }
                 }
@@ -93,6 +111,33 @@ class ProfileTableViewController: UITableViewController {
         return UITableViewCell()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let user = user {
+            if showingCreated {
+                if indexPath.row < user.attendedEvents.count {
+                    let event = user.attendedEvents[indexPath.row]
+                    
+                    // Push to event view
+                    performSegue(withIdentifier: "eventTableViewSegue", sender: event)
+                }
+            } else {
+                if indexPath.row < user.createdEvents.count {
+                    let event = user.createdEvents[indexPath.row]
+                    
+                    // Push to event view
+                    performSegue(withIdentifier: "eventTableViewSegue", sender: event)
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "eventTableViewSegue" {
+            let vc = segue.destination as! EventTableViewController
+            vc.event = sender as? Event
+        }
+    }
+    
     func switchShownEvents(_ index: Int) {
         if index == 0 {
             showingCreated = false
@@ -100,6 +145,19 @@ class ProfileTableViewController: UITableViewController {
         } else {
             showingCreated = true
             self.tableView.reloadData()
+        }
+    }
+    
+    func profileButtonAction() {
+        if let user = user, let WTMUser = WTM.user {
+            if user.key == WTMUser.key {
+                // FUTURE: Edit profile
+            } else if !WTMUser.areFriends(user.key) {
+                // Add friends
+                WTMUser.addFriend(user)
+                self.tableView.reloadData()
+            }
+            // FUTURE: Else if friends remove friends
         }
     }
     

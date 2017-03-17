@@ -43,7 +43,9 @@ class ProfileHeaderTableViewCell: UITableViewCell {
         
         if let WTMUser = profileController.WTM.user {
             if WTMUser.areFriends(user.key) {
-                profileButton.isHidden = true
+                if let titleLabel = profileButton.titleLabel {
+                    titleLabel.text = "Remove Friend"
+                }
             }
         }
         

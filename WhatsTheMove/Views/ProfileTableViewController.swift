@@ -156,8 +156,11 @@ class ProfileTableViewController: UITableViewController {
                 // Add friends
                 WTMUser.addFriend(user)
                 self.tableView.reloadData()
+            } else {
+                //Remove Friend
+                WTMUser.removeFriend(user)
+                self.tableView.reloadData()
             }
-            // FUTURE: Else if friends remove friends
         }
     }
     

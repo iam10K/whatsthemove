@@ -73,10 +73,10 @@ class FeedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
         
-            if indexPath.row < displayedEvents.count {
-                let event = displayedEvents[indexPath.row]
-                cell.populate(with: event)
-            }
+        if indexPath.row < displayedEvents.count {
+            let event = displayedEvents[indexPath.row]
+            cell.populate(with: event)
+        }
         
         return cell
     }
@@ -124,6 +124,20 @@ class FeedTableViewController: UITableViewController {
         self.displayEvents()
     }
     
+    func filterEvents() {
+        let calender = NSCalendar.autoupdatingCurrent
+        let newDate = calender.date(byAdding: .minute, value: -180, to: Date())
+        if let newDate = newDate {
+            for event in displayedEvents {
+                if event.startDate < newDate {
+                    if let index = displayedEvents.index(of: event) {
+                        displayedEvents.remove(at: index)
+                    }
+                }
+            }
+        }
+    }
+    
     func displayEvents() {
         if let user = WTM.user {
             if displayingInterested {
@@ -140,6 +154,7 @@ class FeedTableViewController: UITableViewController {
                 self.navigationItem.title = "Feed"
             }
         }
+        self.filterEvents()
         self.sort()
     }
 }

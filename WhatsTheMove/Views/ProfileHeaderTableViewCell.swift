@@ -9,13 +9,13 @@
 import UIKit
 
 class ProfileHeaderTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var eventsCreatedLabel: UILabel!
     @IBOutlet weak var eventsAttendedLabel: UILabel!
     @IBOutlet weak var friendsLabel: UILabel!
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var bioLabel: UILabel!
-
+    
     @IBOutlet weak var profileButton: UIButton!
     
     var profileController: ProfileTableViewController? = nil
@@ -24,10 +24,10 @@ class ProfileHeaderTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -42,6 +42,16 @@ class ProfileHeaderTableViewCell: UITableViewCell {
         self.profileController = profileController
         
         if let WTMUser = profileController.WTM.user {
+            if WTMUser.sentRequest(user.key) {
+                if let titleLabel = profileButton.titleLabel {
+                    titleLabel.text = "Pending..."
+                }
+            }
+            if WTMUser.receivedRequest(user.key) {
+                if let titleLabel = profileButton.titleLabel {
+                    titleLabel.text = "Accept Request"
+                }
+            }
             if WTMUser.areFriends(user.key) {
                 if let titleLabel = profileButton.titleLabel {
                     titleLabel.text = "Remove Friend"

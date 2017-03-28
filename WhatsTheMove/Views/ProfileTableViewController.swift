@@ -152,13 +152,18 @@ class ProfileTableViewController: UITableViewController {
         if let user = user, let WTMUser = WTM.user {
             if user.key == WTMUser.key {
                 // FUTURE: Edit profile
-            } else if !WTMUser.areFriends(user.key) {
+            } else if !WTMUser.areFriends(user.key) && WTMUser.receivedRequest(user.key) {
+                // not friends and has request
                 // Add friends
                 WTMUser.addFriend(user)
                 self.tableView.reloadData()
-            } else {
-                //Remove Friend
+            } else if WTMUser.areFriends(user.key) {
+                // friends so remove friend
                 WTMUser.removeFriend(user)
+                self.tableView.reloadData()
+            } else {
+                // send Friend Request
+                WTMUser.sendFriendRequest(user)
                 self.tableView.reloadData()
             }
         }

@@ -18,6 +18,8 @@ class User: NSObject {
     var attendedEventsKeys: [String] = []
     var attendedEvents: [Event] = []
     var bio: String = ""
+    var sentRequestKeys: [String] = []
+    var receivedRequestKeys: [String] = []
     //var blockedUsers: [String] = []
     var createdEventsKeys: [String] = []
     var createdEvents: [Event] = []
@@ -80,7 +82,7 @@ class User: NSObject {
             createdEventsKeys.append(contentsOf: Array(createdEventsValue.keys))
             
         }
-
+        
     }
     
     public convenience init(selfSnapshot: FIRDataSnapshot) {
@@ -118,6 +120,22 @@ class User: NSObject {
                     })
                 } else {
                     // FUTURE: Maybe use false for blocked users
+                }
+            }
+        }
+        
+        if let friendRequestValue = snapshotValue["friendRequests"] as? [String: Bool] {
+            for (friendId,value) in friendRequestValue {
+                if value {
+                    // if user sent request to user
+                    if !self.sentRequestKeys.contains(friendId) {
+                        self.sentRequestKeys.append(friendId)
+                    }
+                } else {
+                    // if user is getting a request
+                    if !self.receivedRequestKeys.contains(friendId) {
+                        self.receivedRequestKeys.append(friendId)
+                    }
                 }
             }
         }
@@ -247,7 +265,7 @@ class User: NSObject {
             }
         }
     }
-
+    
     func interest(_ event: Event) {
         // Add to interested array
         self.interested.append(event)
@@ -326,11 +344,78 @@ class User: NSObject {
         }
     }
     
-    func friendRequest(_ otherUser: User) {
-        // FUTURE:
+    func sendFriendRequest(_ otherUser: User) {
+        if self.sentRequestKeys.contains(otherUser.key) {
+            return
+        }
+        
+        // Add friend to list sent requests
+        self.sentRequestKeys.append(otherUser.key)
+        if let ref = ref {
+            // Add to firebase for user
+            ref.child("friendRequests").updateChildValues([otherUser.key:true]) { error,_ in
+                if let error = error {
+                    // Remove since error occured
+                    if let index = self.sentRequestKeys.index(of: otherUser.key) {
+                        self.sentRequestKeys.remove(at: index)
+                    }
+                    print(error)
+                } else {
+                    // Add friend for other user
+                    otherUser.receiveFriendRequest(self)
+                }
+            }
+        }
+    }
+    
+    func receiveFriendRequest(_ otherUser: User) {
+        if self.receivedRequestKeys.contains(otherUser.key) {
+            return
+        }
+        
+        // Add friend to list received requests
+        self.receivedRequestKeys.append(otherUser.key)
+        if let ref = ref {
+            // Add to firebase for user
+            ref.child("friendRequests").updateChildValues([otherUser.key:false]) { error,_ in
+                if let error = error {
+                    // Remove since error occured
+                    if let index = self.receivedRequestKeys.index(of: otherUser.key) {
+                        self.receivedRequestKeys.remove(at: index)
+                    }
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func removeFriendRequest(_ otherUser: User) {
+        // remove from requests lists
+        if let index = self.sentRequestKeys.index(of: otherUser.key) {
+            self.sentRequestKeys.remove(at: index)
+        }
+        
+        if let index = self.receivedRequestKeys.index(of: otherUser.key) {
+            self.receivedRequestKeys.remove(at: index)
+        }
+        
+        // remove requests from each user
+        if let ref = ref {
+            // Add to firebase for user
+            ref.child("friendRequests").child(otherUser.key).removeValue()
+        }
+        
+        if let ref = otherUser.ref {
+            // Add to firebase for user
+            ref.child("friendRequests").child(self.key).removeValue()
+        }
     }
     
     func addFriend(_ friend: User) {
+        if !self.receivedRequest(friend.key) {
+            return
+        }
+        
         if self.friendsKeys.contains(friend.key) {
             return
         }
@@ -379,6 +464,16 @@ class User: NSObject {
     
     func areFriends(_ userId: String) -> Bool {
         return friendsKeys.contains(userId)
+    }
+    
+    // sent friendrequest to userId
+    func sentRequest(_ userId: String) -> Bool {
+        return sentRequestKeys.contains(userId)
+    }
+    
+    // if friend request received from the userId
+    func receivedRequest(_ userId: String) -> Bool {
+        return receivedRequestKeys.contains(userId)
     }
     
     func toAnyObject() -> [AnyHashable: Any] {

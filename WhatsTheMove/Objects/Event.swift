@@ -200,6 +200,14 @@ class Event: NSObject {
         return nil
     }
     
+    // Invite a user
+    func invite(user: User, otherUser: User) {
+        let invite = Invite(fromId: user.key, fromName: user.displayName(), eventTitle: self.title)
+        if let ref = otherUser.ref {
+            ref.child("eventInvites").child(self.key).updateChildValues(invite.toAnyObject() as! [AnyHashable : Any])
+        }
+    }
+    
     // Set the users rating of event
     func rateEvent(ofUser user: String, vote: Bool, ratingLabel: UILabel? = nil, completionHandler: (() -> Void)? = nil) {
         // Keep track if user is changing vote. If so increment/decrement by 2 instead of 1

@@ -46,6 +46,9 @@
 		3039D0BEEA2E0D709AD773D2 /* Pods_WhatsTheMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559979DDA6627368324B0604 /* Pods_WhatsTheMove.framework */; };
 		6E53EAD380CD6BA50D1565AC /* Pods_WhatsTheMoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BBE3A591124C76189FF870 /* Pods_WhatsTheMoveTests.framework */; };
 		8E2AB70F1E52902200DC421A /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2AB70E1E52902200DC421A /* SearchTableViewController.swift */; };
+		9651417D1E89E87D00C4B569 /* AlertsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9651417C1E89E87D00C4B569 /* AlertsTableViewController.swift */; };
+		9651417F1E89E94F00C4B569 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9651417E1E89E94F00C4B569 /* FriendRequestTableViewCell.swift */; };
+		965141811E89E9B400C4B569 /* EventInviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965141801E89E9B400C4B569 /* EventInviteTableViewCell.swift */; };
 		9F94F585E58D2206000B73E7 /* Pods_WhatsTheMoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8E41E23396E99A7C34AC242 /* Pods_WhatsTheMoveUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +121,9 @@
 		6C4A946D90B6FFF296A1B3AA /* Pods-WhatsTheMoveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveTests/Pods-WhatsTheMoveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		848F002851529628B7BDF23F /* Pods-WhatsTheMove.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMove.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMove/Pods-WhatsTheMove.debug.xcconfig"; sourceTree = "<group>"; };
 		8E2AB70E1E52902200DC421A /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableViewController.swift; path = Views/SearchTableViewController.swift; sourceTree = "<group>"; };
+		9651417C1E89E87D00C4B569 /* AlertsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertsTableViewController.swift; path = Views/AlertsTableViewController.swift; sourceTree = "<group>"; };
+		9651417E1E89E94F00C4B569 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendRequestTableViewCell.swift; path = Views/FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
+		965141801E89E9B400C4B569 /* EventInviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventInviteTableViewCell.swift; path = Views/EventInviteTableViewCell.swift; sourceTree = "<group>"; };
 		B02B52A3F96CA64A38EF200D /* Pods-WhatsTheMoveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B8479894443451332A85681D /* Pods-WhatsTheMoveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheMoveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheMoveUITests/Pods-WhatsTheMoveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8E41E23396E99A7C34AC242 /* Pods_WhatsTheMoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsTheMoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +305,7 @@
 		2F8D64091D91B6190089FFCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9651417A1E89E82400C4B569 /* AlertViews */,
 				8E2AB70D1E528FC700DC421A /* SearchViews */,
 				2FA291DE1E37AB7C00B26986 /* EventViews */,
 				2FA291DD1E37AB6900B26986 /* ProfileViews */,
@@ -353,6 +360,24 @@
 				8E2AB70E1E52902200DC421A /* SearchTableViewController.swift */,
 			);
 			name = SearchViews;
+			sourceTree = "<group>";
+		};
+		9651417A1E89E82400C4B569 /* AlertViews */ = {
+			isa = PBXGroup;
+			children = (
+				9651417B1E89E83600C4B569 /* Cells */,
+				9651417C1E89E87D00C4B569 /* AlertsTableViewController.swift */,
+			);
+			name = AlertViews;
+			sourceTree = "<group>";
+		};
+		9651417B1E89E83600C4B569 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9651417E1E89E94F00C4B569 /* FriendRequestTableViewCell.swift */,
+				965141801E89E9B400C4B569 /* EventInviteTableViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -645,6 +670,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F1ABAAA1E52248000830A12 /* EventCommentTableViewCell.swift in Sources */,
+				965141811E89E9B400C4B569 /* EventInviteTableViewCell.swift in Sources */,
 				2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */,
 				2F1ABAA61E5222CF00830A12 /* EventOptionsTableViewCell.swift in Sources */,
 				2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */,
@@ -656,6 +682,7 @@
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,
 				8E2AB70F1E52902200DC421A /* SearchTableViewController.swift in Sources */,
 				2F9329D41DDB97A9004F3C9F /* LocationSearchTableViewController.swift in Sources */,
+				9651417D1E89E87D00C4B569 /* AlertsTableViewController.swift in Sources */,
 				2F1ABAAC1E52251100830A12 /* EventNewCommentTableViewCell.swift in Sources */,
 				2F1ABAB31E52447000830A12 /* EventSponsorTableViewCell.swift in Sources */,
 				2F3126311E5FDC4200AD65F2 /* ProfileHeaderTableViewCell.swift in Sources */,
@@ -670,6 +697,7 @@
 				2F3126331E5FE62800AD65F2 /* ProfileSwitchTableViewCell.swift in Sources */,
 				2F1ABAB11E522B2500830A12 /* EventLocationTableViewCell.swift in Sources */,
 				2F1B2CAC1DC28AA400D341ED /* WTMSingleton.swift in Sources */,
+				9651417F1E89E94F00C4B569 /* FriendRequestTableViewCell.swift in Sources */,
 				2F900D781DCBC4D200198AEA /* NewEventTableViewController.swift in Sources */,
 				2FDA81D71E5B487200591A7F /* Observable.swift in Sources */,
 				2F1ABAAE1E522A2A00830A12 /* EventTitleTableViewCell.swift in Sources */,

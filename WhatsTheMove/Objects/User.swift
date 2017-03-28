@@ -20,6 +20,7 @@ class User: NSObject {
     var bio: String = ""
     var sentRequestKeys: [String] = []
     var receivedRequestKeys: [String] = []
+    var receivedRequestUsers: [User] = []
     //var blockedUsers: [String] = []
     var createdEventsKeys: [String] = []
     var createdEvents: [Event] = []
@@ -29,6 +30,7 @@ class User: NSObject {
     var image: String = ""
     var interestedKeys: [String] = []
     var interested: [Event] = []
+    var invitedEvents: [Invite] = []
     var name: String = ""
     var privacyLevel: Int = 0
     var username: String = ""
@@ -105,6 +107,13 @@ class User: NSObject {
             }
         }
         
+        if let invitesValue = snapshotValue["eventInvites"] as? [String: AnyObject] {
+            for (eventId,value) in invitesValue {
+                let invite = Invite(snapshot: value as! [String : Any], eventId: eventId)
+                self.invitedEvents.append(invite)
+            }
+        }
+        
         if let friendsValue = snapshotValue["friends"] as? [String: Bool] {
             // Add all keys to the string list
             for (friendId,value) in friendsValue {
@@ -135,6 +144,13 @@ class User: NSObject {
                     // if user is getting a request
                     if !self.receivedRequestKeys.contains(friendId) {
                         self.receivedRequestKeys.append(friendId)
+                        // Observe the user once
+                        selfSnapshot.ref.database.reference().child("users").child(friendId).observeSingleEvent(of: .value, with: { snapshot in
+                            if snapshot.exists() {
+                                let friend = User(snapshot: snapshot)
+                                self.receivedRequestUsers.append(friend)
+                            }
+                        })
                     }
                 }
             }
@@ -212,6 +228,11 @@ class User: NSObject {
         default:
             return username
         }
+    }
+    
+    //displays message with the name of a use rwho wants to be friends
+    func requestMessage() -> String {
+        return displayName() + " wants to be friends"
     }
     
     func isInterested(_ event: Event) -> Bool {

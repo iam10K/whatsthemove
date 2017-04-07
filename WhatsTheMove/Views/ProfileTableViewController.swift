@@ -151,7 +151,9 @@ class ProfileTableViewController: UITableViewController {
     func profileButtonAction() {
         if let user = user, let WTMUser = WTM.user {
             if user.key == WTMUser.key {
-                // FUTURE: Edit profile
+                // Edit profile
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "editProfileTableViewController") as! EditProfileTableViewController
+                self.navigationController?.pushViewController(vc, animated:true)
             } else if !WTMUser.areFriends(user.key) && WTMUser.receivedRequest(user.key) {
                 // not friends and has request
                 // Add friends

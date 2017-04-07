@@ -52,7 +52,7 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
     func addressLabelAction() {
         if let event = event {
             var newAddress = ""
-            let addressValue = event.location.address
+            let addressValue = event.location.addressName + "+" + event.location.address
             
             newAddress = addressValue.replacingOccurrences(of: " ", with: "+").replacingOccurrences(of: "\n", with: "+")
             

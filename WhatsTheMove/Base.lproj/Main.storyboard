@@ -201,6 +201,34 @@
             </objects>
             <point key="canvasLocation" x="3897" y="1310"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="NrQ-by-dpp">
+            <objects>
+                <tableViewController id="cav-B3-TuH" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ght-hN-KOx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PLY-Ya-cHS">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PLY-Ya-cHS" id="Kux-Wj-QXs">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cav-B3-TuH" id="ckJ-rD-ZEb"/>
+                            <outlet property="delegate" destination="cav-B3-TuH" id="sq1-Wr-YCB"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L9H-jV-wdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4813.6000000000004" y="1308.3958020989505"/>
+        </scene>
         <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -245,7 +273,7 @@
                     <tabBarItem key="tabBarItem" title="" image="person" id="wux-yV-BVn">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="78b-vj-Xly">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="78b-vj-Xly">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -620,7 +648,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TM9-sC-fd5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TM9-sC-fd5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.34509803919999998" green="0.031372549020000001" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -911,6 +939,36 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle=" " id="73c-3z-37a">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5sh-Ot-MeB">
+                                        <rect key="frame" x="0.0" y="522" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5sh-Ot-MeB" id="rcc-WT-pc9">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invited Users" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCK-Wd-gwX">
+                                                    <rect key="frame" x="13" y="11" width="329" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jCK-Wd-gwX" firstAttribute="centerY" secondItem="rcc-WT-pc9" secondAttribute="centerY" id="UYR-EX-h2t"/>
+                                                <constraint firstAttribute="trailing" secondItem="jCK-Wd-gwX" secondAttribute="trailing" id="cKp-GM-GRT"/>
+                                                <constraint firstItem="jCK-Wd-gwX" firstAttribute="leading" secondItem="rcc-WT-pc9" secondAttribute="leadingMargin" constant="5" id="mIB-kP-6xw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="cav-B3-TuH" kind="show" id="DqD-0W-LtR"/>
+                                            <segue destination="cav-B3-TuH" kind="show" trigger="accessoryAction" id="lzj-JK-9dO"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="ufq-Ue-O6h" id="A2i-XA-f73"/>
@@ -1038,7 +1096,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="N1h-Ru-ldE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N1h-Ru-ldE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.34509803919999998" green="0.031372549020000001" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1249,7 +1307,7 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U9z-gN-xce">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U9z-gN-xce">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -1934,7 +1992,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kwT-Zg-9oQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kwT-Zg-9oQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2364,8 +2422,9 @@ FL0UwBTSFNUU2gAAAAAAAAIBAAAAAAAAAEEAAAAAAAAAAAAAAAAAABTcA
         <image name="star" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ejm-Tc-bIc"/>
         <segue reference="CmN-sE-3Fe"/>
+        <segue reference="Ejm-Tc-bIc"/>
+        <segue reference="lzj-JK-9dO"/>
         <segue reference="Gzb-MY-LNE"/>
     </inferredMetricsTieBreakers>
 </document>

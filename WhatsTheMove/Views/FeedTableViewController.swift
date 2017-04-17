@@ -65,6 +65,17 @@ class FeedTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if displayedEvents.count > 0 {
+            self.tableView.backgroundView = nil
+            self.tableView.separatorStyle = .singleLine
+            return 1
+        } else {
+            emptyMessage(message: "No events occuring now or in the future.", viewController: self)
+            return 0
+        }
+    }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return displayedEvents.count
@@ -79,6 +90,19 @@ class FeedTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    func emptyMessage(message:String, viewController:UITableViewController) {
+        let messageLabel = UILabel(frame: CGRect(x: 0,y: 0, width: viewController.view.bounds.size.width, height: viewController.view.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = UIColor.black
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = .center;
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.sizeToFit()
+        
+        viewController.tableView.backgroundView = messageLabel;
+        viewController.tableView.separatorStyle = .none;
     }
     
     //Sorts the events array by popularity or time

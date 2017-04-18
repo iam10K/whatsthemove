@@ -14,6 +14,8 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
     
     var event: Event?
     
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,11 +32,24 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 70
+        
+        if let user = WTM.user {
+            if let event = event {
+                if event.creatorId != user.key || event.hasOccurred() {
+                    settingsButton.isEnabled = false
+                    settingsButton.tintColor = UIColor.clear
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func settingsButtonAction(_ sender: Any) {
+        
     }
     
     // Display alert to user prompting to go to Maps

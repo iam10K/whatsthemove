@@ -95,6 +95,12 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
                 let alert = UIAlertController(title: "Alert", message: "Event is not occuring now.", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+            } else if event.hasOccurred() {
+                // Event has occurred in the past
+                // Message, event is not occuring now
+                let alert = UIAlertController(title: "Alert", message: "Event is over.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss ", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

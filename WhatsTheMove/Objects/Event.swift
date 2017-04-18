@@ -368,13 +368,18 @@ class Event: NSObject {
     // If the event is occuring or not
     func isOccuring() -> Bool {
         let date: Date = Date()
-        return date.compare(startDate) == .orderedDescending && date.compare(endDate) == .orderedAscending
+        return date > startDate && date < endDate
     }
     
     // If the event is going to occur in the future
     func willOccur() -> Bool {
         let date: Date = Date()
-        return date.compare(startDate) == .orderedAscending
+        return date < startDate
+    }
+    
+    func hasOccurred() -> Bool {
+        let date: Date = Date()
+        return date > endDate
     }
     
     func toAnyObject() -> [AnyHashable: Any] {

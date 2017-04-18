@@ -34,6 +34,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
         searchController.hidesNavigationBarDuringPresentation = false
+        self.definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         self.navigationItem.titleView = searchController.searchBar
     }

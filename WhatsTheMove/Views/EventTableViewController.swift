@@ -41,6 +41,12 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
                 }
             }
         }
+        
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,7 +55,6 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func settingsButtonAction(_ sender: Any) {
-        
     }
     
     // Display alert to user prompting to go to Maps

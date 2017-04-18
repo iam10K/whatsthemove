@@ -2658,9 +2658,9 @@ FL0UwBTSFNUU2gAAAAAAAAIBAAAAAAAAAEEAAAAAAAAAAAAAAAAAABTcA
         <image name="star" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lzj-JK-9dO"/>
+        <segue reference="1UC-Nu-Z7S"/>
         <segue reference="Ejm-Tc-bIc"/>
         <segue reference="CmN-sE-3Fe"/>
-        <segue reference="lzj-JK-9dO"/>
-        <segue reference="Gzb-MY-LNE"/>
     </inferredMetricsTieBreakers>
 </document>

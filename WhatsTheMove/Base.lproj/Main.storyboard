@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8xa-s9-Qs4">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F54b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8xa-s9-Qs4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -67,7 +67,7 @@
                                                 <constraint firstAttribute="width" constant="48" id="IEf-y7-JD8"/>
                                             </constraints>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <state key="normal" image="E8E5DEE7-8FCC-45E2-B236-A230103AA846"/>
+                                            <state key="normal" image="button:hLA-bE-eHQ:image"/>
                                             <connections>
                                                 <action selector="upArrowAction" destination="7fU-Xx-g9u" eventType="touchUpInside" id="xR0-Qc-xll"/>
                                             </connections>
@@ -78,7 +78,7 @@
                                                 <constraint firstAttribute="width" constant="48" id="Yvc-lM-M89"/>
                                             </constraints>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <state key="normal" image="50348C31-564B-4F1C-B770-3EF70957B0BE"/>
+                                            <state key="normal" image="button:BNh-ci-vH2:image"/>
                                             <connections>
                                                 <action selector="downArrowAction" destination="7fU-Xx-g9u" eventType="touchUpInside" id="5Go-kd-KQ1"/>
                                             </connections>
@@ -1852,6 +1852,9 @@
                     <navigationItem key="navigationItem" title="WTM" id="QBI-Oq-pgI">
                         <barButtonItem key="rightBarButtonItem" image="settings" id="1UB-5E-LBN"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="war-zP-8dv" kind="show" identifier="userProfileViewSegue" id="Kkr-wU-laZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bc-ae-UgB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2529,7 +2532,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="50348C31-564B-4F1C-B770-3EF70957B0BE" width="25" height="25">
+        <image name="arrow-down" width="25" height="25"/>
+        <image name="arrow-up" width="26" height="26"/>
+        <image name="bell" width="25" height="25"/>
+        <image name="button:BNh-ci-vH2:image" width="25" height="25">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -2622,7 +2628,7 @@ E34ThxOME5QTlxOcE6sTrxO2E74TyxPQE9IT1BPZE+ET5BPpE/ET9BQGFAkUDgAAAAAAAAIBAAAAAAAA
 AEEAAAAAAAAAAAAAAAAAABQQA
 </mutableData>
         </image>
-        <image name="E8E5DEE7-8FCC-45E2-B236-A230103AA846" width="26" height="26">
+        <image name="button:hLA-bE-eHQ:image" width="26" height="26">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

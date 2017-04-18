@@ -20,7 +20,7 @@ class Utils: NSObject {
         
         // Gather all the date components to construct new date
         let curCalendar = Calendar.current
-        let dateComponents = curCalendar.dateComponents([.year, .month, .day], from: date)
+        let dateComponents = curCalendar.dateComponents([.year, .month, .day], from: Date())
         
         // Create new date from components to remove time
         var futureComponents = DateComponents()

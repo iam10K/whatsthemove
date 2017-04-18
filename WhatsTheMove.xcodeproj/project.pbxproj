@@ -24,6 +24,7 @@
 		2F40E1D31DA9B6BC0058EB76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D21DA9B6BC0058EB76 /* LoginViewController.swift */; };
 		2F40E1D61DAC19260058EB76 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */; };
 		2F40E1D81DAC19E50058EB76 /* NewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */; };
+		2F573B161E97166600E1ACFE /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F573B151E97166600E1ACFE /* EditProfileTableViewController.swift */; };
 		2F65C5501DC916120014AEBE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F65C54F1DC916120014AEBE /* MapViewController.swift */; };
 		2F741AE71D9AD4A0009E6271 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE61D9AD4A0009E6271 /* Event.swift */; };
 		2F741AE91D9AD4B1009E6271 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F741AE81D9AD4B1009E6271 /* Comment.swift */; };
@@ -89,6 +90,7 @@
 		2F40E1D41DAABD5D0058EB76 /* WhatsTheMove.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatsTheMove.entitlements; sourceTree = "<group>"; };
 		2F40E1D51DAC19260058EB76 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = Views/RegistrationViewController.swift; sourceTree = "<group>"; };
 		2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewAccountViewController.swift; path = Views/NewAccountViewController.swift; sourceTree = "<group>"; };
+		2F573B151E97166600E1ACFE /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = Views/EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		2F65C54F1DC916120014AEBE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Views/MapViewController.swift; sourceTree = "<group>"; };
 		2F741AE61D9AD4A0009E6271 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Objects/Event.swift; sourceTree = "<group>"; };
 		2F741AE81D9AD4B1009E6271 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Comment.swift; path = Objects/Comment.swift; sourceTree = "<group>"; };
@@ -228,6 +230,14 @@
 				2F40E1D71DAC19E50058EB76 /* NewAccountViewController.swift */,
 			);
 			name = LoginViews;
+			sourceTree = "<group>";
+		};
+		2F573B141E97164F00E1ACFE /* EditProfileViews */ = {
+			isa = PBXGroup;
+			children = (
+				2F573B151E97166600E1ACFE /* EditProfileTableViewController.swift */,
+			);
+			name = EditProfileViews;
 			sourceTree = "<group>";
 		};
 		2F741AE51D9AD454009E6271 /* Objects */ = {
@@ -677,6 +687,7 @@
 				2F9329D21DDB96EE004F3C9F /* SelectLocationViewController.swift in Sources */,
 				2FA291E01E37AD0200B26986 /* EventTableViewController.swift in Sources */,
 				2F3278F91E045EC300BFE0F4 /* FeedTableViewCell.swift in Sources */,
+				2F573B161E97166600E1ACFE /* EditProfileTableViewController.swift in Sources */,
 				2F915DEB1DF3B33400DDE1E0 /* FeedTableViewController.swift in Sources */,
 				2F1ABAA41E4EED9400830A12 /* Invite.swift in Sources */,
 				2F74EC491D91ACEE00CD1EBA /* AppDelegate.swift in Sources */,

@@ -34,6 +34,13 @@ class EventOptionsTableViewCell: UITableViewCell {
             interestedButton.setImage(newImage, for: .normal)
             interestedButton.tintColor = UIColor.green
         }
+        
+        if user.isAttending(event) {
+            let image:UIImage = #imageLiteral(resourceName: "check")
+            let newImage = image.withRenderingMode(.alwaysTemplate)
+            checkInButton.setImage(newImage, for: .normal)
+            checkInButton.tintColor = UIColor.green
+        }
     }
     
     func addActions(_ target: Any, interestedAction a1: Selector, checkInAction a2: Selector, moreAction a3: Selector) {

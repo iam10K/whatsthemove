@@ -15,6 +15,7 @@ class ProfileTableViewController: UITableViewController {
     var user: User?
     
     var showingCreated: Bool = false
+    var preparing:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class ProfileTableViewController: UITableViewController {
             }
         }
         
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 70
     }
@@ -48,6 +50,7 @@ class ProfileTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         self.tableView.reloadData()
+        preparing = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,30 +114,25 @@ class ProfileTableViewController: UITableViewController {
         return UITableViewCell()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let user = user {
-            if showingCreated {
-                if indexPath.row < user.attendedEvents.count {
-                    let event = user.attendedEvents[indexPath.row]
-                    
-                    // Push to event view
-                    performSegue(withIdentifier: "eventTableViewSegue", sender: event)
-                }
-            } else {
-                if indexPath.row < user.createdEvents.count {
-                    let event = user.createdEvents[indexPath.row]
-                    
-                    // Push to event view
-                    performSegue(withIdentifier: "eventTableViewSegue", sender: event)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "eventTableViewSegueFromProfile" {
+            var indexPath = self.tableView.indexPathForSelectedRow!
+            let vc = segue.destination as! EventTableViewController
+            if indexPath.row < 2 {
+                return
+            }
+            if let user = user {
+                if showingCreated {
+                    if indexPath.row-2 < user.attendedEvents.count {
+                        vc.event = user.attendedEvents[indexPath.row-2]
+                        
+                    }
+                } else {
+                    if indexPath.row < user.createdEvents.count {
+                        vc.event = user.createdEvents[indexPath.row-2]
+                    }
                 }
             }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "eventTableViewSegue" {
-            let vc = segue.destination as! EventTableViewController
-            vc.event = sender as? Event
         }
     }
     
@@ -151,7 +149,9 @@ class ProfileTableViewController: UITableViewController {
     func profileButtonAction() {
         if let user = user, let WTMUser = WTM.user {
             if user.key == WTMUser.key {
-                // FUTURE: Edit profile
+                // Edit profile
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "editProfileTableViewController") as! EditProfileTableViewController
+                self.navigationController?.pushViewController(vc, animated:true)
             } else if !WTMUser.areFriends(user.key) && WTMUser.receivedRequest(user.key) {
                 // not friends and has request
                 // Add friends

@@ -97,13 +97,13 @@ class ProfileTableViewController: UITableViewController {
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
                 if showingCreated {
-                    if indexPath.row-2 < user.attendedEvents.count {
-                        let event = user.attendedEvents[indexPath.row-2]
+                    if indexPath.row-2 < user.createdEvents.count {
+                        let event = user.createdEvents[indexPath.row-2]
                         cell.populate(with: event)
                     }
                 } else {
-                    if indexPath.row-2 < user.createdEvents.count {
-                        let event = user.createdEvents[indexPath.row-2]
+                    if indexPath.row-2 < user.attendedEvents.count {
+                        let event = user.attendedEvents[indexPath.row-2]
                         cell.populate(with: event)
                     }
                 }
@@ -123,13 +123,13 @@ class ProfileTableViewController: UITableViewController {
             }
             if let user = user {
                 if showingCreated {
+                    if indexPath.row-2 < user.createdEvents.count {
+                        vc.event = user.createdEvents[indexPath.row-2]
+                    }
+                } else {
                     if indexPath.row-2 < user.attendedEvents.count {
                         vc.event = user.attendedEvents[indexPath.row-2]
                         
-                    }
-                } else {
-                    if indexPath.row < user.createdEvents.count {
-                        vc.event = user.createdEvents[indexPath.row-2]
                     }
                 }
             }

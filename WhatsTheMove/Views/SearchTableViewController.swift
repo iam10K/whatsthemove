@@ -53,6 +53,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
                 filtered.append(event)
             }
         }
+        filtered = filtered.sorted(by: {$0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970})
         results = filtered
     }
     // MARK: - Table view data source

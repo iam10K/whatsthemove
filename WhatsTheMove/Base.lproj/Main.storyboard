@@ -568,6 +568,34 @@
             </objects>
             <point key="canvasLocation" x="2949.5999999999999" y="2542.5787106446778"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="Pru-wc-DVi">
+            <objects>
+                <tableViewController id="hpE-VL-nlu" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eCu-LP-1jb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PEm-p8-fvA">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEm-p8-fvA" id="QwE-dx-gxK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hpE-VL-nlu" id="3ed-E0-bnK"/>
+                            <outlet property="delegate" destination="hpE-VL-nlu" id="SAC-ld-sd9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfk-wx-5tt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3897" y="2543"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hOe-cr-FGc">
             <objects>
@@ -1850,9 +1878,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="WTM" id="QBI-Oq-pgI">
-                        <barButtonItem key="rightBarButtonItem" image="settings" id="1UB-5E-LBN"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="settings" id="1UB-5E-LBN">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="settingsButtonAction:" destination="IVM-zT-JUE" id="c4S-Dn-6n3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="settingsButton" destination="1UB-5E-LBN" id="5n0-sY-2O4"/>
                         <segue destination="war-zP-8dv" kind="show" identifier="userProfileViewSegue" id="Kkr-wU-laZ"/>
                     </connections>
                 </tableViewController>
@@ -1898,7 +1932,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFx-hh-nR3">
-                                <rect key="frame" x="104" y="277" width="167" height="30"/>
+                                <rect key="frame" x="16" y="277" width="343" height="30"/>
                                 <state key="normal" title="Complete Registration"/>
                                 <connections>
                                     <action selector="createAccountAction" destination="vcl-Y4-x8h" eventType="touchUpInside" id="taV-gf-GdF"/>
@@ -1920,7 +1954,7 @@
                             <constraint firstItem="GEy-Xi-KF0" firstAttribute="leading" secondItem="8Xv-gW-kUc" secondAttribute="leadingMargin" id="NMz-GM-0Fd"/>
                             <constraint firstItem="3mB-3l-2FW" firstAttribute="top" secondItem="GEy-Xi-KF0" secondAttribute="bottom" constant="8" symbolic="YES" id="QdG-xu-h6k"/>
                             <constraint firstItem="GEy-Xi-KF0" firstAttribute="top" secondItem="9pc-pe-pPf" secondAttribute="bottom" constant="58" id="RbA-DV-KGZ"/>
-                            <constraint firstItem="OFx-hh-nR3" firstAttribute="leading" secondItem="8Xv-gW-kUc" secondAttribute="leadingMargin" constant="88" id="SqU-O0-JEI"/>
+                            <constraint firstItem="OFx-hh-nR3" firstAttribute="leading" secondItem="8Xv-gW-kUc" secondAttribute="leadingMargin" id="SqU-O0-JEI"/>
                             <constraint firstItem="qjx-7q-HOc" firstAttribute="centerX" secondItem="OFx-hh-nR3" secondAttribute="centerX" id="alt-gR-4I9"/>
                             <constraint firstItem="3mB-3l-2FW" firstAttribute="leading" secondItem="ure-Da-rZs" secondAttribute="leading" id="c1Q-A6-dOh"/>
                             <constraint firstItem="ure-Da-rZs" firstAttribute="top" secondItem="3mB-3l-2FW" secondAttribute="bottom" constant="46" id="cxs-gZ-LNT"/>
@@ -1939,7 +1973,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBc-Pp-yQz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="212" y="139"/>
+            <point key="canvasLocation" x="212" y="138.98050974512745"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5X6-Eq-edz">
@@ -2652,9 +2686,9 @@ FL0UwBTSFNUU2gAAAAAAAAIBAAAAAAAAAEEAAAAAAAAAAAAAAAAAABTcA
         <image name="star" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lzj-JK-9dO"/>
+        <segue reference="1UC-Nu-Z7S"/>
         <segue reference="Ejm-Tc-bIc"/>
         <segue reference="CmN-sE-3Fe"/>
-        <segue reference="lzj-JK-9dO"/>
-        <segue reference="Gzb-MY-LNE"/>
     </inferredMetricsTieBreakers>
 </document>

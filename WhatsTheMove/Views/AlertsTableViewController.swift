@@ -30,8 +30,17 @@ class AlertsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
+        if let user = WTM.user {
+            if user.receivedRequestKeys.count > 0 || user.invitedEvents.count > 0 {
+                self.tableView.backgroundView = nil
+                self.tableView.separatorStyle = .singleLine
+                return 2
+            } else {
+                emptyMessage(message: "No event invites or friend requests.", viewController: self)
+                return 0
+            }
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,6 +76,19 @@ class AlertsTableViewController: UITableViewController {
             }
         }
         return UITableViewCell()
+    }
+    
+    func emptyMessage(message:String, viewController:UITableViewController) {
+        let messageLabel = UILabel(frame: CGRect(x: 0,y: 0, width: viewController.view.bounds.size.width, height: viewController.view.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = UIColor.black
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = .center;
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.sizeToFit()
+        
+        viewController.tableView.backgroundView = messageLabel;
+        viewController.tableView.separatorStyle = .none;
     }
     
     func acceptRequest(user: User) {

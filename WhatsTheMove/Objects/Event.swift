@@ -284,35 +284,53 @@ class Event: NSObject {
     
     // Check the user into event, does not check if the event is occuring
     func checkin(_ user: User, completionHandler: (() -> Void)? = nil) {
-        if !user.isAttending(self) {
-            
-            // Validate ref and that the user has not checked in
-            if let ref = self.ref {
-                ref.child("checkedIn").runTransactionBlock({ (checkedInValue) -> FIRTransactionResult in
-                    if let newCheckedIn = checkedInValue.value as? Int {
-                        checkedInValue.value = newCheckedIn + 1
-                        return FIRTransactionResult.success(withValue: checkedInValue)
-                    } else {
-                        return FIRTransactionResult.success(withValue: checkedInValue)
-                    }
-                }, andCompletionBlock: { (error, completion, snap) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    if !completion {
-                        print("Not completed")
-                    } else if let snap = snap {
-                        user.attend(self)
+        
+        let removingCheckedIn = user.isAttending(self)
+        
+        // Validate ref and update # of users interested
+        if let ref = self.ref {
+            ref.child("checkedIn").runTransactionBlock({ (checkedInValue) -> FIRTransactionResult in
+                if let newCheckedIn = checkedInValue.value as? Int {
+                    if removingCheckedIn {
+                        checkedInValue.value = newCheckedIn - 1
                         
-                        // Update rating for event object
-                        if let checkedInValue = snap.value as? Int {
-                            self.checkedIn = checkedInValue
-                            completionHandler?()
+                        // Prevent going below 0 for interested
+                        if let value = checkedInValue.value as? Int {
+                            if value < 0 {
+                                checkedInValue.value = 0
+                            }
                         }
+                    } else {
+                        checkedInValue.value = newCheckedIn + 1
                     }
-                })
-            }
+                    return FIRTransactionResult.success(withValue: checkedInValue)
+                } else {
+                    return FIRTransactionResult.success(withValue: checkedInValue)
+                }
+            }, andCompletionBlock: { (error, completion, snap) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                if !completion {
+                    print("Not completed")
+                } else if let snap = snap {
+                    // FUTURE: Possibly include user name for performance increase(less connections to database)
+                    
+                    if !removingCheckedIn {
+                        user.attend(self)
+                    } else {
+                        user.unattend(self)
+                    }
+                    
+                    // Update rating for event object
+                    if let checkedInValue = snap.value as? Int {
+                        self.checkedIn = checkedInValue
+                        completionHandler?()
+                    }
+                }
+            })
         }
+        
     }
     
     // Check the user into event

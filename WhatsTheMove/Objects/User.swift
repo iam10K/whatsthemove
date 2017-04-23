@@ -365,6 +365,31 @@ class User: NSObject {
         }
     }
     
+    func unattend(_ event: Event) {
+        // Remove from attended array
+        if let index = self.attendedEvents.index(of: event) {
+            self.attendedEvents.remove(at: index)
+        }
+        if let index = self.attendedEventsKeys.index(of: event.key) {
+            self.attendedEventsKeys.remove(at: index)
+        }
+        if let ref = ref {
+            // Remove attended from user firebase
+            ref.child("attendedEvents").child(event.key).removeValue() { error,_ in
+                if error != nil {
+                    // Add back because error occured
+                    self.attendedEvents.append(event)
+                    self.attendedEventsKeys.append(event.key)
+                    print(error!)
+                } else {
+                    // Remove attended for event
+                    let dbRef = ref.database.reference()
+                    dbRef.child("attendedEvents").child(event.key).child(self.key).removeValue()
+                }
+            }
+        }
+    }
+    
     func sendFriendRequest(_ otherUser: User) {
         if self.sentRequestKeys.contains(otherUser.key) {
             return

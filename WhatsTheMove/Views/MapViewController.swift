@@ -17,6 +17,8 @@ class MapViewController: UIViewController {
     
     var events: [Event]?
     
+    var displayedEvents: [Event] = []
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -24,6 +26,10 @@ class MapViewController: UIViewController {
         
         // Set events
         events = WTM.eventsObservable.observableProperty
+        if let events = events {
+            displayedEvents = events
+        }
+        filterEvents()
         
         // Enable location services
         locationManager.delegate = self
@@ -40,23 +46,35 @@ class MapViewController: UIViewController {
         }
     }
     
+    func filterEvents() {
+        let calender = NSCalendar.autoupdatingCurrent
+        let newDate = calender.date(byAdding: .minute, value: -180, to: Date())
+        if let newDate = newDate {
+            for event in displayedEvents {
+                if event.startDate < newDate {
+                    if let index = displayedEvents.index(of: event) {
+                        displayedEvents.remove(at: index)
+                    }
+                }
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     private func populatePins() {
-        if let events = events {
-            for event in events {
-                //print(event.toJSONString())
-                // Create a Annotation for each event
-                let eventLocation = CLLocationCoordinate2DMake(event.location.latitude, event.location.longitude)
-                let dropPin = MKPointAnnotation()
-                dropPin.coordinate = eventLocation
-                dropPin.title = event.title
-                dropPin.subtitle = event.location.address
-                mapView.addAnnotation(dropPin)
-            }
+        for event in displayedEvents {
+            //print(event.toJSONString())
+            // Create a Annotation for each event
+            let eventLocation = CLLocationCoordinate2DMake(event.location.latitude, event.location.longitude)
+            let dropPin = MKPointAnnotation()
+            dropPin.coordinate = eventLocation
+            dropPin.title = event.title
+            dropPin.subtitle = event.location.address
+            mapView.addAnnotation(dropPin)
         }
     }
     
@@ -66,7 +84,7 @@ class MapViewController: UIViewController {
             vc.event = sender as? Event
         }
     }
-
+    
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -108,15 +126,13 @@ extension MapViewController: MKMapViewDelegate {
     
     // Function to open maps app when clicking map annotation
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-
-        if let events = events {
-            for event in events {
-                if let annotation = view.annotation {
-                    if let title = annotation.title {
-                        if event.title == title {
-                            performSegue(withIdentifier: "eventTableViewSegue", sender: event)
-                            return
-                        }
+        
+        for event in displayedEvents {
+            if let annotation = view.annotation {
+                if let title = annotation.title {
+                    if event.title == title {
+                        performSegue(withIdentifier: "eventTableViewSegue", sender: event)
+                        return
                     }
                 }
             }

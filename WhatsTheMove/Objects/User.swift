@@ -95,7 +95,7 @@ class User: NSObject {
         if let interestedEventsValue = snapshotValue["interestedEvents"] as? [String: Bool] {
             for (eventId,value) in interestedEventsValue {
                 if value {
-                    selfSnapshot.ref.database.reference().child("events").child(eventId).observe(.value, with: { snapshot in
+                    selfSnapshot.ref.database.reference().child("events").child(eventId).observeSingleEvent(of: .value, with: { snapshot in
                         if snapshot.exists() {
                             let event = Event(snapshot: snapshot)
                             self.interested.append(event)

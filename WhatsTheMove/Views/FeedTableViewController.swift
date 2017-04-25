@@ -111,7 +111,7 @@ class FeedTableViewController: UITableViewController {
         case 0:
             self.displayedEvents = displayedEvents.sorted(by: {$0.rating > $1.rating})
         case 1:
-            self.displayedEvents = displayedEvents.sorted(by: {$0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970})
+            self.displayedEvents = displayedEvents.sorted(by: {$0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970})
         default:
             self.displayedEvents = displayedEvents.sorted(by: {$0.rating > $1.rating})
         }

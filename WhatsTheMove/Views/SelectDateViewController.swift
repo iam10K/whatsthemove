@@ -54,7 +54,7 @@ class SelectDateViewController: UIViewController, FSCalendarDataSource, FSCalend
     @IBAction func doneSelectingDate(_ sender: AnyObject) {
         // Gather all the date components to construct new date
         let curCalendar = Calendar.current
-        let dateComponents = curCalendar.dateComponents([.year, .month, .day], from: calendar.selectedDate as Date)
+        let dateComponents = curCalendar.dateComponents([.year, .month, .day], from: calendar.selectedDate! as Date)
         let timeComponents = curCalendar.dateComponents([.hour, .minute], from: timePicker.date as Date)
         
         // Get all values for new date
